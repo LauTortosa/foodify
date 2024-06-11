@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'planning',
+    'product',
+    'to_do',
+    'calculated_kilograms',
     'corsheaders',
 ]
 
