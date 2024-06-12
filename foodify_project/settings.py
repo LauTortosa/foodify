@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     'planning',
     'product',
-    'to_do',
     'calculated_kilograms',
+    'task',
     'corsheaders',
 ]
 
