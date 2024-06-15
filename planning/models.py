@@ -14,8 +14,8 @@ class Planning(models.Model):
     date = models.DateField()
     load = models.IntegerField()
     tracebility = models.IntegerField()
-    state = models.ForeignKey(State, on_delete=models.RESTRICT)
-    product = models.ForeignKey(Product, on_delete=models.RESTRICT)
+    state = models.ForeignKey(State, on_delete=models.RESTRICT, null=True, default=1)
+    product = models.ForeignKey(Product, on_delete=models.RESTRICT, null=True)
 
     def __str__(self):
         return f"({self.id}) {self.product} {self.state}"

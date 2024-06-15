@@ -15,7 +15,7 @@ class PlanningIn(Schema):
 @api.post("/planning")
 def create_planning(request, data: PlanningIn):
     planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
-    planning.product = Product.object.get(product=data.product)
+    planning.product = Product.objects.get(product=data.product)
     planning.save()
 
     return {"ok": True}
