@@ -34,3 +34,9 @@ def list_plannning(request):
 
     return list
 
+@api.get("planning/registered", response=List[PlanningOut])
+def list_registered(request):
+    planning_registered = Planning.objects.filter(state=3)
+
+    return planning_registered
+
