@@ -1,5 +1,5 @@
 from ninja import NinjaAPI, Schema
-from typing import Optional
+from typing import List
 from .models import Planning
 from product.models import Product
 from datetime import date
@@ -12,6 +12,14 @@ class PlanningIn(Schema):
     tracebility: int
     product: str
 
+class PlanningOut(Schema):
+    id: int
+    date_value: str
+    load: int
+    tracebility: int
+    state_value: str
+    product_value: str
+
 @api.post("/planning")
 def create_planning(request, data: PlanningIn):
     planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
@@ -20,6 +28,9 @@ def create_planning(request, data: PlanningIn):
 
     return {"ok": True}
 
-@api.get("/items")
-def list_items(request):
-    return [{"id": 1, "name": "carbonara"}, {"id": 2, "name": "boloñesa"}]
+@api.get("planning/list", response=List[PlanningOut])
+def list_plannning(request):
+    list = Planning.objects.all()
+
+    return list
+

@@ -19,3 +19,17 @@ class Planning(models.Model):
 
     def __str__(self):
         return f"({self.id}) {self.product} {self.state}"
+    
+    @property
+    def date_value(self):
+        return self.date.strftime("%d-%m-%Y")
+    
+    @property
+    def state_value(self):
+        return self.state.label
+    
+    @property
+    def product_value(self):
+        return self.product.product
+    
+   
