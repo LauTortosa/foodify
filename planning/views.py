@@ -51,3 +51,10 @@ def get_planning(request, planning_id: int):
 
     return planning
 
+@api.delete("planning/{planning_id}")
+def delete_planning(request, planning_id: int):
+    planning = Planning.objects.get(id=planning_id)
+    planning.delete()
+
+    return {"ok": True}
+
