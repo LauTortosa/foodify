@@ -1,6 +1,7 @@
+from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, Schema
 from typing import List, Optional
-from .models import Planning
+from .models import Planning, State
 from product.models import Product, ProductComponent
 from datetime import date
 
@@ -11,6 +12,7 @@ class PlanningIn(Schema):
     load: int
     tracebility: int
     product: str
+    state_value: Optional[str] = None
 
 class PlanningOut(Schema):
     id: int
@@ -58,3 +60,35 @@ def delete_planning(request, planning_id: int):
 
     return {"ok": True}
 
+@api.put("planning/{planning_id}")
+def update_planning(request, planning_id: int, data: PlanningIn):
+    planning = Planning.objects.get(id=planning_id)
+
+    if data.date:
+        planning.date = data.date
+
+    if data.load:
+        planning.load = data.load
+
+    if data.tracebility:
+        planning.tracebility = data.tracebility
+
+    if data.state_value:
+        new_state = State.objects.get(label=data.state_value)
+        planning.state = new_state
+
+    if data.product:
+        new_product = Product.objects.get(product=data.product)
+        planning.product = new_product
+
+    planning.save()
+
+    return {
+        "id": planning.id,
+        "date": planning.date,
+        "load": planning.load,
+        "tracebility": planning.tracebility,
+        "state_value": planning.state.label if planning.state else None,
+        "product": planning.product.product if planning.product else None
+    }
+    
