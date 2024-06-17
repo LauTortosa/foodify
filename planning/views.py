@@ -1,19 +1,29 @@
-from django.shortcuts import get_object_or_404
-from ninja import NinjaAPI, Schema
-from typing import List, Optional
+from ninja import Field, NinjaAPI, Schema
+from typing import Annotated, List, Optional
+
+from pydantic import validator
+
 from .models import Planning, State
 from product.models import Product, ProductComponent
-from datetime import date
+from datetime import date, timedelta
 
 api = NinjaAPI()
 
 class PlanningIn(Schema):
     date: str
-    load: int
-    tracebility: int
-    product: str
-    state_value: Optional[str] = None
+    load: Annotated[int, Field(strict=True, gt=0)]
+    tracebility: Annotated[int, Field(strict=True, gt=0)]
+    product: Annotated[str, Field(min_length=1)]
+    state_value: Optional[str] = Field(None, min_length=1)
 
+    @validator('date')
+    def validate_date(cls, v): 
+     if isinstance(v, str):
+            v = date.fromisoformat(v)
+     if v <= (date.today() - timedelta(days=7)):
+            raise ValueError("La fecha debe ser posterior a la que era hace una semana")
+     return v
+    
 class PlanningOut(Schema):
     id: int
     date_value: str
