@@ -1,6 +1,6 @@
 from datetime import date
 from django.test import TestCase
-from .models import Planning, State, Product
+from ..models import Planning, State, Product
 
 class PlanningModelsTests(TestCase):
 
