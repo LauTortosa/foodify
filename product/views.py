@@ -28,10 +28,9 @@ def list_types(request):
 def list_products(request, filters: ProductFilterOut = Query(...)):
     products = Product.objects.all()
     products = products.filter(type_id=filters.type_id)
-    product_data = [{"id": product.id, "name": product.product} for product in products]
     
-    return product_data
-
+    return list(products.values())
+    
 @product_api.get("/{product_id}", response=ProductOut)
 def get_product(request, product_id: int):
     product = Product.objects.get(id=product_id)
