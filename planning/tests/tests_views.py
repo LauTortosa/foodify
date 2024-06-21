@@ -1,5 +1,4 @@
 from datetime import date, timedelta
-from unittest.mock import patch
 from django.test import TestCase, Client
 from ..models import Planning, State, Product
 from django.utils.dateparse import parse_date
