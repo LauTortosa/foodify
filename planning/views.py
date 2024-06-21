@@ -78,7 +78,13 @@ def get_state(request):
 def get_state_pending(request):
     pending = Planning.objects.filter(state_id=1).count()
 
-    return {"planning pending": pending} 
+    return {"planning pending": pending}
+
+@api.get("/state/prepared")
+def get_state_prepared(request):
+    prepared = Planning.objects.filter(state_id=2).count()
+
+    return {"planning prepared": prepared}  
 
 @api.delete("/{planning_id}")
 def delete_planning(request, planning_id: int):
