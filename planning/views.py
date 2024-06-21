@@ -7,7 +7,7 @@ from .models import Planning, State
 from product.models import Product, ProductComponent
 from datetime import date, timedelta
 
-api = NinjaAPI()
+planning_api = NinjaAPI(urls_namespace='planning_api')
 
 class PlanningIn(Schema):
     date: str
@@ -38,7 +38,7 @@ class StateOut(Schema):
     label: str
 
 
-@api.post("/")
+@planning_api.post("/")
 def create_planning(request, data: PlanningIn):
     planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
     planning.product = Product.objects.get(product=data.product)
@@ -46,19 +46,19 @@ def create_planning(request, data: PlanningIn):
 
     return {"ok": True}
 
-@api.get("/list", response=List[PlanningOut])
+@planning_api.get("/list", response=List[PlanningOut])
 def list_plannning(request):
     list = Planning.objects.all()
 
     return list
 
-@api.get("/registered", response=List[PlanningOut])
+@planning_api.get("/registered", response=List[PlanningOut])
 def list_registered(request):
     planning_registered = Planning.objects.filter(state=3)
 
     return planning_registered
 
-@api.get("/{planning_id}", response=PlanningOut)
+@planning_api.get("/{planning_id}", response=PlanningOut)
 def get_planning(request, planning_id: int):
     planning = Planning.objects.get(id=planning_id)
     product = planning.product
@@ -68,32 +68,32 @@ def get_planning(request, planning_id: int):
 
     return planning
 
-@api.get("/state", response=List[StateOut])
+@planning_api.get("/state", response=List[StateOut])
 def get_state(request):
     state = State.objects.all()
 
     return state
 
-@api.get("/state/pending")
+@planning_api.get("/planning/state/pending")
 def get_state_pending(request):
     pending = Planning.objects.filter(state_id=1).count()
 
     return {"planning pending": pending}
 
-@api.get("/state/prepared")
+@planning_api.get("/state/prepared")
 def get_state_prepared(request):
     prepared = Planning.objects.filter(state_id=2).count()
 
     return {"planning prepared": prepared}  
 
-@api.delete("/{planning_id}")
+@planning_api.delete("/{planning_id}")
 def delete_planning(request, planning_id: int):
     planning = Planning.objects.get(id=planning_id)
     planning.delete()
 
     return {"ok": True}
 
-@api.put("/{planning_id}")
+@planning_api.put("/{planning_id}")
 def update_planning(request, planning_id: int, data: PlanningIn):
     planning = Planning.objects.get(id=planning_id)
 

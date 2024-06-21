@@ -14,7 +14,11 @@ class Product(models.Model):
     type = models.ForeignKey(Type, on_delete=models.RESTRICT, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product} - {self.type}"
+        return f"({self.id}){self.product} - {self.type}"
+    
+    @property
+    def type_value(self):
+        return self.type.label
 
 class Component(models.Model):
     value = models.CharField(max_length=MAX_LENGTH)
