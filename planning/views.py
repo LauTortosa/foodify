@@ -33,6 +33,11 @@ class PlanningOut(Schema):
     product_value: str
     component_value: Optional[List[str]] = None
 
+class StateOut(Schema):
+    id: int
+    label: str
+
+
 @api.post("/planning")
 def create_planning(request, data: PlanningIn):
     planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
@@ -62,6 +67,12 @@ def get_planning(request, planning_id: int):
     planning.component_value = component_values
 
     return planning
+
+@api.get("/state", response=List[StateOut])
+def get_state(request):
+    state = State.objects.all()
+
+    return state 
 
 @api.delete("planning/{planning_id}")
 def delete_planning(request, planning_id: int):
@@ -101,4 +112,6 @@ def update_planning(request, planning_id: int, data: PlanningIn):
         "state_value": planning.state.label,
         "product": planning.product.product
     }
+
+
     
