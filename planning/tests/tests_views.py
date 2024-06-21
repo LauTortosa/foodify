@@ -1,5 +1,4 @@
 from datetime import date, timedelta
-from unittest.mock import patch
 from django.test import TestCase, Client
 from ..models import Planning, State, Product
 from django.utils.dateparse import parse_date
@@ -16,7 +15,7 @@ class CreatePlanningTests(TestCase):
             "product": self.product.product
         }
 
-        url = "/planning/api/planning"
+        url = "/planning/api/"
 
         response = self.client.post(url, create_data, content_type='application/json')
         self.assertEqual(response.status_code, 200)
@@ -41,7 +40,7 @@ class GetRegisteredPlanningTest(TestCase):
         self.planning3 = Planning.objects.create(date="2024-09-16", load=4, tracebility=122, state=self.state_other, product=self.product)
     
     def test_get_planning_registered(self):
-        url = "/planning/api/planning/registered"  
+        url = "/planning/api/registered"  
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -83,7 +82,7 @@ class UpdatePlanningTest(TestCase):
             "product": "Boloñesa"  
         }
 
-        url = f"/planning/api/planning/{self.planning.id}"
+        url = f"/planning/api/{self.planning.id}"
 
         response = self.client.put(url, update_data, content_type='application/json')
 
@@ -119,7 +118,7 @@ class DeletePlanningTest(TestCase):
     def test_delete_planning(self):
         self.assertTrue(Planning.objects.filter(id=self.planning.id).exists())
 
-        url = f"/planning/api/planning/{self.planning.id}"
+        url = f"/planning/api/{self.planning.id}"
 
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 200)
