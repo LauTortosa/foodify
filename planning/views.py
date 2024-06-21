@@ -38,7 +38,7 @@ class StateOut(Schema):
     label: str
 
 
-@api.post("/planning")
+@api.post("/")
 def create_planning(request, data: PlanningIn):
     planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
     planning.product = Product.objects.get(product=data.product)
@@ -46,19 +46,19 @@ def create_planning(request, data: PlanningIn):
 
     return {"ok": True}
 
-@api.get("planning/list", response=List[PlanningOut])
+@api.get("/list", response=List[PlanningOut])
 def list_plannning(request):
     list = Planning.objects.all()
 
     return list
 
-@api.get("planning/registered", response=List[PlanningOut])
+@api.get("/registered", response=List[PlanningOut])
 def list_registered(request):
     planning_registered = Planning.objects.filter(state=3)
 
     return planning_registered
 
-@api.get("planning/{planning_id}", response=PlanningOut)
+@api.get("/{planning_id}", response=PlanningOut)
 def get_planning(request, planning_id: int):
     planning = Planning.objects.get(id=planning_id)
     product = planning.product
@@ -74,14 +74,14 @@ def get_state(request):
 
     return state 
 
-@api.delete("planning/{planning_id}")
+@api.delete("/{planning_id}")
 def delete_planning(request, planning_id: int):
     planning = Planning.objects.get(id=planning_id)
     planning.delete()
 
     return {"ok": True}
 
-@api.put("planning/{planning_id}")
+@api.put("/{planning_id}")
 def update_planning(request, planning_id: int, data: PlanningIn):
     planning = Planning.objects.get(id=planning_id)
 
