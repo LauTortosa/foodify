@@ -1,4 +1,4 @@
-from ninja import NinjaAPI, Schema
+from ninja import NinjaAPI, Query, Schema
 from typing import List
 from .models import Product, ProductComponent, Type
 
@@ -14,11 +14,23 @@ class TypeOut(Schema):
     id: int
     label: str
 
-@product_api.get("/type", response=List[TypeOut])
+class ProductFilterOut(Schema):
+    type_id: int
+
+@product_api.get("/types", response=List[TypeOut])
 def list_types(request):
     types = Type.objects.all()
     
     return types
+
+# List of products by type
+@product_api.get("/products")
+def list_products(request, filters: ProductFilterOut = Query(...)):
+    products = Product.objects.all()
+    products = products.filter(type_id=filters.type_id)
+    product_data = [{"id": product.id, "name": product.product} for product in products]
+    
+    return product_data
 
 @product_api.get("/{product_id}", response=ProductOut)
 def get_product(request, product_id: int):
