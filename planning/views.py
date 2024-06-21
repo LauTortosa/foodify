@@ -88,9 +88,9 @@ def update_planning(request, planning_id: int, data: PlanningIn):
         planning.state = new_state
 
     if data.product:
-        new_product = Product.objects.get(product=data.product)
-        planning.product = new_product
-
+       new_product = Product.objects.get(product=data.product)
+       planning.product = new_product
+    
     planning.save()
 
     return {
@@ -98,7 +98,7 @@ def update_planning(request, planning_id: int, data: PlanningIn):
         "date": planning.date,
         "load": planning.load,
         "tracebility": planning.tracebility,
-        "state_value": planning.state.label if planning.state else None,
-        "product": planning.product.product if planning.product else None
+        "state_value": planning.state.label,
+        "product": planning.product.product
     }
     
