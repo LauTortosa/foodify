@@ -57,3 +57,10 @@ def update_task(request, task_id: int, data: TaskIn):
         "completed": task.completed
     }
 
+@task_api.delete("/{task_id}")
+def delete_task(request, task_id: int):
+    task = Task.objects.get(id=task_id)
+    task.delete()
+
+    return {"ok": True}
+
