@@ -1,12 +1,12 @@
-from ninja import NinjaAPI, Schema
-from typing import List, Optional
+from ninja import Field, NinjaAPI, Schema
+from typing import Annotated, List, Optional
 
 from .models import Task
 
 task_api = NinjaAPI(urls_namespace='task_api')
 
 class TaskIn(Schema):
-    task: str
+    task: Annotated[str, Field(min_length=3, strip_whitespace=True)]
     completed: Optional[str]
 
 class TaskOut(Schema):
