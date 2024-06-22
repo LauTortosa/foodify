@@ -27,18 +27,6 @@ def list_tasks(request):
 
     return list
 
-@task_api.get("/{task_id}", response=TaskOut)
-def get_task(request, task_id: int):
-    task = Task.objects.get(id=task_id)
-    description = task.task 
-    completed = task.completed 
-
-    return TaskOut(
-        id=task.id,
-        task=description,
-        completed=completed
-    )
-
 @task_api.put("/{task_id}")
 def update_task(request, task_id: int, data: TaskIn):
     task = Task.objects.get(id=task_id)
