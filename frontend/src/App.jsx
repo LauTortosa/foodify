@@ -5,8 +5,12 @@ import './App.css'
 const App = () => {
   return (
     <>
+      <div>
       <Navbar />
-      <PlanningView />
+      <div className='min-h-screen'>
+        <PlanningView />
+      </div>
+    </div>
     </>
   )
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 
 const PlanningList = () => {
@@ -10,31 +10,32 @@ const PlanningList = () => {
         .catch(error => console.error(error));
     }, []);
     return (
-        <div>
-        <h2>Listado de Planificaciones</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Cargas</th>
-                    <th>Trazabilidad</th>
-                    <th>Estado</th>
-                    <th>Producto</th>
-                </tr>
-            </thead>
-            <tbody>
-                {plannings.map(planning => (
-                    <tr key={planning.id}>
-                        <td>{planning.date_value}</td>
-                        <td>{planning.load}</td>
-                        <td>{planning.tracebility}</td>
-                        <td>{planning.state_value}</td>
-                        <td>{planning.product_value}</td>
+        <div >
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Trazabilidad</th>
+                        <th>Producto</th>
+                        <th>Cargas</th>
+                        <th>Estado</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    {plannings.map((planning, index) => (
+                    <tr key={planning.id} className="hover">
+                        <td>{index + 1}</td>
+                        <td>{planning.date_value}</td>
+                        <td>{planning.tracebility}</td>
+                        <td>{planning.product_value}</td>
+                        <td>{planning.load}</td>
+                        <td>{planning.state_value}</td>
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
