@@ -1,67 +1,47 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 import axios from "axios";
 
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 
 const PlanningFormComponent = () => {
-  const [formData, setFormData] = useState({
-    date: '',
-    load: '',
-    tracebility: '',
-    type_value: '',
-    product_value: ''
-  });
+    const { register, handleSubmit, setValue } = useForm();
 
 const handleTypeSelect = (typeId, typeLabel) => {
-    setFormData({
-      ...formData,
-      type_value: typeLabel,
-      type_id: typeId
-    });
-  };
+      setValue("type_value", typeLabel);
+      setValue("type_id", typeId);
+};
 
-  const handleProductSelect = (productLabel) => {
-    setFormData({
-      ...formData,
-      product_value: productLabel
-    });
-  };
+const handleProductSelect = (productLabel) => {
+    setValue("product_value", productLabel);
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-        ...formData,
-        [name]: value
-      });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmitForm = async (data) => {
     const dataToSend = {
-      date: new Date(formData.date).toISOString().split('T')[0],
-      load: parseInt(formData.load), 
-      tracebility: parseInt(formData.tracebility),
-      type: formData.type_value, 
-      product: formData.product_value 
+      date: new Date(data.date).toISOString().split('T')[0],
+      load: parseInt(data.load), 
+      tracebility: parseInt(data.tracebility),
+      type: data.type_value, 
+      product: data.product_value 
     };
   
     const response = await axios.post('http://localhost:8000/planning/api/', dataToSend)
     console.log('Planificación añadida:', response.data);
-  };
+};
 
-  return (
-    <form onSubmit={handleSubmit} className="p-4">
+return (
+    <form onSubmit={handleSubmit(handleSubmitForm)} className="p-4">
         <label className="input input-bordered flex items-center gap-2 mb-4">
             Fecha
-            <input type="date" name="date" value={formData.date} onChange={handleChange} className="grow"/>
+            <input type="date" {...register("date")} className="grow"/>
         </label>
         <label className="input input-bordered flex items-center gap-2 mb-4">
             Cargas
-            <input type="number" name="load" value={formData.load} onChange={handleChange} className="grow"/>
+            <input type="number" {...register("load")} className="grow"/>
         </label>
         <label className="input input-bordered flex items-center gap-2 mb-4">
             Trazab.
-            <input type="number" name="tracebility" value={formData.tracebility} onChange={handleChange} className="grow"/>
+            <input type="number" {...register("tracebility")} className="grow"/>
         </label>      
         <SelectTypeProductComponent
         onTypeSelect={handleTypeSelect}
