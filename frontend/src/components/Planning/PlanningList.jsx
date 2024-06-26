@@ -4,11 +4,15 @@ import axios from "axios";
 const PlanningList = () => {
     const [plannings, setPlannings] = useState([]);
 
+    const listPlanning = async () => {
+        const response = await axios.get('http://localhost:8000/planning/api/list');
+        setPlannings(response.data);
+    }
+
     useEffect(() => {
-      axios.get('http://localhost:8000/planning/api/list')
-        .then(response => setPlannings(response.data))
-        .catch(error => console.error(error));
+        listPlanning();
     }, []);
+    
     return (
         <div >
             <table className="table">

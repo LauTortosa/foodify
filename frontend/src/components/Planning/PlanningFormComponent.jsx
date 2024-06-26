@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
-
 import axios from "axios";
-
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 
 const PlanningFormComponent = () => {
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, reset } = useForm();
 
 const handleTypeSelect = (typeId, typeLabel) => {
       setValue("type_value", typeLabel);
@@ -27,6 +25,7 @@ const handleSubmitForm = async (data) => {
   
     const response = await axios.post('http://localhost:8000/planning/api/', dataToSend)
     console.log('Planificación añadida:', response.data);
+    reset();
 };
 
 return (
