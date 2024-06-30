@@ -1,18 +1,15 @@
+import React from 'react';
+import './App.css';
 import Navbar from './components/Navbar';
-import PlanningView from './views/PlanningView';
-import './App.css'
+import MyRoutes from './routes';
 
 const App = () => {
   return (
-    <>
-      <div>
+    <div>
       <Navbar />
-      <div className='min-h-screen'>
-        <PlanningView />
-      </div>
+      <MyRoutes />
     </div>
-    </>
-  )
+  );
 };
 
 export default App;
