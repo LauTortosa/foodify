@@ -14,7 +14,7 @@ const PlanningList = () => {
     }
 
     return (
-        <div >
+        <div className='overflow-x-auto'>
             <table className="table">
                 <thead>
                     <tr>

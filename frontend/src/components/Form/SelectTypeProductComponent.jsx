@@ -43,7 +43,7 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
           <select 
               name="type_value"
               onChange={handleTypeChange} 
-              className="select select-bordered w-full max-w-xs">
+              className="select select-bordered w-full">
             <option value="">Tipo de producto</option>
             {types.map(type => (
                 <option key={type.id} value={type.label}>{type.label}</option>
@@ -54,7 +54,7 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
           <select 
               name="product_value"
               onChange={handleProductChange} 
-              className="select select-bordered w-full max-w-xs">
+              className="select select-bordered w-full">
             <option value="">Producto</option>
             {filteredProducts.map(product => (
                 <option key={product.id} value={product.product}>{product.product}</option>
