@@ -22,7 +22,7 @@ class Planning(models.Model):
     
     @property
     def date_value(self):
-        return self.date.strftime("%d-%m-%Y")
+        return self.date.strftime("%d/%m/%Y")
     
     @property
     def state_value(self):
