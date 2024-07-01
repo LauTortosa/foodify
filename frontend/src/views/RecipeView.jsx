@@ -28,8 +28,7 @@ const RecipeView = () => {
               onProductSelect={handleProductSelect}/>
           </div>
           <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
-              <h2 className="text-center text-xl font-bold underline mb-4">Receta</h2>
-              {selectedProductId && <RecipeComponent productId={selectedProductId} />}
+              <RecipeComponent productId={selectedProductId} />
           </div>
         </div>
       </div>
