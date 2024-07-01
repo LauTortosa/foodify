@@ -28,12 +28,14 @@ const Navbar = () => {
           >
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/planning">Planificaciones</Link></li>
+            <li><Link to="/recipes">Recetas</Link></li>
           </ul>
         </div>
       </div>
       <div className="navbar hidden md:flex">
         <Link to="/" className="btn btn-ghost text-xl">Inicio</Link>
         <Link to="/planning" className="btn btn-ghost text-xl">Planificaciones</Link>
+        <Link to="/recipes" className="btn btn-ghost text-xl">Recetas</Link>
       </div>
     </div>
   );

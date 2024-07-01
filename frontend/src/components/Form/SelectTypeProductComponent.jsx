@@ -34,7 +34,9 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
     
     const handleProductChange = (e) => {
         const { value } = e.target;
-        onProductSelect(value);
+        const selectedProduct = filteredProducts.find(product => product.product === value);
+        const productId = selectedProduct ? selectedProduct.id : '';
+        onProductSelect(value, productId);
     };
     
     return (
