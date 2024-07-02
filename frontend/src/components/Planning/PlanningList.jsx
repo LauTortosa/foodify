@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 const PlanningList = () => {
@@ -32,7 +33,11 @@ const PlanningList = () => {
                         <td>{index + 1}</td>
                         <td>{planning.date_value}</td>
                         <td>{planning.tracebility}</td>
-                        <td>{planning.product_value}</td>
+                        <td className="text-blue-500 hover:underline">
+                            <Link to={`/planning/${planning.id}`}>
+                                {planning.product_value}
+                            </Link>
+                        </td>
                         <td>{planning.load}</td>
                         <td>{planning.state_value}</td>
                     </tr>
