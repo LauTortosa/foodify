@@ -15,6 +15,12 @@ const PlanningDetailsView = () => {
         const response = await axios.get(`http://localhost:8000/planning/api/${planningId}`);
         setPlanning(response.data);
     }
+
+    const deletePlanning = async () => {
+        await axios.delete(`http://localhost:8000/planning/api/${planningId}`);
+        navigate('/planning'); 
+    }
+    
     if (!planning) {
         return <p>Cargando...</p>; 
     }
@@ -54,6 +60,8 @@ const PlanningDetailsView = () => {
                             })}
                         </tbody>
                     </table>
+                    {/* TODO add alert */}
+                    <button className="btn w-20" onClick={deletePlanning}>Eliminar</button>
                 </div>
             </div>
         </div>
