@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
+import CheckboxLoads from "../components/PlanningDetails/CheckboxLoads";
+
 const PlanningDetailsView = () => {
     const { id: planningId } = useParams();
     const navigate = useNavigate();
-    const [planning, setPlanning] = useState(null);
+    const [planning, setPlanning] = useState({ component_value: [], load: [] });
 
     useEffect(() => {
         getPlanning();
-    }, []);
+    }, [planningId]);
 
     const getPlanning = async () => {
         const response = await axios.get(`http://localhost:8000/planning/api/${planningId}`);
@@ -20,12 +22,9 @@ const PlanningDetailsView = () => {
         await axios.delete(`http://localhost:8000/planning/api/${planningId}`);
         navigate('/planning'); 
     }
-    
-    if (!planning) {
-        return <p>Cargando...</p>; 
-    }
+
     return (
-        <div className="flex justify-center ">
+        <div className="flex justify-center">
             <div className="card w-5/6 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title uppercase">
@@ -33,39 +32,24 @@ const PlanningDetailsView = () => {
                         <div className="badge badge-outline">{planning.state_value}</div>
                     </h2>
                     <div className="flex item-center mt-4">
-                      <p>Fecha de inicio: {planning.date_value}</p>
+                        <p>Fecha de inicio: {planning.date_value}</p>
                     </div>
                     <div className="flex item-center mt-4">
-                      <p>Cargas: {planning.load}</p>
+                        <p>Cargas: {planning.load}</p>
                     </div>
                     <div className="flex item-center mt-4">
-                      <p>Trazabilidad: {planning.tracebility}</p>
+                        <p>Trazabilidad: {planning.tracebility}</p>
                     </div>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Componentes</th>
-                                <th>Cantidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {planning.component_value.map((component, index) => {
-                                const [ingredient, quantity] = component.split(' - ');
-                                return (
-                                    <tr key={index}>
-                                        <td>{ingredient}</td>
-                                        <td>{quantity}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    {/* TODO add alert */}
-                    <button className="btn w-20" onClick={deletePlanning}>Eliminar</button>
+                    <CheckboxLoads
+                        components={planning.component_value}
+                        load={planning.load}
+                        planningId={planningId}
+                    />
+                    <button className="btn mt-8 w-24" onClick={deletePlanning}>Eliminar</button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default PlanningDetailsView;
