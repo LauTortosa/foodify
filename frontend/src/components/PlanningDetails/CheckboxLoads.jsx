@@ -36,7 +36,7 @@ const CheckboxLoads = ({ components, load, planningId }) => {
               <th>Componentes</th>
               <th>Cantidad</th>
               {Array.from({ length: load }).map((_, loadIndex) => (
-                <th key={loadIndex}>Load {loadIndex + 1}</th>
+                <th key={loadIndex}>Carga {loadIndex + 1}</th>
               ))}
             </tr>
           </thead>
