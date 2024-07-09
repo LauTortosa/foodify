@@ -20,7 +20,7 @@ class PlanningIn(Schema):
     def validate_date(cls, v): 
      if isinstance(v, str):
             v = date.fromisoformat(v)
-     if v <= (date.today() - timedelta(days=7)):
+     if v <= (date.today() - timedelta(days=30)):
             raise ValueError("La fecha debe ser posterior a la que era hace una semana")
      return v
     
