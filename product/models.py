@@ -31,3 +31,6 @@ class ProductComponent(models.Model):
     product = models.ForeignKey(Product, on_delete=models.RESTRICT)
     component = models.ForeignKey(Component, on_delete=models.RESTRICT)
     kilograms = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.product}"

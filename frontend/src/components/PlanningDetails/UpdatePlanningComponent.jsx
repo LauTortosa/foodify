@@ -51,7 +51,7 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
                 onChange={() => setEditState("Pendiente")}
             />
             <br />
-            <label htmlFor="pesado" className="mr-2">Pesado</label>
+            <label htmlFor="pesado" className="mr-8">Pesado</label>
             <input
                 type="radio"
                 name="state"
@@ -62,7 +62,7 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
                 onChange={() => setEditState("Pesado")}
             />
             <br />
-            <label htmlFor="registrado" className="mr-1">Registrado</label>
+            <label htmlFor="registrado" className="mr-2">Registrado</label>
             <input
                 type="radio"
                 name="state"
@@ -72,7 +72,6 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
                 checked={editState === "Registrado"}
                 onChange={() => setEditState("Registrado")}
             />
-            <br />
             <button className="btn mt-6 mx-auto block" onClick={updatePlanning}>Aceptar</button>
         </div>
     )
