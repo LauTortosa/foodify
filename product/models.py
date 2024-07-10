@@ -33,4 +33,4 @@ class ProductComponent(models.Model):
     kilograms = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f"{self.product}"
+        return f"{self.product.product} - {self.component.label} ({self.kilograms} kg)"
