@@ -12,8 +12,8 @@ const MyRoutes = () => {
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route path="/planning" element={<PlanningView />} />
+      <Route path="/planning/:id" element={<PlanningDetailsView />} />
       <Route path="/planning-registered" element={<PlanningRegisteredView />} />
-      <Route path="/planning" element={<PlanningDetailsView />} />
       <Route path="/recipes" element={<RecipeView />} />
     </Routes>
   );
