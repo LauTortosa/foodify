@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initialDate, initialTracebility, initialProduct, onClose, onPlanningUpdated }) => {
+const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initialDate, initialTracebility, initialProduct, onClose }) => {
     const [editState, setEditState] = useState(initialState);
     const [editLoad, setEditLoad] = useState(initialLoad);
 
