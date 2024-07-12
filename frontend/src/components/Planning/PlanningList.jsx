@@ -12,7 +12,8 @@ const PlanningList = ({showLink = true, showState = true}) => {
 
     const listPlanning = async () => {
         const response = await axios.get('http://localhost:8000/planning/api/list');
-        setPlannings(response.data);
+        const filteredPlannings = response.data.filter(planning => planning.state_value !== 'Registrado');
+        setPlannings(filteredPlannings);
     }
 
     return (
