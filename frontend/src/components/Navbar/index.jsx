@@ -30,6 +30,7 @@ const Navbar = () => {
             <li><Link to="/planning">Planificaciones</Link></li>
             <li><Link to="/recipes">Recetas</Link></li>
             <li><Link to="/planning-registered">Diario de registros</Link></li>
+            <li><Link to="/calculate-kilograms">Calcular kilos</Link></li>
           </ul>
         </div>
       </div>
@@ -38,6 +39,7 @@ const Navbar = () => {
         <Link to="/planning" className="btn btn-ghost text-xl">Planificaciones</Link>
         <Link to="/recipes" className="btn btn-ghost text-xl">Recetas</Link>
         <Link to="/planning-registered" className="btn btn-ghost text-xl">Diario de registros</Link>
+        <Link to="/calculate-kilograms" className="btn btn-ghost text-xl">Calcular kilos</Link>
       </div>
     </div>
   );
