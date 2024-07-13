@@ -48,8 +48,10 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
               className="select select-bordered w-full">
             <option value="">Tipo de producto</option>
             {types.map(type => (
-                <option key={type.id} value={type.label}>{type.label}</option>
-              ))}
+                <option key={type.id} value={type.label}>
+                    {type.label}
+                </option>
+            ))}
           </select>
           </div>
           <div className="mb-4">
@@ -59,8 +61,10 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
               className="select select-bordered w-full">
             <option value="">Producto</option>
             {filteredProducts.map(product => (
-                <option key={product.id} value={product.product}>{product.product}</option>
-              ))}
+                <option key={product.id} value={product.product}>
+                    {product.product}
+                </option>
+            ))}
           </select>
           </div>
         </div>
