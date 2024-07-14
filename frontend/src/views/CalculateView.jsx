@@ -88,14 +88,20 @@ const CalculateView = () => {
         }
     
         setCalculatedKilosTotal(newCalculatedKilosComponent);
-        console.log('calc', newCalculatedKilosComponent);
+        clearCheckedProducts();
+    };
+
+    const clearCheckedProducts = () => {
+        const updatedProductsByType = {};
+        for (const typeId in productsByType) {
+            updatedProductsByType[typeId] = productsByType[typeId].map(product => ({
+                ...product,
+                checked: false
+            }));
+        }
+        setProductsByType(updatedProductsByType);
     };
     
-
-    useEffect(() => {
-        console.log('Selected Products:', selectedProducts);
-    }, [selectedProducts]);
-
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
             <div className='ml-8 mr-4'>
