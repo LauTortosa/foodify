@@ -89,6 +89,7 @@ const CalculateView = () => {
     
         setCalculatedKilosTotal(newCalculatedKilosComponent);
         clearCheckedProducts();
+        setSelectedProducts([]);
     };
 
     const clearCheckedProducts = () => {
@@ -101,7 +102,12 @@ const CalculateView = () => {
         }
         setProductsByType(updatedProductsByType);
     };
-    
+
+    const deleteCalculate = () => {
+        setSelectedProducts([]);
+        setCalculatedKilosTotal({});
+    }
+    // TODO validation form
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
             <div className='ml-8 mr-4'>
@@ -141,6 +147,11 @@ const CalculateView = () => {
                         onClick={calculateTotal}
                         className="btn w-40 mt-6 mb-8">
                         Calcular
+                    </button>
+                    <button 
+                        onClick={deleteCalculate}
+                        className="btn w-40 mt-6 mb-8">
+                        Eliminar
                     </button>
                 </div>
             </div>
