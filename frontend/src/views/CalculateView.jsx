@@ -78,12 +78,13 @@ const CalculateView = () => {
             components.forEach((component) => {
                 const [name, kilos] = component.split(" = ");
                 const parsedKilos = parseFloat(kilos) * load;
+                const roundedKilos = parseFloat(parsedKilos.toFixed(2));
     
                 if (!newCalculatedKilosComponent[name]) {
                     newCalculatedKilosComponent[name] = 0;
                 }
     
-                newCalculatedKilosComponent[name] += parsedKilos;
+                newCalculatedKilosComponent[name] += roundedKilos;
             });
         }
     
