@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
+import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateComponent';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -19,11 +20,6 @@ const CalculateView = () => {
         setProductsByType(updatedProductsByType);
     };
 
-    const deleteCalculate = () => {
-        setSelectedProducts([]);
-        setCalculatedKilosTotal({});
-    }
-    
     // TODO validation form
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
@@ -47,11 +43,10 @@ const CalculateView = () => {
                         load={load}
                         setCalculatedKilosTotal={setCalculatedKilosTotal}
                     />
-                    <button 
-                        onClick={deleteCalculate}
-                        className="btn w-40 mt-6 mb-8">
-                        Eliminar
-                    </button>
+                    <DeleteCalculateComponent 
+                        setSelectedProducts={setSelectedProducts}
+                        setCalculatedKilosTotal={setCalculatedKilosTotal}
+                    />
                 </div>
             </div>
             <div className="col-span-3 overflow-x-auto mb-12 mr-8">
