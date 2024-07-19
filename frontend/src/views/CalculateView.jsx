@@ -1,41 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
+import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [calculatedKilosTotal, setCalculatedKilosTotal] = useState([]);
     const [load, setLoad] = useState(1);
-
-    const getProductComponents = async (productId) => {
-        const response = await axios.get(`http://localhost:8000/product/api/${productId}`);
-        return response.data.component_value;
-    };
-
-    const calculateTotal = async () => {
-        const newCalculatedKilosComponent = { ...calculatedKilosTotal };
-    
-        for (const productId of selectedProducts) {
-            const components = await getProductComponents(productId);
-    
-            components.forEach((component) => {
-                const [name, kilos] = component.split(" = ");
-                const parsedKilos = parseFloat(kilos) * load;
-                const roundedKilos = parseFloat(parsedKilos.toFixed(2));
-    
-                if (!newCalculatedKilosComponent[name]) {
-                    newCalculatedKilosComponent[name] = 0;
-                }
-    
-                newCalculatedKilosComponent[name] += roundedKilos;
-            });
-        }
-    
-        setCalculatedKilosTotal(newCalculatedKilosComponent);
-        clearCheckedProducts();
-        setSelectedProducts([]);
-    };
 
     const clearCheckedProducts = () => {
         const updatedProductsByType = {};
@@ -71,11 +42,11 @@ const CalculateView = () => {
                         value={load}
                         onChange={(e) => setLoad(parseInt(e.target.value))}
                     />
-                    <button 
-                        onClick={calculateTotal}
-                        className="btn w-40 mt-6 mb-8">
-                        Calcular
-                    </button>
+                    <CalculateKilosComponent
+                        selectedProducts={selectedProducts}
+                        load={load}
+                        setCalculatedKilosTotal={setCalculatedKilosTotal}
+                    />
                     <button 
                         onClick={deleteCalculate}
                         className="btn w-40 mt-6 mb-8">
