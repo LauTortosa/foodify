@@ -3,14 +3,21 @@ import { useEffect, useState } from "react";
 
 const HomeView = () => {
     const [statePending, setStatePending] = useState(0);
+    const [statePrepared, setStatePrepared] = useState(0);
 
     useEffect(() => {
         getStatePending();
+        getStatePrepared();
     }, []);
 
     const getStatePending = async() => {
-        const response = await axios.get('http://localhost:8000/planning/api/planning/state/pending');
+        const response = await axios.get('http://localhost:8000/planning/api/state/pending');
         setStatePending(response.data["planning pending"]);
+    };
+
+    const getStatePrepared = async() => { 
+        const response = await axios.get('http://localhost:8000/planning/api/state/prepared');
+        setStatePrepared(response.data["planning prepared"]);
     }
 
     return (
@@ -20,7 +27,7 @@ const HomeView = () => {
               <h2 className='text-center text-xl font-bold underline mb-4'>Planificaciones pendientes</h2>
               <ul>
                 <li>Por preparar {statePending}</li>
-                <li>Por registrar {statePending}</li>
+                <li>Por registrar {statePrepared}</li>
               </ul>
           </div>
           <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>

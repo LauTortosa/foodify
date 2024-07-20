@@ -74,7 +74,7 @@ def get_state(request):
 
     return state
 
-@planning_api.get("/planning/state/pending")
+@planning_api.get("/state/pending")
 def get_state_pending(request):
     pending = Planning.objects.filter(state_id=1).count()
 
