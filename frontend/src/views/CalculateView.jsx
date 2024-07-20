@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
 import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateComponent';
+import TableCalculateKilosComponent from '../components/Calculate/TableCalculateKilosComponent';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -41,24 +42,10 @@ const CalculateView = () => {
                 </div>
             </div>
             <div className="col-span-3 overflow-x-auto mb-12 mr-8">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Componente</th>
-                            <th>Total kilos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Object.entries(calculatedKilosTotal).map(([componentName, totalKilos], index) => (
-                            <tr key={componentName} className="mb-4">
-                                <td>{index + 1}</td>
-                                <td>{componentName}</td>
-                                <td>{totalKilos} kg</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <TableCalculateKilosComponent 
+                    calculatedKilosTotal={calculatedKilosTotal}
+                />
+                
             </div>
         </div>
     );

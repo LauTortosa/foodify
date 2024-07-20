@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 
-const CalculateKilosComponent = ({ selectedProducts, setSelectedProducts, load, setCalculatedKilosTotal, calculatedKilosTotal }) => {
+const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTotal, calculatedKilosTotal }) => {
 
     const getProductComponents = async (productId) => {
         const response = await axios.get(`http://localhost:8000/product/api/${productId}`);
