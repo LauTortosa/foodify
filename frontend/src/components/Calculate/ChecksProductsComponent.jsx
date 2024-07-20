@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const ChecksProductsComponent = ({ selectedProducts, setSelectedProducts }) => {
+const ChecksProductsComponent = ({ setSelectedProducts }) => {
     const [types, setTypes] = useState([]);
     const [productsByType, setProductsByType] = useState({});
 
@@ -61,16 +61,13 @@ const ChecksProductsComponent = ({ selectedProducts, setSelectedProducts }) => {
                 return [...prevSelectedProducts, productId];
             }
         });
-
-        
-       
     };
 
     return (
         <div>
             {types.map(type => (
                 <div key={type.id}>
-                    <h3 className="font-bold">{type.label}</h3>
+                    <h3 className="font-bold mt-4">{type.label}</h3>
                     <ul>
                         {productsByType[type.id]?.map(product => (
                             <li key={product.id}>
@@ -79,7 +76,7 @@ const ChecksProductsComponent = ({ selectedProducts, setSelectedProducts }) => {
                                         type="checkbox"
                                         checked={product.checked}
                                         onChange={() => handleCheckboxChange(type.id, product.id)}
-                                        className="checkbox"
+                                        className="checkbox mt-2 mr-2"
                                     />
                                     <span>{product.product}</span>
                                 </label>
