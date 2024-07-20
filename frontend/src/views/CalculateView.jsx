@@ -4,6 +4,7 @@ import ChecksProductsComponent from '../components/Calculate/ChecksProductsCompo
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
 import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateComponent';
 import TableCalculateKilosComponent from '../components/Calculate/TableCalculateKilosComponent';
+import LoadInputCalculateKilosComponent from '../components/Calculate/LoadInputCalculateKilosComponent';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -18,34 +19,26 @@ const CalculateView = () => {
                     selectedProducts={selectedProducts} 
                     setSelectedProducts={setSelectedProducts} 
                 />
-                <div className="mt-8 ml-4">
-                    <label className="text-sm mt-8 mr-4 font-bold">
-                        Número de cargas
-                    </label>
-                    <input
-                        type="number"
-                        className="input input-bordered input-sm w-40 max-w-xs mt-2 mb-2"
-                        value={load}
-                        onChange={(e) => setLoad(parseInt(e.target.value))}
-                    />
-                    <CalculateKilosComponent
-                        selectedProducts={selectedProducts}
-                        load={load}
-                        setCalculatedKilosTotal={setCalculatedKilosTotal}
-                        calculatedKilosTotal={calculatedKilosTotal}
-                        setSelectedProducts={setSelectedProducts}
-                    />
-                    <DeleteCalculateComponent 
-                        setSelectedProducts={setSelectedProducts}
-                        setCalculatedKilosTotal={setCalculatedKilosTotal}
-                    />
-                </div>
+                <LoadInputCalculateKilosComponent 
+                    value={load}
+                    setLoad={setLoad}
+                />
+                <CalculateKilosComponent
+                    selectedProducts={selectedProducts}
+                    load={load}
+                    setCalculatedKilosTotal={setCalculatedKilosTotal}
+                    calculatedKilosTotal={calculatedKilosTotal}
+                    setSelectedProducts={setSelectedProducts}
+                />
+                <DeleteCalculateComponent 
+                    setSelectedProducts={setSelectedProducts}
+                    setCalculatedKilosTotal={setCalculatedKilosTotal}
+                />
             </div>
             <div className="col-span-3 overflow-x-auto mb-12 mr-8">
                 <TableCalculateKilosComponent 
                     calculatedKilosTotal={calculatedKilosTotal}
                 />
-                
             </div>
         </div>
     );
