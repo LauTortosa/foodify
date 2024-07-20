@@ -29,9 +29,11 @@ const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTot
         }
 
         setCalculatedKilosTotal(newCalculatedKilos);
+        console.log("producto seleccionado despues de calcular", selectedProducts);
     };
 
     useEffect(() => {
+        console.log('products select', selectedProducts)
     }, [selectedProducts]);
 
     return (

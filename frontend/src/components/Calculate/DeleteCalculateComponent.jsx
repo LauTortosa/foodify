@@ -1,7 +1,5 @@
-const DeletePlanningComponent = ({ setSelectedProducts, setCalculatedKilosTotal }) => {
-    
+const DeletePlanningComponent = ({ setCalculatedKilosTotal }) => {
     const deleteCalculate = () => {
-        setSelectedProducts([]); 
         setCalculatedKilosTotal({});
     }
 
