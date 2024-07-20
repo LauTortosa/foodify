@@ -29,18 +29,16 @@ const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTot
         }
 
         setCalculatedKilosTotal(newCalculatedKilos);
-        console.log("producto seleccionado despues de calcular", selectedProducts);
     };
 
     useEffect(() => {
-        console.log('products select', selectedProducts)
     }, [selectedProducts]);
 
     return (
         <div>
             <button 
                 onClick={calculateTotal}
-                className="btn w-40 mt-6 mb-8">
+                className="btn w-40 mt-6">
                 Calcular
             </button>
         </div>
