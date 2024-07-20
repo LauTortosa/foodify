@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
@@ -6,19 +6,8 @@ import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateCom
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
-    const [calculatedKilosTotal, setCalculatedKilosTotal] = useState([]);
+    const [calculatedKilosTotal, setCalculatedKilosTotal] = useState({});
     const [load, setLoad] = useState(1);
-
-    const clearCheckedProducts = () => {
-        const updatedProductsByType = {};
-        for (const typeId in productsByType) {
-            updatedProductsByType[typeId] = productsByType[typeId].map(product => ({
-                ...product,
-                checked: false
-            }));
-        }
-        setProductsByType(updatedProductsByType);
-    };
 
     // TODO validation form
     return (
@@ -42,6 +31,8 @@ const CalculateView = () => {
                         selectedProducts={selectedProducts}
                         load={load}
                         setCalculatedKilosTotal={setCalculatedKilosTotal}
+                        calculatedKilosTotal={calculatedKilosTotal}
+                        setSelectedProducts={setSelectedProducts}
                     />
                     <DeleteCalculateComponent 
                         setSelectedProducts={setSelectedProducts}

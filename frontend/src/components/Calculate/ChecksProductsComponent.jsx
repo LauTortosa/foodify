@@ -61,6 +61,9 @@ const ChecksProductsComponent = ({ selectedProducts, setSelectedProducts }) => {
                 return [...prevSelectedProducts, productId];
             }
         });
+
+        
+       
     };
 
     return (

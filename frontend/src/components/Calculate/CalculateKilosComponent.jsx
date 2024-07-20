@@ -1,31 +1,38 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTotal }) => {
+const CalculateKilosComponent = ({ selectedProducts, setSelectedProducts, load, setCalculatedKilosTotal, calculatedKilosTotal }) => {
+
     const getProductComponents = async (productId) => {
         const response = await axios.get(`http://localhost:8000/product/api/${productId}`);
         return response.data.component_value;
     };
 
     const calculateTotal = async () => {
-        const newCalculatedKilos = {};
-    
+        const newCalculatedKilos = { ...calculatedKilosTotal };
+
         for (const productId of selectedProducts) {
             const components = await getProductComponents(productId);
-    
+
             components.forEach((component) => {
                 const [name, kilos] = component.split(" = ");
-                const parsedKilos = parseFloat(kilos) * load;
-                const roundedKilos = parseFloat(parsedKilos.toFixed(2));
-    
+                const parsedKilos = parseFloat(kilos);
+                const additionalKilos = parseFloat((parsedKilos * load).toFixed(2));
+
                 if (!newCalculatedKilos[name]) {
                     newCalculatedKilos[name] = 0;
                 }
-                newCalculatedKilos[name] += roundedKilos;
+                
+                newCalculatedKilos[name] += additionalKilos;
+
             });
         }
+
         setCalculatedKilosTotal(newCalculatedKilos);
-       // clearCheckedProducts();
     };
+
+    useEffect(() => {
+    }, [selectedProducts]);
 
     return (
         <div>
@@ -36,7 +43,6 @@ const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTot
             </button>
         </div>
     );
-
 };
 
-export default CalculateKilosComponent
+export default CalculateKilosComponent;
