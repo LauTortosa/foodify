@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import StatePendingComponent from "../components/Home/StatePendingComponent";
 import StatePreparedComponent from "../components/Home/StatePreparedComponent";
 
-const HomeView = ({ statePending, statePrepared }) => {
+const HomeView = ({ statePending, statePrepared, taskId }) => {
     const [tasks, setTask] = useState([]);
 
     useEffect(() => {
@@ -15,6 +15,11 @@ const HomeView = ({ statePending, statePrepared }) => {
         const response = await axios.get('http://localhost:8000/task/api/list');
         setTask(response.data);
     };
+
+    const deleteTask = async (taskId) => {
+        await axios.delete(`http://localhost:8000/task/api/${taskId}`);
+        getTask();
+    }
 
     const handleCheckboxChange = (id) => {
         setTask(prevTasks => 
@@ -43,6 +48,7 @@ const HomeView = ({ statePending, statePrepared }) => {
                                     <th>#</th>
                                     <th>Tarea</th>
                                     <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,6 +64,8 @@ const HomeView = ({ statePending, statePrepared }) => {
                                             className="checkbox"
                                         />
                                     </td>
+                       <td><button className="btn w-20" onClick={() => deleteTask(task.id)}>Eliminar</button>
+                        </td>
                                 </tr>
                             ))}
                             </tbody>
