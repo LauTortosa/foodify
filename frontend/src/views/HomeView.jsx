@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import StatePendingComponent from "../components/Home/StatePendingComponent";
 import StatePreparedComponent from "../components/Home/StatePreparedComponent";
 
-const HomeView = ({ statePending, statePrepared, taskId }) => {
-    const [tasks, setTask] = useState([]);
+const HomeView = ({ statePending, statePrepared }) => {
+    const [listTasks, setListTask] = useState([]);
+    const [newTask, setNewTask] = useState("");
 
     useEffect(() => {
         getTask();
@@ -13,7 +14,7 @@ const HomeView = ({ statePending, statePrepared, taskId }) => {
 
     const getTask = async () => {
         const response = await axios.get('http://localhost:8000/task/api/list');
-        setTask(response.data);
+        setListTask(response.data);
     };
 
     const deleteTask = async (taskId) => {
@@ -21,8 +22,19 @@ const HomeView = ({ statePending, statePrepared, taskId }) => {
         getTask();
     }
 
+    const createTask = async () => {
+        const dataToSend = {
+            task: newTask,
+            completed: "false"
+        };
+
+        await axios.post('http://localhost:8000/task/api/', dataToSend);
+        setNewTask("");  
+        getTask();  
+    };
+
     const handleCheckboxChange = (id) => {
-        setTask(prevTasks => 
+        setListTask(prevTasks => 
             prevTasks.map(task => 
                 task.id === id ? { ...task, completed: !task.completed } : task
             )
@@ -52,7 +64,7 @@ const HomeView = ({ statePending, statePrepared, taskId }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                            {tasks.map((task, index) => (
+                            {listTasks.map((task, index) => (
                                 <tr key={task.id} className="hover">
                                     <td>{index + 1}</td>
                                     <td>{task.task}</td>
@@ -64,12 +76,21 @@ const HomeView = ({ statePending, statePrepared, taskId }) => {
                                             className="checkbox"
                                         />
                                     </td>
-                       <td><button className="btn w-20" onClick={() => deleteTask(task.id)}>Eliminar</button>
-                        </td>
+                                    <td>
+                                        <button className="btn w-20" onClick={() => deleteTask(task.id)}>Eliminar</button>
+                                    </td>
                                 </tr>
                             ))}
                             </tbody>
                         </table>
+                        <input 
+                            type="text"
+                            value={newTask} 
+                            onChange={(e) => setNewTask(e.target.value)}
+                            placeholder="Escribe una tarea"
+                            className="input input-bordered w-full max-w-xs mt-4"
+                        />
+                        <button className="btn w-20 mt-2" onClick={createTask}>Añadir tarea</button>
                     </div>
                 </div>
             </div>
