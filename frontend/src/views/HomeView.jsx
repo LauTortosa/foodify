@@ -8,11 +8,6 @@ import ListTasksComponent from "../components/Home/ListTasksComponent";
 const HomeView = ({ statePending, statePrepared, listTasks, setListTask }) => {
     const [newTask, setNewTask] = useState("");
 
-    const deleteTask = async (taskId) => {
-        await axios.delete(`http://localhost:8000/task/api/${taskId}`);
-        getTask();
-    }
-
     const createTask = async () => {
         const dataToSend = {
             task: newTask,

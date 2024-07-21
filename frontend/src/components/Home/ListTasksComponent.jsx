@@ -26,6 +26,7 @@ const ListTasksComponent = () => {
         <TableTasksComponent 
             listTasks={listTasks}
             onCheckboxChange={handleCheckboxChange}
+            getTask={getTask}
         />
     );
 };

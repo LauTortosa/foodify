@@ -1,4 +1,6 @@
-const TableTasksComponent = ({ listTasks, onCheckboxChange }) => {
+import DeleteTaskComponent from "./DeleteTaskComponent";
+
+const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
     return (
         <table className="table">
             <thead>
@@ -23,7 +25,10 @@ const TableTasksComponent = ({ listTasks, onCheckboxChange }) => {
                         />
                     </td>
                     <td>
-                        <button className="btn w-20" onClick={() => deleteTask(task.id)}>Eliminar</button>
+                        <DeleteTaskComponent
+                            taskId={task.id}
+                            getTask={getTask}
+                        />
                     </td>
                 </tr>
                 ))}
