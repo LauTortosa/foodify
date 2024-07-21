@@ -1,40 +1,23 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import StatePendingComponent from "../components/Home/StatePendingComponent";
 
-const HomeView = () => {
-    const [statePending, setStatePending] = useState(0);
-    const [statePrepared, setStatePrepared] = useState(0);
-
-    useEffect(() => {
-        getStatePending();
-        getStatePrepared();
-    }, []);
-
-    const getStatePending = async() => {
-        const response = await axios.get('http://localhost:8000/planning/api/state/pending');
-        setStatePending(response.data["planning pending"]);
-    };
-
-    const getStatePrepared = async() => { 
-        const response = await axios.get('http://localhost:8000/planning/api/state/prepared');
-        setStatePrepared(response.data["planning prepared"]);
-    }
+const HomeView = ({ statePending, statePrepared }) => {
 
     return (
         <div className='container mx-auto mt-10'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-          <div className='md:col-span-2 lg:col-span-1'>
-              <h2 className='text-center text-xl font-bold underline mb-4'>Planificaciones pendientes</h2>
-              <ul>
-                <li>Por preparar {statePending}</li>
-                <li>Por registrar {statePrepared}</li>
-              </ul>
-          </div>
-          <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
-              <h2 className="text-center text-xl font-bold underline mb-4">Lista de tareas</h2>
-          </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+                <div className='md:col-span-2 lg:col-span-1'>
+                    <h2 className='text-center text-xl font-bold underline mb-4'>Planificaciones pendientes</h2>
+                    <ul>
+                        <StatePendingComponent 
+                        statePending={statePending}
+                        />
+                    </ul>
+                </div>
+                <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
+                    <h2 className="text-center text-xl font-bold underline mb-4">Lista de tareas</h2>
+                </div>
+            </div>
         </div>
-      </div>
     );
 }
 
