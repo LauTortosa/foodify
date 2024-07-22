@@ -1,18 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import TableTasksComponent from "./TableTasksComponent";
+import CreateTaskComponent from "./CreateTaskComponent";
 
-const ListTasksComponent = () => {
-    const [listTasks, setListTask] = useState([]);
-
-    useEffect(() => {
-        getTask();
-    }, []);
-
-    const getTask = async () => {
-        const response = await axios.get('http://localhost:8000/task/api/list');
-        setListTask(response.data);
-    };
+const ListTasksComponent = ({ listTasks, setListTask, getTask }) => {
 
     const handleCheckboxChange = (id) => {
         setListTask(prevTasks => 
@@ -23,11 +12,14 @@ const ListTasksComponent = () => {
     };
 
     return (
+        <>
         <TableTasksComponent 
             listTasks={listTasks}
             onCheckboxChange={handleCheckboxChange}
             getTask={getTask}
         />
+        <CreateTaskComponent getTask={getTask} />
+    </>
     );
 };
 

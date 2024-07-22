@@ -1,22 +1,20 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 import StatePendingComponent from "../components/Home/StatePendingComponent";
 import StatePreparedComponent from "../components/Home/StatePreparedComponent";
 import ListTasksComponent from "../components/Home/ListTasksComponent";
 
-const HomeView = ({ statePending, statePrepared, listTasks, setListTask }) => {
-    const [newTask, setNewTask] = useState("");
+const HomeView = ({ statePending, statePrepared }) => {
+    const [listTasks, setListTask] = useState([]);
 
-    const createTask = async () => {
-        const dataToSend = {
-            task: newTask,
-            completed: "false"
-        };
+    useEffect(() => {
+        getTask();
+    }, []);
 
-        await axios.post('http://localhost:8000/task/api/', dataToSend);
-        setNewTask("");  
-        getTask();  
+    const getTask = async () => {
+        const response = await axios.get('http://localhost:8000/task/api/list');
+        setListTask(response.data);
     };
 
     return (
@@ -35,15 +33,8 @@ const HomeView = ({ statePending, statePrepared, listTasks, setListTask }) => {
                         <ListTasksComponent
                             listTasks={listTasks}
                             setListTask={setListTask}
+                            getTask={getTask}
                         />
-                        <input 
-                            type="text"
-                            value={newTask} 
-                            onChange={(e) => setNewTask(e.target.value)}
-                            placeholder="Escribe una tarea"
-                            className="input input-bordered w-full max-w-xs mt-4"
-                        />
-                        <button className="btn ml-4" onClick={createTask}>Añadir tarea</button>
                     </div>
                 </div>
             </div>
