@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initialDate, initialTracebility, initialProduct, onClose }) => {
     const [editState, setEditState] = useState(initialState);
     const [editLoad, setEditLoad] = useState(initialLoad);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
     }, [initialState, initialLoad, initialDate, initialTracebility, initialProduct]);
@@ -21,6 +24,7 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
         };
     
         await axios.put(`http://localhost:8000/planning/api/${planningId}`, newData);
+        navigate(0);
         onClose();
     }
 
