@@ -1,7 +1,7 @@
 from ninja import Field, NinjaAPI, Schema
 from typing import Annotated, List, Optional
 
-from pydantic import validator
+from pydantic import field_validator
 
 from .models import Planning, State
 from product.models import Product, ProductComponent
@@ -16,7 +16,7 @@ class PlanningIn(Schema):
     product: Annotated[str, Field(min_length=1)]
     state_value: Optional[str] = Field(None, min_length=1)
 
-    @validator('date')
+    @field_validator('date')
     def validate_date(cls, v): 
      if isinstance(v, str):
             v = date.fromisoformat(v)
