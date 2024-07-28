@@ -15,8 +15,8 @@ const StatePreparedComponent = () => {
     };
 
     return(
-        <li className="text-2xl">
-            Por registrar <span className="text-4xl ml-16">{statePrepared}</span>
+        <li className="text-xl ml-2">
+            Por registrar <span className="text-3xl ml-24">{statePrepared}</span>
         </li>
     );
 };
