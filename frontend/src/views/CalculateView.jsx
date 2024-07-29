@@ -9,7 +9,7 @@ import LoadInputCalculateKilosComponent from '../components/Calculate/LoadInputC
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [calculatedKilosTotal, setCalculatedKilosTotal] = useState({});
-    const [load, setLoad] = useState(1);
+    const [load, setLoad] = useState(0);
 
     // TODO validation form
     return (

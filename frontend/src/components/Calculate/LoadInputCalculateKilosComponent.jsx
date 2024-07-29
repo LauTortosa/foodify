@@ -1,4 +1,4 @@
-const LoadInputCalculateKilosComponent = ({ load = 1, setLoad }) => {
+const LoadInputCalculateKilosComponent = ({ load, setLoad }) => {
     return (
         <div className="mt-8">
             <label className="text-sm font-bold">
