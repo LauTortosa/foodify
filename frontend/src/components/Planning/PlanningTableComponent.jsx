@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
 
 const PlanningTableComponent = ({ plannings, showLink, showState }) => {
     return (
@@ -12,6 +13,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState }) => {
                         <th>Producto</th>
                         <th>Cargas</th>
                         {showState && <th>Estado</th>}
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState }) => {
                         )}
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
+                        <td><DeletePlanningComponent planningId={planning.id} /></td>
                     </tr>
                 ))}
                 </tbody>

@@ -6,7 +6,7 @@ const DeletePlanningComponent = ({ planningId }) => {
 
     const deletePlanning = async () => {
         await axios.delete(`http://localhost:8000/planning/api/${planningId}`);
-        navigate('/planning');
+        navigate(0);
     }
 
     return ( 
