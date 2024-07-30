@@ -11,7 +11,7 @@ const DeletePlanningComponent = ({ planningId }) => {
 
     return ( 
         <div>
-            <button className="btn mt-8 w-24" onClick={deletePlanning}>Eliminar</button>
+            <button className="btn w-24" onClick={deletePlanning}>Eliminar</button>
         </div>
     );
 }
