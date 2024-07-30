@@ -11,7 +11,6 @@ const CalculateView = () => {
     const [calculatedKilosTotal, setCalculatedKilosTotal] = useState({});
     const [load, setLoad] = useState(0);
 
-    // TODO validation form
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
             <div className='ml-8 mr-4'>
