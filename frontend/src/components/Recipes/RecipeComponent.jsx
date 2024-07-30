@@ -15,7 +15,6 @@ const RecipeComponent = ({ productId }) => {
         }
     }, [productId]);
     
-    console.log('recipe', recipe);
     if (!recipe) {
         return (
             <div className="flex justify-center">

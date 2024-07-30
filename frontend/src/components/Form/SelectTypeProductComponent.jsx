@@ -3,7 +3,6 @@ import axios from "axios";
 
 const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
     const [types, setTypes] = useState([]);
-    const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     
     useEffect(() => {
