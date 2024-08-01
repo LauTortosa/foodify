@@ -1,23 +1,46 @@
 import { Link } from 'react-router-dom';
 import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
+import { useState } from 'react';
 
 const PlanningTableComponent = ({ plannings, showLink, showState }) => {
+    const [sortConfig, setSortConfig] = useState({key: null, direction: 'asc'});
+
+    const sortedPlannings = [...plannings].sort((a, b) => {
+        if (!sortConfig.key) return 0;
+
+        const aValue = a[sortConfig.key];
+        const bValue = b[sortConfig.key];
+
+        if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1; // -1 a va antes que b
+        if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1; // 1 a va despues de b
+
+        return 0;
+    });
+
+    const handleSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    };
+
     return (
         <div className='overflow-x-auto'>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Fecha</th>
-                        <th>Trazabilidad</th>
-                        <th>Producto</th>
-                        <th>Cargas</th>
-                        {showState && <th>Estado</th>}
+                        <th className='cursor-pointer' onClick={() => handleSort('index')}>#</th>
+                        <th className='cursor-pointer' onClick={() => handleSort('date_value')}>Fecha</th>
+                        <th className='cursor-pointer' onClick={() => handleSort('tracebility')}>Trazabilidad</th>
+                        <th className='cursor-pointer' onClick={() => handleSort('product_value')}>Producto</th>
+                        <th className='cursor-pointer' onClick={() => handleSort('load')}>Cargas</th>
+                        {showState && <th className='cursor-pointer' onClick={() => handleSort('state_value')}>Estado</th>}
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                {plannings.map((planning, index) => (
+                {sortedPlannings.map((planning, index) => (
                     <tr key={planning.id} className="hover">
                         <td>{index + 1}</td>
                         <td>{planning.date_value}</td>
