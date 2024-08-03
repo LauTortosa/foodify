@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
 
+/**
+ * CheckboxLoads component allows users to toggle individual and entire columns of checkboxes,
+ * and persists the state to localStorage.
+ *
+ * @param {Array} components - List of components to be displayed.
+ * @param {Number} load - Number of load columns to generate.
+ * @param {String} planningId - Unique identifier for the planning, used for localStorage key.
+ */
+
 const CheckboxLoads = ({ components, load, planningId }) => {
     const [checkedLoads, setCheckedLoads] = useState({});
     const [allChecked, setAllChecked] = useState({});
 
+    // effect to load the checked state from localStorage when the component mounts
     useEffect(() => {
         const savedData = JSON.parse(localStorage.getItem(`checkedData_${planningId}`));
             if (savedData) {
@@ -19,6 +29,7 @@ const CheckboxLoads = ({ components, load, planningId }) => {
       return checkedLoads[`${componentIndex}_${loadIndex}`] || false;
     };
 
+    // function to toggle the checked state of a specific checkbox
     const toggleCheck = (componentIndex, loadIndex) => {
         const key = `${componentIndex}_${loadIndex}`;
         setCheckedLoads((prevState) => {
@@ -28,6 +39,7 @@ const CheckboxLoads = ({ components, load, planningId }) => {
         });
     };
 
+    // function to toggle the checked state of all checkboxes in a specific column
     const toggleAllChecks = (loadIndex) => {
       const newCheckedLoads = { ...checkedLoads };
       const newAllChecked = !allChecked[loadIndex];
