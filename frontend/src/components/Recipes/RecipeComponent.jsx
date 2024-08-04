@@ -16,45 +16,30 @@ const RecipeComponent = ({ productId }) => {
     }, [productId]);
     
     if (!recipe) {
-        return (
-            <div className="flex justify-center">
-            <div className="card bg-base-100 w-100 shadow-xl">
-                <div className="card-body">
-                <p className="text-lg text-center">Selecciona un producto para ver la receta</p>
-                </div>
-            </div>
-        </div>
+        return ( 
+            <div className="flex justify-center"></div>
         );
     }
 
     return (
         <div className="flex justify-center">
-            <div className="card bg-base-100 w-96 shadow-xl">
+            <div className="card shadow-xl mt-8">
                 <div className="card-body">
-                    <h2 className="card-title uppercase justify-center">{recipe.product}</h2>
-                    <table className="table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-2">Ingrediente</th>
-                                <th className="px-4 py-2">Cantidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {recipe.component_value.map((component, index) => {
-                                const [ingredient, quantity] = component.split(' = ');
-                                return (
-                                    <tr key={index}>
-                                        <td className="border px-4 py-2">{ingredient}</td>
-                                        <td className="border px-4 py-2">{quantity}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <h2 className="card-title uppercase justify-center text-3xl w-full mb-4">{recipe.product}</h2>
+                    <ul>
+                        {recipe.component_value.map((component, index) => {
+                            const [ingredient, quantity] = component.split(' = ');
+                            return (
+                                <li key={index} className="text-xl">
+                                    <p className="px-4 py-2">{ingredient} = {quantity}</p>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default RecipeComponent;
