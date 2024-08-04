@@ -4,7 +4,7 @@ import axios from "axios";
 
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 
-const PlanningFormComponent = ({ onPlanningCreated }) => {
+const PlanningFormComponent = ({ refreshPlanningList }) => {
     const { register, handleSubmit, setValue, reset } = useForm();
     const [error, setError] = useState();
     const [confirmMessage, setConfirmMessage] = useState();
@@ -37,8 +37,8 @@ const handleSubmitForm = async (data) => {
         reset();
         setError("");
         setConfirmMessage("Planificación creada con éxito");
-        if (onPlanningCreated) onPlanningCreated();
-        
+        if (refreshPlanningList) refreshPlanningList();
+
     } catch (error) {
         const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.msg || error.message || "Error al añadir la planificación.";
         setError("Error al añadir la planificación: " + errorMessage);
