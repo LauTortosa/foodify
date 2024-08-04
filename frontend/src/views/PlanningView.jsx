@@ -22,7 +22,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
           </div>
           <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
             <h2 className="text-center text-xl font-bold underline mb-4">Listado de Planificaciones</h2>
-            <PlanningList plannings={plannings} showLink={true} showState={true} />
+            <PlanningList plannings={plannings} showLink={true} showState={true} refreshPlanningList={listPlanning}/>
           </div>
         </div>
       </div>

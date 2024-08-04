@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
 import { sortData, handleSort } from '../../utils';
 
-const PlanningTableComponent = ({ plannings, showLink, showState }) => {
+const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlanningList }) => {
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'asc'});
-
     const sortedPlannings = sortData(plannings, sortConfig);
 
     return (
@@ -39,7 +38,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState }) => {
                         )}
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
-                        <td><DeletePlanningComponent planningId={planning.id} /></td>
+                        <td><DeletePlanningComponent planningId={planning.id} refreshPlanningList={refreshPlanningList}/></td>
                     </tr>
                 ))}
                 </tbody>
