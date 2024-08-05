@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputRadioComponent from "../Form/InputRadioComponent";
+import InputNumberComponent from "../Form/InputNumberComponent";
 
 const UpdatePlanningComponent = ({ 
     planningId, 
@@ -48,13 +49,11 @@ const UpdatePlanningComponent = ({
             <h3 className="font-bold text-lg text-center">Editar planificación</h3>
             <h4 className="underline mb-2">Cargas</h4>
             <p>Número actual: {initialLoad}</p>
-            <label htmlFor="load">Número de cargas nuevo</label>
-            <input
-                type="number"
-                className="input input-bordered input-sm w-40 max-w-xs ml-4 mb-2"
-                id="load"
+            <InputNumberComponent 
+                label="Número de cargas nuevo"
                 value={editLoad}
-                onChange={(e) => setEditLoad(e.target.value)}
+                onChange={setEditLoad}
+                id={editLoad}
             />
             <div className="divider"></div>
             <h4 className="underline mb-2">Estado</h4>
