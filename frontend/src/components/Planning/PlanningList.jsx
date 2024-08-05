@@ -1,8 +1,14 @@
 import PlanningTableComponent from './PlanningTableComponent';
 
-const PlanningList = ({ plannings, showLink = true, showState = true, refreshPlanningList }) => {
+const PlanningList = ({ plannings, showLink = true, showState = true, showDelete = true, refreshPlanningList }) => {
     return (
-        <PlanningTableComponent plannings={plannings} showLink={showLink} showState={showState} refreshPlanningList={refreshPlanningList} />
+        <PlanningTableComponent 
+            plannings={plannings} 
+            showLink={showLink} 
+            showState={showState} 
+            showDelete={showDelete} 
+            refreshPlanningList={refreshPlanningList} 
+        />
     );
 };
 

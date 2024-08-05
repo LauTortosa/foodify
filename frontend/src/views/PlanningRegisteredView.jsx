@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import PlanningTableComponent from "../components/Planning/PlanningTableComponent";
 
-const PlanningRegisteredView = ({showLink = false, showState = false}) => {
+const PlanningRegisteredView = ({showLink = false, showState = false, showDelete = false}) => {
     const [plannings, setPlannings] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,12 @@ const PlanningRegisteredView = ({showLink = false, showState = false}) => {
     };
 
     return ( 
-        <PlanningTableComponent plannings={plannings} showLink={showLink} showState={showState} />  
+        <PlanningTableComponent 
+            plannings={plannings} 
+            showLink={showLink} 
+            showState={showState} 
+            showDelete={showDelete} 
+        />  
     );
 };
 
