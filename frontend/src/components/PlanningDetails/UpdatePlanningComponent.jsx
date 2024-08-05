@@ -1,15 +1,25 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import InputRadioComponent from "../Form/InputRadioComponent";
 
-const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initialDate, initialTracebility, initialProduct, onClose }) => {
+const UpdatePlanningComponent = ({ 
+    planningId, 
+    initialState, 
+    initialLoad, 
+    initialDate, 
+    initialTracebility, 
+    initialProduct, 
+    onClose 
+}) => {
+
     const [editState, setEditState] = useState(initialState);
     const [editLoad, setEditLoad] = useState(initialLoad);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-    }, [initialState, initialLoad, initialDate, initialTracebility, initialProduct]);
+    }, []);
 
     const updatePlanning = async () => {
         const newData = { 
@@ -27,6 +37,12 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
         onClose();
     }
 
+    const radioOptions = [
+        { id: 'pendiente', label: 'Pendiente', value: 'Pendiente'},
+        { id: 'pesado', label: 'Pesado', value: 'Pesado'},
+        { id: 'registrado', label: 'Registrado', value: 'Registrado'}
+    ];
+
     return (
         <div>
             <h3 className="font-bold text-lg text-center">Editar planificación</h3>
@@ -41,39 +57,12 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
                 onChange={(e) => setEditLoad(e.target.value)}
             />
             <div className="divider"></div>
-            {/* TODO refactor */}
             <h4 className="underline mb-2">Estado</h4>
-            <label htmlFor="pendiente" className="mr-3">Pendiente</label>
-            <input
-                type="radio"
+            <InputRadioComponent
                 name="state"
-                className="radio radio-xs"
-                id="pendiente"
-                value="Pendiente"
-                checked={editState === "Pendiente"}
-                onChange={() => setEditState("Pendiente")}
-            />
-            <br />
-            <label htmlFor="pesado" className="mr-8">Pesado</label>
-            <input
-                type="radio"
-                name="state"
-                className="radio radio-xs"
-                id="pesado"
-                value="Pesado"
-                checked={editState === "Pesado"}
-                onChange={() => setEditState("Pesado")}
-            />
-            <br />
-            <label htmlFor="registrado" className="mr-2">Registrado</label>
-            <input
-                type="radio"
-                name="state"
-                className="radio radio-xs"
-                id="registrado"
-                value="Registrado"
-                checked={editState === "Registrado"}
-                onChange={() => setEditState("Registrado")}
+                options={radioOptions}
+                selectedValue={editState}
+                onChange={setEditState}
             />
             <button className="btn mt-6 mx-auto block" onClick={updatePlanning}>Aceptar</button>
         </div>
@@ -81,4 +70,3 @@ const UpdatePlanningComponent = ({ planningId, initialState, initialLoad, initia
 }
 
 export default UpdatePlanningComponent;
-

@@ -1,23 +1,14 @@
-import { useState, useEffect } from 'react';
-import axios from "axios";
-
 import PlanningTableComponent from './PlanningTableComponent';
 
-const PlanningList = ({showLink = true, showState = true}) => {
-    const [plannings, setPlannings] = useState([]);
-
-    useEffect(() => {
-        listPlanning();
-    }, []);
-
-    const listPlanning = async () => {
-        const response = await axios.get('http://localhost:8000/planning/api/list');
-        const filteredPlannings = response.data.filter(planning => planning.state_value !== 'Registrado');
-        setPlannings(filteredPlannings);
-    }
-
+const PlanningList = ({ plannings, showLink = true, showState = true, showDelete = true, refreshPlanningList }) => {
     return (
-       <PlanningTableComponent plannings={plannings} showLink={showLink} showState={showState} />
+        <PlanningTableComponent 
+            plannings={plannings} 
+            showLink={showLink} 
+            showState={showState} 
+            showDelete={showDelete} 
+            refreshPlanningList={refreshPlanningList} 
+        />
     );
 };
 

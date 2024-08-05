@@ -4,14 +4,14 @@ import axios from "axios";
 
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 
-const PlanningFormComponent = () => {
+const PlanningFormComponent = ({ refreshPlanningList }) => {
     const { register, handleSubmit, setValue, reset } = useForm();
     const [error, setError] = useState();
     const [confirmMessage, setConfirmMessage] = useState();
 
 const handleTypeSelect = (typeId, typeLabel) => {
-      setValue("type_value", typeLabel);
-      setValue("type_id", typeId);
+    setValue("type_value", typeLabel);
+    setValue("type_id", typeId);
 };
 
 const handleProductSelect = (productLabel) => {
@@ -37,6 +37,8 @@ const handleSubmitForm = async (data) => {
         reset();
         setError("");
         setConfirmMessage("Planificación creada con éxito");
+        if (refreshPlanningList) refreshPlanningList();
+
     } catch (error) {
         const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.msg || error.message || "Error al añadir la planificación.";
         setError("Error al añadir la planificación: " + errorMessage);

@@ -20,12 +20,20 @@ const CreateTaskComponent = ({ getTask }) => {
             setError("Error al crear la tarea: " + error.response.data.detail[0].msg);
         }
     };
+
+    const handleKeyDown = (event) => {
+        if(event.key === 'Enter') {
+            createTask();
+        }
+    };
+
     return ( 
         <div>
             <input 
                 type="text"
                 value={newTask} 
                 onChange={(e) => setNewTask(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Escribe una tarea"
                 className="input input-bordered w-full max-w-xs mt-4 mr-4"
             />

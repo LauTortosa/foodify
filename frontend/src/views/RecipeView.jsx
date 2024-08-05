@@ -19,17 +19,19 @@ const RecipeView = () => {
   };
 
   return (
-    <div className='container mx-auto mt-10'>
+    <div className='container mt-10'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-          <div className='md:col-span-2 lg:col-span-1'>
+        <div></div>
+          <div className='md:col-span-2 lg:col-span-3'>
             <h2 className='text-center text-xl font-bold underline mb-4'>Seleccionar receta</h2>
-            <SelectTypeProductComponent 
-            onTypeSelect={handleTypeSelect}
-            onProductSelect={handleProductSelect}/>
-          </div>
-          <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
+            <div className='mx-96'>
+              <SelectTypeProductComponent 
+                onTypeSelect={handleTypeSelect}
+                onProductSelect={handleProductSelect}/>
+            </div>
             <RecipeComponent productId={selectedProductId} />
           </div>
+          <div></div>
       </div>
     </div>
   );

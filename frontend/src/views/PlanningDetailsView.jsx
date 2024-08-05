@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 import PlanningDetailsComponent from "../components/PlanningDetails/PlanningDetailsComponent";
-import DeletePlanningComponent from "../components/PlanningDetails/DeletePlanningComponent";
 import UpdatePlanningComponent from "../components/PlanningDetails/UpdatePlanningComponent";
 
 const PlanningDetailsView = () => {
@@ -31,7 +30,6 @@ const PlanningDetailsView = () => {
             <div className="card w-5/6 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <PlanningDetailsComponent planningId={planningId} onEditClick={editClick} />
-                    <DeletePlanningComponent planningId={planningId} />
                 </div>
             </div>
             {isEdit && (
