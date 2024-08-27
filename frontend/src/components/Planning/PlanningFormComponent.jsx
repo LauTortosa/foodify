@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
+import InputNumberComponent from "../Form/InputNumberComponent";
 
 const PlanningFormComponent = ({ refreshPlanningList }) => {
     const { register, handleSubmit, setValue, reset } = useForm();
@@ -57,14 +58,18 @@ return (
             Fecha
             <input type="date" {...register("date")} className="grow"/>
         </label>
-        <label className="input input-bordered flex items-center gap-2 mb-4">
-            Cargas
-            <input type="number" {...register("load")} className="grow"/>
-        </label>
-        <label className="input input-bordered flex items-center gap-2 mb-4">
-            Trazab.
-            <input type="number" {...register("tracebility")} className="grow"/>
-        </label>      
+        <InputNumberComponent 
+            label="Cargas"
+            id="load"
+            className=""
+            register={register}
+        />
+        <InputNumberComponent 
+            label="Trazab."
+            id="tracebility"
+            className=""
+            register={register}
+        />
         <SelectTypeProductComponent
             onTypeSelect={handleTypeSelect}
             onProductSelect={handleProductSelect}
@@ -101,10 +106,7 @@ return (
             <span>{confirmMessage}</span>
             <button onClick={clearMessage} className="btn btn-sm btn-circle btn-ghost">✕</button>
         </div>}
-
-
     </form>
-
   );
 };
 

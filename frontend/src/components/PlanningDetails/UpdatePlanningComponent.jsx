@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputRadioComponent from "../Form/InputRadioComponent";
+import InputNumberComponent from "../Form/InputNumberComponent";
 
 const UpdatePlanningComponent = ({ 
     planningId, 
@@ -35,7 +36,7 @@ const UpdatePlanningComponent = ({
         await axios.put(`http://localhost:8000/planning/api/${planningId}`, newData);
         navigate(0);
         onClose();
-    }
+    };
 
     const radioOptions = [
         { id: 'pendiente', label: 'Pendiente', value: 'Pendiente'},
@@ -47,14 +48,13 @@ const UpdatePlanningComponent = ({
         <div>
             <h3 className="font-bold text-lg text-center">Editar planificación</h3>
             <h4 className="underline mb-2">Cargas</h4>
-            <p>Número actual: {initialLoad}</p>
-            <label htmlFor="load">Número de cargas nuevo</label>
-            <input
-                type="number"
-                className="input input-bordered input-sm w-40 max-w-xs ml-4 mb-2"
-                id="load"
+            <p className="mb-6">Número actual: {initialLoad}</p>
+            <InputNumberComponent 
+                label="Número de cargas nuevo"
                 value={editLoad}
-                onChange={(e) => setEditLoad(e.target.value)}
+                onChange={setEditLoad}
+                id={editLoad}
+                className=""
             />
             <div className="divider"></div>
             <h4 className="underline mb-2">Estado</h4>
@@ -66,7 +66,7 @@ const UpdatePlanningComponent = ({
             />
             <button className="btn mt-6 mx-auto block" onClick={updatePlanning}>Aceptar</button>
         </div>
-    )
-}
+    );
+};
 
 export default UpdatePlanningComponent;
