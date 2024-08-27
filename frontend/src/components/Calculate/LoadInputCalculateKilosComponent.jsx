@@ -4,10 +4,11 @@ const LoadInputCalculateKilosComponent = ({ load, setLoad }) => {
     return (
         <div className="mt-8">
             <InputNumberComponent 
-                label="Número de cargas" 
+                label="Cargas" 
                 value={load} 
                 onChange={setLoad} 
                 id="loadInput"
+                className=""
             />
         </div>
     )
