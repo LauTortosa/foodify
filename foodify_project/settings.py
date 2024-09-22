@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'calculated_kilograms',
     'task',
     'corsheaders',
+    'users',
 ]
 
 MIDDLEWARE = [
