@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
+
 const Navbar = () => {
+  const username = useAuthenticatedUser();
+
   return (
     <div className="navbar bg-green-100 h-28">
       <div className="navbar-start">
@@ -29,7 +33,9 @@ const Navbar = () => {
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/planning">Planificaciones</Link></li>
             <li><Link to="/recipes">Recetas</Link></li>
-            <li><Link to="/planning-registered">Diario de registros</Link></li>
+            {username === 'responsable' && (
+              <li><Link to="/planning-registered">Diario de registros</Link></li>
+            )}
             <li><Link to="/calculate-kilograms">Calcular kilos</Link></li>
           </ul>
         </div>
@@ -38,8 +44,12 @@ const Navbar = () => {
         <Link to="/" className="btn btn-ghost text-xl">Inicio</Link>
         <Link to="/planning" className="btn btn-ghost text-xl">Planificaciones</Link>
         <Link to="/recipes" className="btn btn-ghost text-xl">Recetas</Link>
-        <Link to="/planning-registered" className="btn btn-ghost text-xl">Diario de registros</Link>
-        <Link to="/calculate-kilograms" className="btn btn-ghost text-xl">Calcular kilos</Link>
+        {username === 'responsable' && (
+          <Link to="/planning-registered" className="btn btn-ghost text-xl">Diario de registros</Link>
+        )}
+        {username && (
+          <Link to="/calculate-kilograms" className="btn btn-ghost text-xl">Calcular kilos</Link>
+        )}
       </div>
     </div>
   );
