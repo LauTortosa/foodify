@@ -2,10 +2,13 @@ import PlanningList from '../components/Planning/PlanningList.jsx'
 import PlanningFormComponent from '../components/Planning/PlanningFormComponent.jsx';
 import StatePendingComponent from "../components/Home/StatePendingComponent";
 import StatePreparedComponent from "../components/Home/StatePreparedComponent";
+
 import usePlanningList from './../hooks/usePlanningList';
+import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
 
 const PlanningView = ({ statePending, statePrepared }) => {
   const { plannings, listPlanning } = usePlanningList();
+  const username = useAuthenticatedUser();
 
   return (
       <div className='container mx-auto mt-10'>
@@ -17,8 +20,12 @@ const PlanningView = ({ statePending, statePrepared }) => {
                 <StatePreparedComponent statePrepared={statePrepared} />    
               </ul>
               <div className="divider"></div>
-            <h2 className='text-center text-xl font-bold underline mb-4'>Añadir planificación</h2>
-            <PlanningFormComponent refreshPlanningList={listPlanning}/>
+              {username === 'responsable' && (
+                <>
+                <h2 className='text-center text-xl font-bold underline mb-4'>Añadir planificación</h2>
+                <PlanningFormComponent refreshPlanningList={listPlanning}/>
+                </>
+              )}
           </div>
           <div className='md:col-span-2 lg:col-span-3 lg:ml-24'>
             <h2 className="text-center text-xl font-bold underline mb-4">Listado de Planificaciones</h2>

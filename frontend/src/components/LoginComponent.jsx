@@ -18,6 +18,7 @@ const LoginComponent = () => {
             if (response.data.success) {
                 alert('Login successful');
                 setError('');
+                window.location.reload();
             } else {
                 setError('Login failed');
             }
@@ -33,6 +34,7 @@ const LoginComponent = () => {
                 setUsername('');
                 setPassword('');
                 setError('');
+                window.location.reload();
             } else {
                 setError('Logout failed');
             }
