@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import axios from "axios"
 
 const useAuthenticatedUser = () => {
     const [username, setUsername] = useState('');
@@ -20,5 +21,4 @@ const useAuthenticatedUser = () => {
 
     return username;
 };
-
-export default useAuthenticatedUser;
+ export default useAuthenticatedUser;

@@ -1,28 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAuthenticatedUser from './../hooks/useAuthenticatedUser';
 
 const LoginComponent = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [authenticatedUser, setAuthenticatedUser] = useState('');
-    
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/users/api/me', { withCredentials: true });
-                if (response.data.authenticated) {
-                    setAuthenticatedUser(response.data.username);
-                } else {
-                    setAuthenticatedUser('');
-                }
-            } catch (error) {
-                console.error('Error checking authentication', error);
-            }
-        };
-        
-        checkAuthentication();
-    }, []);
+    const authenticatedUser = useAuthenticatedUser();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -33,21 +17,19 @@ const LoginComponent = () => {
             }, { withCredentials: true });
             if (response.data.success) {
                 alert('Login successful');
-                setAuthenticatedUser(username);
                 setError('');
             } else {
                 setError('Login failed');
             }
         } catch (error) {
-            setError('An error ocurred. Try again')
+            setError('An error occurred. Try again');
         }
     };
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/users/api/logout')
+            const response = await axios.post('http://localhost:8000/users/api/logout', {}, { withCredentials: true });
             if (response.data.success) {
-                setAuthenticatedUser('');
                 setUsername('');
                 setPassword('');
                 setError('');
@@ -55,7 +37,7 @@ const LoginComponent = () => {
                 setError('Logout failed');
             }
         } catch (error) {
-            setError('An error ocurred');
+            setError('An error occurred');
         }
     };
     
