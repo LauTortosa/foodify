@@ -6,18 +6,23 @@ const LoginComponent = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [authenticatedUser, setAuthenticatedUser] = useState('');
-
+    
     useEffect(() => {
-        const storedUser = localStorage.getItem('authenticatedUser');
-        if (storedUser) {
-            setAuthenticatedUser(storedUser);
-        }
+        const checkAuthentication = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/users/api/me', { withCredentials: true });
+                if (response.data.authenticated) {
+                    setAuthenticatedUser(response.data.username);
+                } else {
+                    setAuthenticatedUser('');
+                }
+            } catch (error) {
+                console.error('Error checking authentication', error);
+            }
+        };
+        
+        checkAuthentication();
     }, []);
-
-    const showUser = (username) => {
-        setAuthenticatedUser(username);
-        localStorage.setItem('authenticatedUser', username);
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,10 +30,10 @@ const LoginComponent = () => {
             const response = await axios.post('http://localhost:8000/users/api/login', {
                 username,
                 password,
-            });
+            }, { withCredentials: true });
             if (response.data.success) {
                 alert('Login successful');
-                showUser(username);
+                setAuthenticatedUser(username);
                 setError('');
             } else {
                 setError('Login failed');
@@ -46,7 +51,6 @@ const LoginComponent = () => {
                 setUsername('');
                 setPassword('');
                 setError('');
-                localStorage.removeItem('authenticatedUser');
             } else {
                 setError('Logout failed');
             }

@@ -24,3 +24,10 @@ def login_user(request, data: LoginSchema):
 def logout_user(request):
     logout(request)
     return {"success": True}
+
+@users_api.get('me')
+def me(request):
+    if request.user.is_authenticated:
+        return {"authenticated": True, "username": request.user.username}
+    else:
+        return {"authenticated": False, "error": "User is not authenticated"}
