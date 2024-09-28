@@ -6,7 +6,7 @@ import MyRoutes from './routes';
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <h1 className="text-center text-4xl font-bold mt-10">FOODIFY PLANNER</h1>
       <MyRoutes />
     </div>
   );
