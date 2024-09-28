@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import MyRoutes from './routes';
+import LogoutComponent from './components/Log/LogoutComponent';
 import useAuthenticatedUser from './hooks/useAuthenticatedUser';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         {username && (
           <div className="ml-auto font-bold mt-10">
             <p>Sesión iniciada con: {username}</p>
+            <LogoutComponent />
             </div>
         )}
       </div>

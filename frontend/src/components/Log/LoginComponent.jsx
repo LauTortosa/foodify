@@ -27,22 +27,6 @@ const LoginComponent = () => {
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            const response = await axios.post('http://localhost:8000/users/api/logout', {}, { withCredentials: true });
-            if (response.data.success) {
-                setUsername('');
-                setPassword('');
-                setError('');
-                window.location.reload();
-            } else {
-                setError('Logout failed');
-            }
-        } catch (error) {
-            setError('An error occurred');
-        }
-    };
-    
     return (
         <div>
             {!authenticatedUser && (
