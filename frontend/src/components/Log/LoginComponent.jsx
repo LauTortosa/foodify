@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import useAuthenticatedUser from './../hooks/useAuthenticatedUser';
+import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
 
 const LoginComponent = () => {
     const [username, setUsername] = useState('');

@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 import ListTasksComponent from "../components/Home/ListTasksComponent";
-import LoginComponent from "../components/LoginComponent";
+import LoginComponent from "../components/Log/LoginComponent";
 import Navbar from "../components/Navbar";
 
 const HomeView = () => {
