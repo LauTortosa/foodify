@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import useAuthenticatedUser from './../hooks/useAuthenticatedUser';
 
@@ -45,14 +45,6 @@ const LoginComponent = () => {
     
     return (
         <div>
-            {authenticatedUser && (
-                <div>
-                    <p>Sesión iniciada con: {authenticatedUser}</p>
-                    <button 
-                        className="btn mt-4"
-                        onClick={handleLogout}>Cerrar sesión</button>
-                </div>
-            )}
             {!authenticatedUser && (
                 <div className="card bg-base-100 w-64 shadow-xl">
                     <div className="card-body">
