@@ -19,7 +19,7 @@ const LoginComponent = () => {
 
     return (
         <div>
-            <button onClick={handleLogout} className="btn btn-primary">Cerrar sesión</button>
+            <a onClick={handleLogout}>Cerrar sesión</a>
             {error && <p className="text-red-500">{error}</p>}
         </div>
     );
