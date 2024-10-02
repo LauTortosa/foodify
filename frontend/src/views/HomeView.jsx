@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-
 import ListTasksComponent from "../components/Home/ListTasksComponent";
-import LoginComponent from "../components/Log/LoginComponent";
 import Navbar from "../components/Navbar";
 
 const HomeView = () => {
@@ -25,7 +23,6 @@ const HomeView = () => {
                     <Navbar />
                 </div>
                 <div className='md:col-span-2 lg:col-span-3 lg:ml-24 mt-6'>
-                    <LoginComponent />
                     <h2 className="text-center text-xl font-bold underline mb-4">Lista de tareas</h2>
                     <div className='overflow-x-auto'>
                         <ListTasksComponent
