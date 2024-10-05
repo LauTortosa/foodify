@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import SelectTypeProductComponent from "../components/Form/SelectTypeProductComponent";
 import RecipeComponent from "../components/Recipes/RecipeComponent";
+import Navbar from '../components/Navbar';
 
 const RecipeView = () => {
   const { setValue } = useForm();
@@ -19,9 +20,11 @@ const RecipeView = () => {
   };
 
   return (
-    <div className='container mt-10'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        <div></div>
+    <div className='container'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+        <div>
+          <Navbar />
+        </div>
           <div className='md:col-span-2 lg:col-span-3'>
             <h2 className='text-center text-xl font-bold underline mb-4'>Seleccionar receta</h2>
             <div className='mx-96'>
