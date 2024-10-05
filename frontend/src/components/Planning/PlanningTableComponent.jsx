@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
 import { sortData, handleSort } from '../../utils';
+
+import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
+import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
 
 const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlanningList, showDelete }) => {
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'asc'});
     const sortedPlannings = sortData(plannings, sortConfig);
+    const username = useAuthenticatedUser();
 
     return (
         <div className='overflow-x-auto ml-24 mb-24'>
@@ -18,7 +21,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'product_value')}>Producto</th>
                         <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'load')}>Cargas</th>
                         {showState && <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'state_value')}>Estado</th>}
-                        {showDelete && <th>Acciones</th>}
+                        {username === 'responsable' && {showDelete} && <th>Acciones</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +41,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         )}
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
-                            {showDelete && <td>
+                            {username === 'responsable' && showDelete && <td>
                                 <DeletePlanningComponent 
                                     planningId={planning.id} 
                                     refreshPlanningList={refreshPlanningList}
