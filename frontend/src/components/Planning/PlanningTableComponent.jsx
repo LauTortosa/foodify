@@ -30,7 +30,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <td>{index + 1}</td>
                         <td>{planning.date_value}</td>
                         <td>{planning.tracebility}</td>
-                        {showLink ? (
+                        {username === 'responsable' || 'operator' && showLink ? (
                         <td className="text-blue-500 hover:underline">
                             <Link to={`/planning/${planning.id}`}>
                                 {planning.product_value}
