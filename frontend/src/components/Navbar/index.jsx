@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="flex flex-col bg-gray-300 h-screen p-8">
+      <div className="flex flex-col bg-gray-300 h-screen p-8 mr-22">
         <div className="mb-4">
           <Link to="/" className="block py-2 px-4 text-xl">Inicio</Link>
         </div>

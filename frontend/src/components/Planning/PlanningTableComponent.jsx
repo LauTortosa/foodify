@@ -8,7 +8,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
     const sortedPlannings = sortData(plannings, sortConfig);
 
     return (
-        <div className='overflow-x-auto'>
+        <div className='overflow-x-auto ml-24 mb-24'>
             <table className="table">
                 <thead>
                     <tr>

@@ -5,6 +5,7 @@ import CalculateKilosComponent from '../components/Calculate/CalculateKilosCompo
 import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateComponent';
 import TableCalculateKilosComponent from '../components/Calculate/TableCalculateKilosComponent';
 import LoadInputCalculateKilosComponent from '../components/Calculate/LoadInputCalculateKilosComponent';
+import Navbar from '../components/Navbar';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -13,6 +14,7 @@ const CalculateView = () => {
 
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
+            <Navbar />
             <div className='ml-8 mr-4'>
                 <ChecksProductsComponent
                     selectedProducts={selectedProducts} 

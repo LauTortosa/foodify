@@ -14,9 +14,9 @@ const StatePendingComponent = () => {
   };
 
   return(
-    <li className="mb-8 text-xl ml-2">
-      Por preparar <span className="text-3xl ml-24">{statePending}</span>
-    </li>
+    <div className="mb-8 text-lg">
+      Por preparar <span className="text-2xl ml-20">{statePending}</span>
+    </div>
   );
 };
 
