@@ -10,12 +10,23 @@ class ProductOut(Schema):
     type_value: str
     component_value: List[str]
 
+class ProductNameOut(Schema):
+    id: int
+    product: str
+    type_value: str
+
 class TypeOut(Schema):
     id: int
     label: str
 
 class ProductFilterOut(Schema):
     type_id: int
+
+@product_api.get("/list", response=List[ProductNameOut])
+def list(request):
+    products = Product.objects.all()
+
+    return products
 
 @product_api.get("/types", response=List[TypeOut])
 def list_types(request):
@@ -39,6 +50,8 @@ def get_product(request, product_id: int):
     product.component_value = components_value
 
     return product
+
+
 
 
 
