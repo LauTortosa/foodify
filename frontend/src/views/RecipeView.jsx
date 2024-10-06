@@ -20,12 +20,6 @@ const RecipeView = () => {
     setProductList(response.data);
   }
 
-  const handleViewClick = (productId) => {
-    setSelectedProductId(productId);
-    document.getElementById('my_modal_3').showModal();
-  };
-
-
   return (
     <div className='container'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
@@ -51,16 +45,17 @@ const RecipeView = () => {
                         <td>{product.product}</td>
                         <td>{product.type_value}</td>
                         <td>
-                          <button className="btn btn-sm btn-ghost" onClick={() => handleViewClick(product.id)}>Ver datos</button>
-                          <dialog id="my_modal_3" className="modal">
+                          <label htmlFor={`modal_${product.id}`} className="btn btn-sm btn-ghost" onClick={() => setSelectedProductId(product.id)}>Ver datos</label>
+                          <input type="checkbox" id={`modal_${product.id}`} className="modal-toggle" />
+                          <div className="modal">
                             <div className="modal-box">
                               <form method="dialog">
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                <label htmlFor={`modal_${product.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
                               </form>
                               <h2 className='text-xl text-center font-bold underline mb-4'>Datos de la receta</h2>
                               <RecipeComponent productId={selectedProductId} />
-                              </div>
-                          </dialog>
+                            </div>
+                          </div>
                         </td>
                     </tr>
                 ))}
