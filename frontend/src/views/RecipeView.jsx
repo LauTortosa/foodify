@@ -52,7 +52,6 @@ const RecipeView = () => {
                               <form method="dialog">
                                 <label htmlFor={`modal_${product.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
                               </form>
-                              <h2 className='text-xl text-center font-bold underline mb-4'>Datos de la receta</h2>
                               <RecipeComponent productId={selectedProductId} />
                             </div>
                           </div>

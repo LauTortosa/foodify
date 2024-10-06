@@ -22,20 +22,29 @@ const RecipeComponent = ({ productId }) => {
     }
 
     return (
-        <div className="flex justify-center">
-            <div className="card shadow-xl mt-8">
-                <div className="card-body">
-                    <h2 className="card-title uppercase justify-center text-3xl w-full mb-4">{recipe.product}</h2>
-                    <ul>
-                        {recipe.component_value.map((component, index) => {
-                            const [ingredient, quantity] = component.split(' = ');
-                            return (
-                                <li key={index} className="text-xl">
-                                    <p className="px-4 py-2">{ingredient} = {quantity}</p>
-                                </li>
-                            );
-                        })}
-                    </ul>
+        <div className="">
+            <div className="">
+                <div className="">
+                    <h2 className="font-bold uppercase text-3xl text-center w-full mb-8">{recipe.product}</h2>
+                    <table className="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Componentes</th>
+                                <th>Cantidad</th>                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recipe.component_value.map((component, index) => {
+                                const [ingredient, quantity] = component.split(' = ');
+                                return (
+                                    <tr className="hover" key={index}>
+                                        <td>{ingredient}</td>
+                                        <td>{quantity}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
