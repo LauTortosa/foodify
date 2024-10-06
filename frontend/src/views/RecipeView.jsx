@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
 import { sortData, handleSort } from '../utils';
 import axios from 'axios';
 
 import Navbar from '../components/Navbar';
+import RecipeComponent from '../components/Recipes/RecipeComponent';
 
 const RecipeView = () => {
-  const { setValue } = useForm();
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [productList, setProductList] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
@@ -20,6 +19,12 @@ const RecipeView = () => {
     const response = await axios.get('http://localhost:8000/product/api/list');
     setProductList(response.data);
   }
+
+  const handleViewClick = (productId) => {
+    setSelectedProductId(productId);
+    document.getElementById('my_modal_3').showModal();
+  };
+
 
   return (
     <div className='container'>
@@ -45,7 +50,18 @@ const RecipeView = () => {
                         <td>{index + 1}</td>
                         <td>{product.product}</td>
                         <td>{product.type_value}</td>
-                        <td>Ver datos</td>
+                        <td>
+                          <button className="btn btn-sm btn-ghost" onClick={() => handleViewClick(product.id)}>Ver datos</button>
+                          <dialog id="my_modal_3" className="modal">
+                            <div className="modal-box">
+                              <form method="dialog">
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                              </form>
+                              <h2 className='text-xl text-center font-bold underline mb-4'>Datos de la receta</h2>
+                              <RecipeComponent productId={selectedProductId} />
+                              </div>
+                          </dialog>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
