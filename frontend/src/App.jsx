@@ -1,25 +1,18 @@
 import React from 'react';
 import MyRoutes from './routes';
-import useAuthenticatedUser from './hooks/useAuthenticatedUser';
-import UserDropdownComponent from './components/Log/UserDropdownComponent';
+import Navbar from './components/Navbar'; 
+import HeaderComponent from './components/HeaderComponent';
 
 const App = () => {
-  const username = useAuthenticatedUser();
-  const isGuest = !username;
-  const userType = isGuest ? 'guest' : (username === 'responsable' ? 'responsable' : 'operator'); 
-
   return (
-    <div>
-      <div className="navbar border-b-4 border-gray-300">
-        <h1 className="text-center text-5xl font-bold mt-10 ml-8 mb-6">FOODIFY PLANNER</h1>
-        <div className="ml-auto font-bold mt-10">
-          <div className="form-control mr-8">
-            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-          </div>
-          <UserDropdownComponent username={username} userType={userType} />
+    <div className="flex flex-col"> 
+      <HeaderComponent />
+      <div className="flex flex-row flex-1"> 
+        <Navbar /> 
+        <div className="flex-1"> 
+          <MyRoutes /> 
         </div>
       </div>
-      <MyRoutes />
     </div>
   );
 };

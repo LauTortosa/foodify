@@ -14,7 +14,6 @@ const CalculateView = () => {
 
     return (
         <div className='grid grid-cols-4 divide-x-2 mt-12'>
-            <Navbar />
             <div className='ml-8 mr-4'>
                 <ChecksProductsComponent
                     selectedProducts={selectedProducts} 
