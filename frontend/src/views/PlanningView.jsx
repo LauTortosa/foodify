@@ -5,7 +5,6 @@ import StatePreparedComponent from "../components/Home/StatePreparedComponent";
 
 import usePlanningList from './../hooks/usePlanningList';
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
-import Navbar from '../components/Navbar/index.jsx';
 
 const PlanningView = ({ statePending, statePrepared }) => {
   const { plannings, listPlanning } = usePlanningList();
@@ -13,12 +12,10 @@ const PlanningView = ({ statePending, statePrepared }) => {
 
   return (
     <div className='container'>
-      <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
-        <div className='md:col-span-1'>
-        </div>
-        <div className='md:col-span-3'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-8'>
-            <div>
+      <div className='grid grid-cols-1 md:grid-cols-5 gap-8'>
+        <div className='md:col-span-5'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'>
+            <div className='ml-28'>
               <h2 className='text-lg font-bold underline mb-4'>Planificaciones pendientes</h2>
               <StatePendingComponent statePending={statePending} />
               <StatePreparedComponent statePrepared={statePrepared} />
