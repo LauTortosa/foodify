@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../AlertComponent";
 
 const RecipeAddModalComponent = ({ productId, components }) => {
     const [selectedComponent, setSelectedComponent] = useState('');
     const [quantity, setQuantity] = useState(0);
-    const [confirmMessage, setConfirmMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
     
     const createComponent = async (data) => {
@@ -19,7 +20,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
             await axios.post('http://localhost:8000/product/api/component-product', dataToSend);
             setSelectedComponent("");
             setQuantity(0);
-            setConfirmMessage("Componente añadido con éxito");
+            setSuccessMessage("Componente añadido con éxito");
         } catch (error) {
             console.error(error.response.data);
         }
@@ -29,10 +30,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
         setSelectedComponent(e.target.value);
     };
 
-    const clearMessage = () => {
-        setConfirmMessage("");
-        setError("");
-    };
+    const clearSuccess = () => setSuccessMessage("");
 
     return (
         <>
@@ -79,24 +77,15 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                     <button className="btn mt-4" onClick={createComponent}>
                         Añadir
                     </button>
-                    {confirmMessage && 
-                        <div role="alert" className="alert alert-success mt-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 shrink-0 stroke-current"
-                                fill="none"
-                                viewBox="0 0 24 24">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-                            <span>{confirmMessage}</span>
-                            <button onClick={clearMessage} className="btn btn-sm btn-circle btn-ghost">✕</button>
-                        </div>
-                    }
+                    <div>
+                        {successMessage && (
+                            <AlertComponent 
+                                type="success"
+                                message={successMessage}
+                                onClose={clearSuccess}
+                            />    
+                        )}
+                    </div>
                 </div>
             </div>
         </>
