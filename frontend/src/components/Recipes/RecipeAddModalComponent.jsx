@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
 import AlertComponent from "../AlertComponent";
 
 const RecipeAddModalComponent = ({ productId, components }) => {
@@ -8,6 +10,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
     const [quantity, setQuantity] = useState(0);
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
+    const username = useAuthenticatedUser();
     
     const createComponent = async (data) => {
         try {
@@ -34,11 +37,13 @@ const RecipeAddModalComponent = ({ productId, components }) => {
 
     return (
         <>
-            <label 
+            {username === 'responsable' && (
+                <label 
                 htmlFor={`modal-add-component-${productId}`} 
-                className="btn">
+                className="btn mb-8">
                 Añadir Componente
             </label>
+            )}
             <input type="checkbox" id={`modal-add-component-${productId}`} className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
