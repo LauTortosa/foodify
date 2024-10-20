@@ -25,6 +25,12 @@ const RecipeComponent = ({ productId }) => {
         }
     };
 
+    const deleteComponet = async (componentLabel) => {
+        await axios.delete(`http://localhost:8000/product/api/${productId}/${componentLabel}`);
+        await getRecipe(productId);
+        await getComponents(); 
+    };
+
     useEffect(() => {
         getComponents();
     }, []);
@@ -56,6 +62,7 @@ const RecipeComponent = ({ productId }) => {
                             <tr>
                                 <th>Componentes</th>
                                 <th>Cantidad</th>                            
+                                <th>Acciones</th>                            
                             </tr>
                         </thead>
                         <tbody>
@@ -65,6 +72,13 @@ const RecipeComponent = ({ productId }) => {
                                     <tr className="hover" key={index}>
                                         <td>{ingredient}</td>
                                         <td>{quantity}</td>
+                                        <td>
+                                            <button 
+                                            className="btn btn-sm btn-ghost"
+                                            onClick={() => deleteComponet(ingredient)}>
+                                                Eliminar
+                                            </button>
+                                        </td>
                                     </tr>
                                 );
                             })}
