@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, Query, Schema
 from typing import List
 from .models import Product, ProductComponent, Type, Component
@@ -34,6 +33,14 @@ class ProductComponentIn(Schema):
 
 @product_api.post("/component-product")
 def add_component_product(request, data: ProductComponentIn):
+    exists = ProductComponent.objects.filter(
+        product_id=data.product_id,
+        component_id=data.component_id
+    ).exists()
+
+    if exists:
+        return {"ok": False, "message": "Component already exists for this product"}
+    
     component = ProductComponent.objects.create(
         product_id=data.product_id, 
         component_id=data.component_id, 
