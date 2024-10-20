@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
 import RecipeAddModalComponent from "./RecipeAddModalComponent";
 
 const RecipeComponent = ({ productId }) => {
     const [recipe, setRecipe] = useState(null);
     const [components, setComponents] = useState([]);
+    const user = useAuthenticatedUser();
 
     const getComponents = async () => {
         try {
@@ -61,8 +63,10 @@ const RecipeComponent = ({ productId }) => {
                         <thead>
                             <tr>
                                 <th>Componentes</th>
-                                <th>Cantidad</th>                            
-                                <th>Acciones</th>                            
+                                <th>Cantidad</th> 
+                                {user === 'responsable' && (
+                                    <th>Acciones</th>                            
+                                )}                           
                             </tr>
                         </thead>
                         <tbody>
@@ -72,13 +76,16 @@ const RecipeComponent = ({ productId }) => {
                                     <tr className="hover" key={index}>
                                         <td>{ingredient}</td>
                                         <td>{quantity}</td>
-                                        <td>
-                                            <button 
-                                            className="btn btn-sm btn-ghost"
-                                            onClick={() => deleteComponet(ingredient)}>
-                                                Eliminar
-                                            </button>
-                                        </td>
+                                        {user === 'responsable' && (
+                                            <td>
+                                                <button 
+                                                className="btn btn-sm btn-ghost"
+                                                onClick={() => deleteComponet(ingredient)}>
+                                                    Eliminar
+                                                </button>
+                                            </td>
+                                        )}
+                                        
                                     </tr>
                                 );
                             })}
