@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, Query, Schema
 from typing import List
 from .models import Product, ProductComponent, Type, Component
@@ -82,6 +83,19 @@ def get_product(request, product_id: int):
     product.component_value = components_value
 
     return product
+
+@product_api.delete("/{product_id}/{component_label}")
+def delete_product_component(request, product_id: int, component_label: str):
+    product = Product.objects.get(id=product_id)
+    product_component = ProductComponent.objects.filter(product=product, component__label=component_label).first()
+
+    product_component.delete()
+    
+    return {"ok": f"Componente '{component_label}' eliminado del producto '{product.product}'"}
+
+
+
+
 
 
 
