@@ -55,9 +55,9 @@ const CheckboxLoads = ({ components, load, planningId }) => {
 
     const toggleRowChecks = (componentIndex) => {
       const newCheckedLoads = { ...checkedLoads };
-      const allCheckedState = components.every((_, loadIndex) => isChecked(componentIndex, loadIndex));
+      const allCheckedState = Array.from({ length: load }).every((_, loadIndex) => isChecked(componentIndex, loadIndex));
 
-      components.forEach((_, loadIndex) => {
+      Array.from({ length: load }).forEach((_, loadIndex) => {
           const key = `${componentIndex}_${loadIndex}`;
           newCheckedLoads[key] = !allCheckedState; 
       });
