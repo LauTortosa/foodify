@@ -38,9 +38,9 @@ const CreateTaskComponent = ({ getTask }) => {
                 onChange={(e) => setNewTask(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Escribe una tarea"
-                className="input input-bordered w-full max-w-xs mt-4 mr-4"
+                className="input input-bordered w-full max-w-lg mt-4"
             />
-            <button className="btn" onClick={createTask}>Añadir tarea</button>
+            <button className="btn mt-4 ml-4" onClick={createTask}>Añadir tarea</button>
             <div>
             {warningMessage && (
                 <AlertComponent

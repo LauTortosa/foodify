@@ -7,7 +7,7 @@ const DeleteTaskComponent = ({ taskId, getTask }) => {
     };
     
     return (
-        <button className="btn w-20" onClick={deleteTask}>Eliminar</button>
+        <button className="btn btn-sm" onClick={deleteTask}>Eliminar</button>
     );
 
 };
