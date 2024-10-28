@@ -16,19 +16,21 @@ const PlanningRegisteredView = ({showLink = false, showState = false, showDelete
     };
 
     return (
-        <div className='container mt-10'>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                <div></div>
+        <div className='container'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8'>
+                <div className='md:col-span-2 lg:col-span-1'></div>
                 <div className='md:col-span-2 lg:col-span-3'>
-                    <h2 className='text-center text-xl font-bold underline mb-8'>Planificaciones registradas</h2>
-                    <PlanningTableComponent 
-                        plannings={plannings} 
-                        showLink={showLink} 
-                        showState={showState} 
-                        showDelete={showDelete} 
-                    />  
+                    <h2 className='text-center text-xl font-bold underline mt-4 mb-4'>Planificaciones registradas</h2>
+                    <div className='overflow-x-auto ml-24 mb-24'>
+                        <PlanningTableComponent 
+                            plannings={plannings} 
+                            showLink={showLink} 
+                            showState={showState} 
+                            showDelete={showDelete} 
+                        />  
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div>
     );
 };

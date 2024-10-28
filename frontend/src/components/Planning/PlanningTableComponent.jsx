@@ -11,7 +11,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
     const username = useAuthenticatedUser();
 
     return (
-        <div className='overflow-x-auto ml-24 mb-24'>
+        <div className=''>
             <table className="table">
                 <thead>
                     <tr>
