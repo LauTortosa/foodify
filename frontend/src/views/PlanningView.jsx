@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import PlanningList from '../components/Planning/PlanningList.jsx'
 import PlanningFormComponent from '../components/Planning/PlanningFormComponent.jsx';
 import StatePendingComponent from "../components/Home/StatePendingComponent";
@@ -28,10 +30,16 @@ const PlanningView = ({ statePending, statePrepared }) => {
                   <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
                       <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <button 
+                          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
                       </form>
                       <h2 className='text-xl text-center font-bold underline mb-4'>Añadir planificación</h2>
-                      <PlanningFormComponent refreshPlanningList={listPlanning} />
+                      <PlanningFormComponent 
+                        refreshPlanningList={listPlanning}
+                      />
                     </div>
                   </dialog>
                 </div>

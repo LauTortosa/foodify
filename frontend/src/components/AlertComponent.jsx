@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 const icons = {
     success: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -11,9 +13,20 @@ const icons = {
     ),
 };
 
+const alertClasses = {
+    success: "bg-green-400",
+    warning: "bg-yellow-300",
+}
+
 const AlertComponent = ({ type, message, onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+           if (onClose) onClose(); 
+        }, 5000);
+    }, [onClose]);
+
     return (
-        <div role="alert" className={`alert alert-${type} mt-4 mb-4`}>
+        <div role="alert" className={`alert ${alertClasses[type]} mt-4 mb-4`}>
             {icons[type]}
             <span>{message}</span>
             {onClose && (
