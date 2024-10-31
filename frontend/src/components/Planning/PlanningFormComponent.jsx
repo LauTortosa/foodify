@@ -43,9 +43,13 @@ const handleSubmitForm = async (data) => {
         if (refreshPlanningList) refreshPlanningList();
 
     } catch (error) {
-        const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.msg || error.message || "Error al añadir la planificación.";
-        setWarningMessage("Error al añadir la planificación: " + errorMessage);
-        setSuccessMessage("");
+        if (error.response?.status === 409) {
+            setWarningMessage("El número de trazabilidad ya existe");
+        } else {
+            const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.msg || error.message || "Error al añadir la planificación.";
+            setWarningMessage("Error al añadir la planificación: " + errorMessage);
+            setSuccessMessage("");
+        }
     }
 };
 

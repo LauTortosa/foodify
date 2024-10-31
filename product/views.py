@@ -40,7 +40,7 @@ def add_component_product(request, data: ProductComponentIn):
     ).exists()
 
     if exists:
-        raise HttpError (409, "Component already exists for this product")
+        raise HttpError(409, "Component already exists for this product")
     
     component = ProductComponent.objects.create(
         product_id=data.product_id, 

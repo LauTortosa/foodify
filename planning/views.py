@@ -1,4 +1,5 @@
 from ninja import Field, NinjaAPI, Schema
+from ninja.errors import HttpError
 from typing import Annotated, List, Optional
 
 from pydantic import field_validator
@@ -40,8 +41,13 @@ class StateOut(Schema):
 
 @planning_api.post("/")
 def create_planning(request, data: PlanningIn):
-    planning = Planning.objects.create(date=data.date, load=data.load, tracebility=data.tracebility)
+    planning = Planning.objects.create(date=data.date, load=data.load)
+    exists = Planning.objects.filter(tracebility=data.tracebility).exists()
     planning.product = Product.objects.get(product=data.product)
+
+    if exists: 
+        raise HttpError(409, "Tracebility already exists for this planning")
+
     planning.save()
 
     return {"ok": True}

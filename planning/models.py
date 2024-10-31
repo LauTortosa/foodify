@@ -13,7 +13,7 @@ class State(models.Model):
 class Planning(models.Model):
     date = models.DateField()
     load = models.IntegerField()
-    tracebility = models.IntegerField()
+    tracebility = models.IntegerField(null=True)
     state = models.ForeignKey(State, on_delete=models.RESTRICT, null=True, default=1)
     product = models.ForeignKey(Product, on_delete=models.RESTRICT, null=True)
 
