@@ -13,8 +13,8 @@ const PlanningView = ({ statePending, statePrepared }) => {
   const username = useAuthenticatedUser();
 
   return (
-    <div className='container'>
-      <div className='grid grid-cols-1 md:grid-cols-5 gap-8'>
+    <div className='container min-h-screen flex flex-col'>
+      <div className='grid grid-cols-1 md:grid-cols-5 gap-8 flex-grow'>
         <div className='md:col-span-5'>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'>
             <div className='ml-28'>

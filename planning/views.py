@@ -41,14 +41,17 @@ class StateOut(Schema):
 
 @planning_api.post("/")
 def create_planning(request, data: PlanningIn):
-    planning = Planning.objects.create(date=data.date, load=data.load)
-    exists = Planning.objects.filter(tracebility=data.tracebility).exists()
-    planning.product = Product.objects.get(product=data.product)
+    print("received data:", data)
 
-    if exists: 
+    if Planning.objects.filter(tracebility=data.tracebility).exists():
         raise HttpError(409, "Tracebility already exists for this planning")
 
-    planning.save()
+    planning = Planning.objects.create(
+        date=data.date, 
+        load=data.load,
+        tracebility=data.tracebility,
+        product = Product.objects.get(product=data.product)
+    )
 
     return {"ok": True}
 

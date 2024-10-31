@@ -36,6 +36,8 @@ const handleSubmitForm = async (data) => {
             product: data.product_value 
         };
 
+        console.log("data send", dataToSend);
+
         await axios.post('http://localhost:8000/planning/api/', dataToSend)
         reset();
         setWarningMessage("");

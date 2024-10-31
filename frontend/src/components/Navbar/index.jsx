@@ -7,8 +7,8 @@ const Navbar = () => {
   const username = useAuthenticatedUser();
 
   return (
-    <div>
-      <div className="flex flex-col bg-gray-300 h-screen p-8">
+    <div className="flex flex-col h-screen">
+      <div className="flex flex-col bg-gray-300 h-full p-8">
         <div className="mb-4">
           <Link to="/" className="block py-2 px-4 text-xl">Inicio</Link>
         </div>

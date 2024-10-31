@@ -17,9 +17,9 @@ const UserDropdownComponent = ({ username, userType }) => {
     };
 
     return (
-        <div class="dropdown dropdown-end mr-10">
-            <div tabindex="0" role="button" class="btn btn-active btn-neutral avatar bg-neutral text-neutral-content text-lg w-12 rounded-full">{getUserLabel()}</div>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <div className="dropdown dropdown-end mr-10">
+            <div tabIndex="0" role="button" className="btn btn-active btn-neutral avatar bg-neutral text-neutral-content text-lg w-12 rounded-full">{getUserLabel()}</div>
+            <ul tabIndex="0" className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 {userType === 'guest' ? (
                     <LoginComponent />
                         ) : (
