@@ -6,7 +6,7 @@ import HeaderComponent from './components/HeaderComponent';
 const App = () => {
   return (
     <div className="flex flex-col h-screen"> 
-      <HeaderComponent />
+      <HeaderComponent/>
       <div className="flex flex-1"> 
         <Navbar /> 
         <div className="flex-1"> 
