@@ -1,4 +1,5 @@
 from ninja import NinjaAPI, Query, Schema
+from ninja.errors import HttpError
 from typing import List
 from .models import Product, ProductComponent, Type, Component
 
@@ -39,7 +40,7 @@ def add_component_product(request, data: ProductComponentIn):
     ).exists()
 
     if exists:
-        return {"ok": False, "message": "Component already exists for this product"}
+        raise HttpError (409, "Component already exists for this product")
     
     component = ProductComponent.objects.create(
         product_id=data.product_id, 

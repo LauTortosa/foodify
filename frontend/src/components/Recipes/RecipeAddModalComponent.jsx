@@ -9,6 +9,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
     const [selectedComponent, setSelectedComponent] = useState('');
     const [quantity, setQuantity] = useState(0);
     const [successMessage, setSuccessMessage] = useState('');
+    const [warningMessage, setWarningMessage] = useState('');
     const navigate = useNavigate();
     const username = useAuthenticatedUser();
     
@@ -25,7 +26,11 @@ const RecipeAddModalComponent = ({ productId, components }) => {
             setQuantity(0);
             setSuccessMessage("Componente añadido con éxito");
         } catch (error) {
-            console.error(error.response.data);
+            if (error.response?.status === 409) {
+                setWarningMessage("El componente ya existe para este producto");
+            } else {
+                console.error("Error: ", error.response?.data || error.message);
+            }
         }
     };
 
@@ -33,7 +38,10 @@ const RecipeAddModalComponent = ({ productId, components }) => {
         setSelectedComponent(e.target.value);
     };
 
-    const clearSuccess = () => setSuccessMessage("");
+    const clearMessages = () => {
+        setSuccessMessage("");
+        setWarningMessage("");
+    };
 
     return (
         <>
@@ -87,7 +95,16 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                             <AlertComponent 
                                 type="success"
                                 message={successMessage}
-                                onClose={clearSuccess}
+                                onClose={clearMessages}
+                            />    
+                        )}
+                    </div>
+                    <div>
+                        {warningMessage && (
+                            <AlertComponent 
+                                type="warning"
+                                message={warningMessage}
+                                onClose={clearMessages}
                             />    
                         )}
                     </div>
