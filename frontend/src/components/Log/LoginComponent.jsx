@@ -16,7 +16,6 @@ const LoginComponent = () => {
                 password,
             }, { withCredentials: true });
             if (response.data.success) {
-                alert('Login successful');
                 setError('');
                 window.location.reload();
             } else {
