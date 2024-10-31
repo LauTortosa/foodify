@@ -7,9 +7,9 @@ const App = () => {
   return (
     <div className="flex flex-col h-screen"> 
       <HeaderComponent />
-      <div className="flex flex-row flex-1"> 
+      <div className="flex flex-1"> 
         <Navbar /> 
-        <div className="flex-1 overflow-hidden"> 
+        <div className="flex-1"> 
           <MyRoutes /> 
         </div>
       </div>
