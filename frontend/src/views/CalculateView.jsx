@@ -5,6 +5,7 @@ import CalculateKilosComponent from '../components/Calculate/CalculateKilosCompo
 import DeleteCalculateComponent from '../components/Calculate/DeleteCalculateComponent';
 import TableCalculateKilosComponent from '../components/Calculate/TableCalculateKilosComponent';
 import LoadInputCalculateKilosComponent from '../components/Calculate/LoadInputCalculateKilosComponent';
+import Navbar from '../components/Navbar';
 
 const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);

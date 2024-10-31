@@ -33,27 +33,47 @@ const PlanningDetailsComponent = ({ planningId, onEditClick }) => {
     }
 
     return(
-        <div>
-            <h2 className="card-title uppercase">
-                {planning.product_value}
-                <div className="badge badge-outline">{planning.state_value}</div>
+        <div className="flex flex-col">
+        <div className="flex items-center">
+            <h2 className="card-title uppercase flex items-center">
+                <span>{planning.product_value}</span>
+                <div className="badge badge-sm badge-outline ml-2">{planning.state_value}</div>
             </h2>
-            <div className="flex item-center mt-4">
-                <p>Fecha de inicio: {planning.date_value}</p>
+            
+            <div className="ml-16 mt-10">
+                <h2 className='text-md font-bold underline'>Acciones</h2>
+                <button className="btn btn-sm mt-4" onClick={() => onEditClick(planning)}>Editar</button>
             </div>
-            <div className="flex item-center mt-4">
-                <p>Cargas: {planning.load}</p>
-            </div>
-            <div className="flex item-center mt-4">
-                <p>Trazabilidad: {planning.tracebility}</p>
-            </div>
-            <CheckboxLoads
-                components={planning.component_value}
-                load={planning.load}
-                planningId={planningId}
-            />
-            <button className="btn mt-4" onClick={() => onEditClick(planning)}>Editar</button>
         </div>
+        <div className="flex items-center mb-8">
+            <div className="flex flex-col">
+                <p className="m-2">
+                    <span className="text-sm font-bold mr-2">
+                        Fecha de inicio:
+                    </span> 
+                    {planning.date_value}
+                </p>
+                <p className="m-2">
+                    <span className="text-sm font-bold mr-2">
+                        Cargas:  
+                    </span> 
+                    {planning.load}
+                </p>
+                <p className="m-2">
+                    <span className="text-sm font-bold mr-2">
+                        Trazabilidad:  
+                    </span> 
+                    {planning.tracebility}
+                </p>
+            </div>
+        </div>
+    
+        <CheckboxLoads
+            components={planning.component_value}
+            load={planning.load}
+            planningId={planningId}
+        />
+    </div>
     );
 }
 

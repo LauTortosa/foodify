@@ -39,7 +39,6 @@ const CheckboxLoads = ({ components, load, planningId }) => {
         });
     };
 
-    // function to toggle the checked state of all checkboxes in a specific column
     const toggleAllChecks = (loadIndex) => {
       const newCheckedLoads = { ...checkedLoads };
       const newAllChecked = !allChecked[loadIndex];
@@ -50,6 +49,19 @@ const CheckboxLoads = ({ components, load, planningId }) => {
       });
     
       setAllChecked((prevAllChecked) => ({ ...prevAllChecked, [loadIndex]: newAllChecked }));
+      setCheckedLoads(newCheckedLoads);
+      saveToLocalStorage(newCheckedLoads);
+    };
+
+    const toggleRowChecks = (componentIndex) => {
+      const newCheckedLoads = { ...checkedLoads };
+      const allCheckedState = Array.from({ length: load }).every((_, loadIndex) => isChecked(componentIndex, loadIndex));
+
+      Array.from({ length: load }).forEach((_, loadIndex) => {
+          const key = `${componentIndex}_${loadIndex}`;
+          newCheckedLoads[key] = !allCheckedState; 
+      });
+
       setCheckedLoads(newCheckedLoads);
       saveToLocalStorage(newCheckedLoads);
     };
@@ -69,7 +81,7 @@ const CheckboxLoads = ({ components, load, planningId }) => {
           {components.map((component, componentIndex) => {
             const [ingredient, quantity] = component.split(' - ');
             return (
-              <tr key={componentIndex}>
+              <tr key={componentIndex} onClick={() => toggleRowChecks(componentIndex)} className="cursor-pointer">
                 <td>{ingredient}</td>
                 <td>{quantity}</td>
                   {Array.from({ length: load }).map((_, loadIndex) => (

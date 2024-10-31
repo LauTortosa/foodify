@@ -23,7 +23,6 @@ const PlanningDetailsView = () => {
     const editClose = () => {
         setIsEdit(false);
     };
-    // TODO button that select all loads
     // TODO when all checks are true, state change to 'prepared'
     return (
         <div className="flex justify-center">
