@@ -1,9 +1,6 @@
 # FOODIFY PLANNER 
 Aplicación web para la organización y planificación de trabajo de una empresa de alimentación.
 
-## Estado del proyecto
-**En desarrollo:** Todas las funcionalidades están implementadas. Actualmente, trabajando en validaciones, refactorización y filtos.
-
 ## Tecnologías utilizadas
 **Backend:**
 - Django: Framework 
