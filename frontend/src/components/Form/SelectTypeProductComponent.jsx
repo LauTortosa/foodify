@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import apiClient from "../apiClient";
 
 const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
     const [types, setTypes] = useState([]);
@@ -10,12 +11,12 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
     }, []);
     
     const loadTypes = async () => {
-        const response = await axios.get('http://localhost:8000/product/api/types');
+        const response = await apiClient.get('/product/api/types');
         setTypes(response.data);
     };
     
     const loadProductsByType = async (typeId) => {
-        const response = await axios.get(`http://localhost:8000/product/api/products?type_id=${typeId}`);
+        const response = await apiClient.get(`/product/api/products?type_id=${typeId}`);
         const productsNames = response.data.map(product => ({
             id: product.id,
             product: product.product

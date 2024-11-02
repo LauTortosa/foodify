@@ -1,5 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
+
+import apiClient from "../apiClient";
 import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
 
 const LoginComponent = () => {
@@ -11,7 +12,7 @@ const LoginComponent = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/users/api/login', {
+            const response = await apiClient.post('/users/api/login', {
                 username,
                 password,
             }, { withCredentials: true });

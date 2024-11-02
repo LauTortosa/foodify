@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
+
+import apiClient from "../apiClient";
 import AlertComponent from "../AlertComponent";
 
 const CreateTaskComponent = ({ getTask }) => {
@@ -13,7 +14,7 @@ const CreateTaskComponent = ({ getTask }) => {
         };
 
         try {
-            await axios.post('http://localhost:8000/task/api/', dataToSend);
+            await apiClient.post('/task/api/', dataToSend);
             setNewTask("");  
             getTask();  
             setWarningMessage("");

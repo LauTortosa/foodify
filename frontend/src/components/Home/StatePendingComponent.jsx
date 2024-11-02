@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+
+import apiClient from "../apiClient";
 
 const StatePendingComponent = () => {
   const [statePending, setStatePending] = useState(0);
@@ -9,7 +10,7 @@ const StatePendingComponent = () => {
   }, []);
 
   const getStatePending = async() => {
-    const response = await axios.get('http://localhost:8000/planning/api/state/pending');
+    const response = await apiClient.get('/planning/api/state/pending');
     setStatePending(response.data["planning pending"]);
   };
 

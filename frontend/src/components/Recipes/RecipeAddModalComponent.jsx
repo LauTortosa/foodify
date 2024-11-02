@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import apiClient from "../apiClient";
 import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
 import AlertComponent from "../AlertComponent";
 
@@ -21,7 +21,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                 kilograms: quantity,
             };
 
-            await axios.post('http://localhost:8000/product/api/component-product', dataToSend);
+            await apiClient.post('/product/api/component-product', dataToSend);
             setSelectedComponent("");
             setQuantity(0);
             setSuccessMessage("Componente añadido con éxito");

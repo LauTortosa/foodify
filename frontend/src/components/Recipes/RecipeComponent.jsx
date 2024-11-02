@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
+import apiClient from "../apiClient";
 import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
 import RecipeAddModalComponent from "./RecipeAddModalComponent";
 
@@ -11,7 +11,7 @@ const RecipeComponent = ({ productId }) => {
 
     const getComponents = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/product/api/component');
+            const response = await apiClient.get('/product/api/component');
             setComponents(response.data);
         } catch (error) {
             console.error('Error fetching components:', error);
@@ -20,7 +20,7 @@ const RecipeComponent = ({ productId }) => {
 
     const getRecipe = async (productId) => {
         try {
-            const response = await axios.get(`http://localhost:8000/product/api/${productId}`);
+            const response = await apiClient.get(`/product/api/${productId}`);
             setRecipe(response.data);
         } catch (error) {
             console.error('Error fetching recipe:', error.response.data);
@@ -28,7 +28,7 @@ const RecipeComponent = ({ productId }) => {
     };
 
     const deleteComponet = async (componentLabel) => {
-        await axios.delete(`http://localhost:8000/product/api/${productId}/${componentLabel}`);
+        await apiClient.delete(`/product/api/${productId}/${componentLabel}`);
         await getRecipe(productId);
         await getComponents(); 
     };

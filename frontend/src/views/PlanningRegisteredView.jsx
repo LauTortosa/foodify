@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import apiClient from "../components/apiClient"
 import PlanningTableComponent from "../components/Planning/PlanningTableComponent";
 
 const PlanningRegisteredView = ({showLink = false, showState = false, showDelete = false}) => {
@@ -11,7 +12,7 @@ const PlanningRegisteredView = ({showLink = false, showState = false, showDelete
     }, []);
 
     const listRegistereds = async () => {
-        const response = await axios.get('http://localhost:8000/planning/api/registered');
+        const response = await apiClient.get('/planning/api/registered');
         setPlannings(response.data);
     };
 

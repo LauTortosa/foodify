@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { sortData, handleSort } from '../utils';
 import axios from 'axios';
+
+import apiClient from "../components/apiClient"
 import RecipeComponent from '../components/Recipes/RecipeComponent';
 
 const RecipeView = () => {
@@ -15,7 +17,7 @@ const RecipeView = () => {
 
     const getProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/product/api/list');
+            const response = await apiClient.get('/product/api/list');
             setProductList(response.data);
         } catch (error) {
             console.error('Error fetching products:', error);

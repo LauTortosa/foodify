@@ -1,8 +1,8 @@
-import axios from "axios";
+import apiClient from "../apiClient";
 
 const DeleteTaskComponent = ({ taskId, getTask }) => {
     const deleteTask = async () => {
-        await axios.delete(`http://localhost:8000/task/api/${taskId}`);
+        await apiClient.delete(`/task/api/${taskId}`);
         getTask();
     };
     

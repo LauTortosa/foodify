@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
+import apiClient from "../apiClient";
 
 const StatePreparedComponent = () => {
     const [statePrepared, setStatePrepared] = useState(0);
@@ -10,7 +10,7 @@ const StatePreparedComponent = () => {
     });
 
     const getStatePrepared = async () => {
-        const response = await axios.get('http://localhost:8000/planning/api/state/prepared');
+        const response = await apiClient.get('/planning/api/state/prepared');
         setStatePrepared(response.data["planning prepared"]);
     };
 

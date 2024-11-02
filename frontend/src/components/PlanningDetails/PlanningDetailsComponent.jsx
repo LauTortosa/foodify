@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
+import apiClient from "../apiClient";
 import CheckboxLoads from "./CheckboxLoads";
 
 const PlanningDetailsComponent = ({ planningId, onEditClick }) => {
@@ -18,7 +18,7 @@ const PlanningDetailsComponent = ({ planningId, onEditClick }) => {
     }, [planningId]);
 
     const getPlanning = async () => {
-        const response = await axios.get(`http://localhost:8000/planning/api/${planningId}`);
+        const response = await apiClient.get(`/planning/api/${planningId}`);
         const data = response.data;
 
         setPlanning({

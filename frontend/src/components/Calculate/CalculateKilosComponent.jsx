@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+
+import apiClient from "../apiClient";
 import AlertComponent from '../AlertComponent';
 
 const CalculateKilosComponent = ({ selectedProducts, load, setCalculatedKilosTotal, calculatedKilosTotal }) => {
     const [warningMessage, setWarningMessage] = useState("");
 
     const getProductComponents = async (productId) => {
-        const response = await axios.get(`http://localhost:8000/product/api/${productId}`);
+        const response = await apiClient.get(`/product/api/${productId}`);
         return response.data.component_value;
     };
 

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
 
+import apiClient from "../apiClient";
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 import InputNumberComponent from "../Form/InputNumberComponent";
 import AlertComponent from "../AlertComponent";
@@ -38,7 +38,7 @@ const handleSubmitForm = async (data) => {
 
         console.log("data send", dataToSend);
 
-        await axios.post('http://localhost:8000/planning/api/', dataToSend)
+        await apiClient.post('/planning/api/', dataToSend)
         reset();
         setWarningMessage("");
         setSuccessMessage("Planificación creada con éxito");

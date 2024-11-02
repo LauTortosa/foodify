@@ -1,8 +1,8 @@
-import axios from "axios";
+import apiClient from "../apiClient";
 
 const DeletePlanningComponent = ({ planningId, refreshPlanningList }) => {
     const deletePlanning = async () => {
-        await axios.delete(`http://localhost:8000/planning/api/${planningId}`);
+        await apiClient.delete(`/planning/api/${planningId}`);
        if (refreshPlanningList) refreshPlanningList();
     }
 
