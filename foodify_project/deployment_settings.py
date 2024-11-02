@@ -3,7 +3,12 @@ import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    
 CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 DEBUG = False
@@ -36,7 +41,7 @@ STORAGES = {
 }
 
 DATABASES = {
-    'default': dj_database_url.config(        # Replace this value with your local database's connection string.        
+    'default': dj_database_url.config(                
         default=os.environ['DATABASE_URL'],        
         conn_max_age=600    
     )
