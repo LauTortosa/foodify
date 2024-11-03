@@ -27,9 +27,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-   'https://foodify-1.onrender.com',
-]
+CORS_ALLOWED_ORIGINS = True
 
 STORAGES = {
     "default" : {
