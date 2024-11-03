@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import ListTasksComponent from "../components/Home/ListTasksComponent";
+import ListTasksComponent from "@/components/Home/ListTasksComponent";
 import apiClient from "../components/apiClient"
 
 const HomeView = () => {
