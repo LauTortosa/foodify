@@ -3,7 +3,7 @@ import DeleteTaskComponent from "./DeleteTaskComponent";
 const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
     if (!Array.isArray(listTasks)) {
         console.error("listTasks no es un array:", listTasks);
-        return <div>No hay tareas disponibles.</div>; // Maneja el caso cuando no hay tareas
+        return <div>No hay tareas disponibles.</div>;
     }
 
     return (
