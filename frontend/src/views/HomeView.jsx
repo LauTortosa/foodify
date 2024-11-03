@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import ListTasksComponent from "@/components/Home/ListTasksComponent";
-import apiClient from "@/components/apiClient.jsx"
+import apiClient from "@/components/apiClient"
 
 const HomeView = () => {
     const [listTasks, setListTask] = useState([]);
