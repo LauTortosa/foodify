@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
 
 import ListTasksComponent from "@/components/Home/ListTasksComponent";
-import apiClient from "@/components/apiClient"
 
 const HomeView = () => {
     const [listTasks, setListTask] = useState([]);
@@ -11,8 +11,12 @@ const HomeView = () => {
     }, []);
 
     const getTask = async () => {
-        const response = await apiClient.get('/task/api/list');
-        setListTask(response.data);
+        try {
+            const response = await axios.get('https://foodify-1.onrender.com/task/api/list');
+            setListTask(response.data);
+        } catch (error) {
+            console.error('Error al obtener las tareas:', error.response ? error.response.data : error.message);
+        }
     };
 
     return (
