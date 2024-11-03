@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import apiClient from "../components/apiClient"
+import apiClient from "../components/apiClient.jsx"
 
 const useAuthenticatedUser = () => {
     const [username, setUsername] = useState('');

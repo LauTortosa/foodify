@@ -138,4 +138,9 @@ CORS_ALLOWED_ORIGINS = [
     'https://foodify-1.onrender.com'
 ]
 
+SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True 
+
 STATIC_ROOT = BASE_DIR/'staticfiles'
