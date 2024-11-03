@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import apiClient from "../components/apiClient.jsx"
+import apiClient from "../components/apiClient.jsx";
 import PlanningTableComponent from "../components/Planning/PlanningTableComponent";
 
 const PlanningRegisteredView = ({showLink = false, showState = false, showDelete = false}) => {
