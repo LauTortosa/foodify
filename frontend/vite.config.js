@@ -10,4 +10,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://foodify-tf7b.onrender.com',
+        changeOrigin: true,
+      },
+    },
 });
