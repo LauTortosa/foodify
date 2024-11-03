@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+*dl=z^l8p##@e_v3p*mkoe2ytam0b!0@6&=l#!#u97b(!@9uj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -134,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
+    'https://foodify-1.onrender.com',
     'http://localhost:5173'
 ]
 
