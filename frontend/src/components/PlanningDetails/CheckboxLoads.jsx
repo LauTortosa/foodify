@@ -81,8 +81,8 @@ const CheckboxLoads = ({ components, load, planningId }) => {
           {components.map((component, componentIndex) => {
             const [ingredient, quantity] = component.split(' - ');
             return (
-              <tr >
-                <td key={componentIndex} onClick={() => toggleRowChecks(componentIndex)} className="cursor-pointer">{ingredient}</td>
+              <tr key={componentIndex}>
+                <td  onClick={() => toggleRowChecks(componentIndex)} className="cursor-pointer">{ingredient}</td>
                 <td>{quantity}</td>
                   {Array.from({ length: load }).map((_, loadIndex) => (
                 <td key={loadIndex}>
