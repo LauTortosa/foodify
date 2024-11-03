@@ -1,40 +1,36 @@
 import DeleteTaskComponent from "./DeleteTaskComponent";
 
 const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
+    if (!Array.isArray(listTasks)) {
+        console.error("listTasks no es un array:", listTasks);
+        return <div>No hay tareas disponibles.</div>; // Maneja el caso cuando no hay tareas
+    }
+
     return (
-        <table className="table">
+        <table>
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Tarea</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>Completada</th>
                 </tr>
             </thead>
             <tbody>
-                {listTasks.map((task, index) => (
-                <tr key={task.id} className="hover">
-                    <td>{index + 1}</td>
-                    <td>{task.task}</td>
-                    <td>
-                        <input
-                            type="checkbox"
-                            checked={task.completed}
-                            onChange={() => onCheckboxChange(task.id)}
-                            className="checkbox"
-                        />
-                    </td>
-                    <td>
-                        <DeleteTaskComponent
-                            taskId={task.id}
-                            getTask={getTask}
-                        />
-                    </td>
-                </tr>
+                {listTasks.map(task => (
+                    <tr key={task.id}>
+                        <td>{task.task}</td>
+                        <td>
+                            <input 
+                                type="checkbox" 
+                                checked={task.completed} 
+                                onChange={() => onCheckboxChange(task.id)} 
+                            />
+                        </td>
+                    </tr>
                 ))}
             </tbody>
         </table>
     );
 };
+
 
 export default TableTasksComponent;
