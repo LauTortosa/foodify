@@ -27,9 +27,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#    'http://localhost:5173',
-# ]
+CORS_ALLOWED_ORIGINS = [
+   'https://foodify-1.onrender.com',
+]
 
 STORAGES = {
     "default" : {
@@ -46,3 +46,8 @@ DATABASES = {
         conn_max_age=600    
     )
 }
+
+SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True 

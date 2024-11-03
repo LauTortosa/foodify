@@ -134,13 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'https://foodify-1.onrender.com'
+    'http://localhost:5173'
 ]
-
-SESSION_COOKIE_SAMESITE = "None"
-CSRF_COOKIE_SAMESITE = "None"
-SESSION_COOKIE_SECURE = True 
-CSRF_COOKIE_SECURE = True 
 
 STATIC_ROOT = BASE_DIR/'staticfiles'
