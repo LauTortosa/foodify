@@ -30,7 +30,5 @@
     "tailwindcss": "^3.4.4",
     "vite": "^5.2.0"
   },
-  {
-    "homepage": "https://foodify-1.onrender.com"
-  }
+  "homepage": "https://foodify-1.onrender.com"
 }
