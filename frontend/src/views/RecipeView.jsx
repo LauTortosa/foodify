@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { sortData, handleSort } from '../utils';
 import axios from 'axios';
 
-import apiClient from "@/components/apiClient.jsx"
+import apiClient from "@/components/apiClient"
 import RecipeComponent from '../components/Recipes/RecipeComponent';
 
 const RecipeView = () => {
