@@ -11,5 +11,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('product/', include('product.urls')),
     path('planning/', include('planning.urls')),
-    path('task/', include('task.urls')),
+    path('task/api/', include('task.urls')),
 ]
