@@ -11,8 +11,13 @@ const HomeView = () => {
     }, []);
 
     const getTask = async () => {
-        const response = await apiClient.get('/task/api/list');
-        setListTask(response.data);
+        try {
+            const response = await apiClient.get('/task/api/list');
+            console.log('datos api', response.data);
+            setListTask(response.data);
+        } catch (error) {
+            console.error('error al obtener datos', error);
+        }
     };
 
     return (
