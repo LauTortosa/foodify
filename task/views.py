@@ -25,7 +25,7 @@ def create_task(request, data: TaskIn):
 def list_tasks(request):
     list = Task.objects.all()
 
-    return [TaskOut(id=task.id, task=task.task, completed=task.completed) for task in tasks]
+    return list
 
 @task_api.put("/{task_id}")
 def update_task(request, task_id: int, data: TaskIn):
