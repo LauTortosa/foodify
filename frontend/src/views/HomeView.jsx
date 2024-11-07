@@ -12,6 +12,7 @@ const HomeView = () => {
 
     const getTask = async () => {
         try {
+            console.log("API URL en producción:", import.meta.env.VITE_API_BASE_URL_DEPLOY);
             const response = await apiClient.get('/task/api/list');
             console.log('datos api', response.data);
             setListTask(response.data);
