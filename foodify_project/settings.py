@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'foodify_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if os.getenv('DEBUG', 'False') == 'False':
+if os.getenv('DEBUG', 'False') == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
