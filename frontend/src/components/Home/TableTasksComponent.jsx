@@ -1,8 +1,5 @@
-import DeleteTaskComponent from "./DeleteTaskComponent";
-
 const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
     if (!Array.isArray(listTasks)) {
-        console.error("listTasks no es un array:", listTasks);
         return <div>No hay tareas disponibles.</div>;
     }
 
@@ -31,6 +28,5 @@ const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
         </table>
     );
 };
-
 
 export default TableTasksComponent;

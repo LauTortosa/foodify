@@ -36,7 +36,6 @@ const handleSubmitForm = async (data) => {
             product: data.product_value 
         };
 
-        console.log("data send", dataToSend);
 
         await apiClient.post('/planning/api/', dataToSend)
         reset();
