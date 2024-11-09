@@ -5,10 +5,12 @@ import HeaderComponent from './components/HeaderComponent';
 
 const App = () => {
   return (
-    <div className="flex flex-col h-screen"> 
+    <div className="flex flex-col min-h-screen"> 
       <HeaderComponent/>
       <div className="flex flex-1"> 
-        <Navbar /> 
+      <div className="flex-shrink-0"> 
+          <Navbar />
+        </div>
         <div className="flex-1"> 
           <MyRoutes /> 
         </div>

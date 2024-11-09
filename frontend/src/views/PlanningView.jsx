@@ -53,6 +53,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 
