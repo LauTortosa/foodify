@@ -7,7 +7,7 @@ const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
     }
 
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
                     <th>Tarea</th>
