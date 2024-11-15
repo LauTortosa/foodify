@@ -103,10 +103,14 @@ if os.getenv('DEBUG', 'False') == 'True':
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ['DATABASE_URL'],  
-            conn_max_age=600 
-        )
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'foodify_db', 
+            'USER': 'admin',
+            'PASSWORD': '53377989LTGltg',  
+            'HOST': 'localhost',  
+            'PORT': '5432',  
+        }
     }
 
 # Password validation
