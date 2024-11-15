@@ -104,7 +104,7 @@ if os.getenv('DEBUG', 'False') == 'True':
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL', 'postgres://admin:53377989LTGltg@localhost:5432/foodify_db')
+            default=os.environ.get('DATABASE_URL')
         )
     }
 
