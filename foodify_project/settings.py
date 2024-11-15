@@ -10,9 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os 
-import dj_database_url
+import environ
 
-from dotenv import load_dotenv
 from pathlib import Path 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-load_dotenv()
+env = environ.Env()
+environ.Env.read_env()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -103,9 +103,7 @@ if os.getenv('DEBUG', 'False') == 'True':
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL')
-        )
+        'default': env.db('DATABASE_URL')
     }
 
 # Password validation
