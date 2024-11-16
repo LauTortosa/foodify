@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env()
 
-#SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'foodify_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if env.bool('DEBUG', default='False'):
+if env.bool('DEBUG', default=False):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
