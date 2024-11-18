@@ -147,7 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'https://foodify-1.onrender.com',
+    'https://foodifyplanning.es',
     'http://localhost:5173'
 ]
 
