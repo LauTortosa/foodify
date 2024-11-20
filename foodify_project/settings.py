@@ -27,14 +27,7 @@ DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'foodifyplanning.es', 'www.foodifyplanning.es']
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
 CSRF_TRUSTED_ORIGINS = []
-if RENDER_EXTERNAL_HOSTNAME:
-    CSRF_TRUSTED_ORIGINS.append('https://' + RENDER_EXTERNAL_HOSTNAME)
-
 
 # Application definition
 
@@ -90,7 +83,19 @@ WSGI_APPLICATION = 'foodify_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if env.bool('DEBUG', default=False):
+#if env.bool('DEBUG', default=False):
+ #   DATABASES = {
+ #       'default': {
+  #          'ENGINE': 'django.db.backends.sqlite3',
+ #           'NAME': BASE_DIR / 'db.sqlite3',
+  #      }
+#    }
+#else:
+ #   DATABASES = {
+ #       'default': env.db('DATABASE_URL')
+ #   }
+
+if DEBUG:  
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -99,7 +104,7 @@ if env.bool('DEBUG', default=False):
     }
 else:
     DATABASES = {
-        'default': env.db('DATABASE_URL')
+        'default': env.db('DATABASE_URL')  
     }
 
 # Password validation

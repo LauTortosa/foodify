@@ -27,13 +27,13 @@ const RecipeView = () => {
     const sortedProducts = sortData(productList, sortConfig);
 
     return (
-      <div className='container'>
+      <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8'>
           <div className='md:col-span-2 lg:col-span-1'></div>
           <div className='md:col-span-2 lg:col-span-3'>
             <h2 className='text-center text-xl font-bold underline mt-4 mb-4'>Lista de recetas</h2>
-            <div className='overflow-x-auto ml-24 mb-24'>
-              <table className="table">
+            <div className='overflow-x-auto mb-24'>
+              <table className="table min-w-full">
                 <thead>
                   <tr>
                     <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'index')}>#</th>
@@ -49,11 +49,13 @@ const RecipeView = () => {
                     <td>{product.product}</td>
                     <td>{product.type_value}</td>
                     <td>
-                      <button className="btn btn-sm btn-ghost" 
-                      onClick={() => {
-                        setSelectedProductId(product.id);
-                        setIsModalOpen(true);
-                      }}>
+                      <button 
+                        className="btn btn-sm btn-ghost" 
+                        onClick={() => {
+                          setSelectedProductId(product.id);
+                          setIsModalOpen(true);
+                        }}
+                      >
                         Ver datos
                       </button>
                     </td>

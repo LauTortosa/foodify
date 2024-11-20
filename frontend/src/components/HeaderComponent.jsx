@@ -9,10 +9,16 @@ const HeaderComponent = () => {
 
   return (
     <div className="navbar border-b-4 border-gray-300 mt-6">
-      <h1 className="text-center text-5xl font-bold mt-10 ml-8 mb-6">FOODIFY PLANNER</h1>
-      <div className="ml-auto font-bold">
-        <div className="form-control mr-8">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+      <h1 className="text-center text-5xl font-bold mt-10 mb-6">
+        FOODIFY PLANNER
+      </h1>
+      <div className="flex ml-auto items-center space-x-4 mr-8 font-bold">
+        <div className="form-control">
+          <input 
+            type="text" 
+            placeholder="Search" 
+            className="input input-bordered w-24 sm:w-32 md:w-48 lg:w-64" 
+          />
         </div>
         <UserDropdownComponent username={username} userType={userType} />
       </div>

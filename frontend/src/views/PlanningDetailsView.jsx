@@ -25,15 +25,15 @@ const PlanningDetailsView = () => {
     };
     // TODO when all checks are true, state change to 'prepared'
     return (
-        <div className="flex justify-center">
-            <div className="card w-5/6 bg-base-100 shadow-xl">
+        <div className="flex justify-center p-4">
+            <div className="card w-full max-w-4xl bg-base-100 shadow-xl md:w-5/6">
                 <div className="card-body">
                     <PlanningDetailsComponent planningId={planningId} onEditClick={editClick} />
                 </div>
             </div>
             {isEdit && (
                 <div className="modal modal-open">
-                    <div className="modal-box">
+                    <div className="modal-box w-full max-w-lg">
                         <UpdatePlanningComponent
                             planningId={planningId}
                             initialState={planningDetails.state_value}
@@ -43,7 +43,12 @@ const PlanningDetailsView = () => {
                             initialProduct={planningDetails.product_value}
                             onClose={editClose}
                         />
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={editClose}>✕</button>
+                        <button 
+                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
+                            onClick={editClose}
+                        >
+                            ✕
+                        </button>
                     </div>
                 </div>
             )}
