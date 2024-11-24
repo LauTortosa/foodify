@@ -152,7 +152,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     'https://foodifyplanning.es',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'http://localhost:5174',
 ]
 
 STATIC_ROOT = BASE_DIR/'staticfiles'
