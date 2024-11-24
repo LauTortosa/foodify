@@ -9,24 +9,25 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os 
+import environ
 
-from pathlib import Path
-
+from pathlib import Path 
+env = environ.Env()
+environ.Env.read_env('/home/ubuntu/proyectos/foodify/.env')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+*dl=z^l8p##@e_v3p*mkoe2ytam0b!0@6&=l#!#u97b(!@9uj'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'foodifyplanning.es', 'www.foodifyplanning.es']
 
+CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 
@@ -50,8 +51,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -82,13 +83,29 @@ WSGI_APPLICATION = 'foodify_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#if env.bool('DEBUG', default=False):
+ #   DATABASES = {
+ #       'default': {
+  #          'ENGINE': 'django.db.backends.sqlite3',
+ #           'NAME': BASE_DIR / 'db.sqlite3',
+  #      }
+#    }
+#else:
+ #   DATABASES = {
+ #       'default': env.db('DATABASE_URL')
+ #   }
 
+if DEBUG:  
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': env.db('DATABASE_URL')  
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -124,7 +141,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -134,5 +152,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
+    'https://foodifyplanning.es',
+    'http://localhost:5173'
 ]
+
+STATIC_ROOT = BASE_DIR/'staticfiles'
+
+STORAGES = {
+    "default" : {
+        "BACKEND" : "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles" : {
+        "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True 
+
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True 
