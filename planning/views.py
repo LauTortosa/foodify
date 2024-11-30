@@ -1,29 +1,46 @@
 from ninja import Field, NinjaAPI, Schema
 from ninja.errors import HttpError
-from typing import Annotated, List, Optional
-
-from pydantic import field_validator
+from typing import List, Optional
+from pydantic.functional_validators import field_validator
+from datetime import date, timedelta
 
 from .models import Planning, State
 from product.models import Product, ProductComponent
-from datetime import date, timedelta
 
 planning_api = NinjaAPI(urls_namespace='planning_api')
 
 class PlanningIn(Schema):
-    date: str
-    load: Annotated[int, Field(strict=True, gt=0)]
-    tracebility: Annotated[int, Field(strict=True, gt=0)]
-    product: Annotated[str, Field(min_length=1)]
-    state_value: Optional[str] = Field(None, min_length=1)
+    date: str = Field(...)
+    load: int = Field(...)
+    tracebility: int = Field(...)
+    product: str = Field(..., min_length=1)
 
-    @field_validator('date')
-    def validate_date(cls, v): 
-     if isinstance(v, str):
-            v = date.fromisoformat(v)
-     if v <= (date.today() - timedelta(days=30)):
-            raise ValueError("La fecha debe ser posterior a la que era hace una semana")
-     return v
+    @field_validator("date")
+    def validate_date(cls, v):
+        try:
+            parsed_date = date.fromisoformat(v)  
+        except ValueError:
+            raise ValueError("introduce una fecha válida")
+
+        if parsed_date <= (date.today() - timedelta(days=30)):
+            raise ValueError("la fecha debe ser posterior a hace 30 días")
+        return parsed_date
+    
+    @field_validator("load", mode="before")
+    def validate_load(cls, v):
+        if v is None:
+            raise ValueError("introduce el número de cargas")
+        if v <= 0: 
+           raise ValueError("el numero de cargas tiene que ser mayor que 0")
+        return v
+    
+    @field_validator("tracebility", mode="before")
+    def validate_tracebility(cls, v):
+        if v is None: 
+            raise ValueError("introduce el número de trazabilidad")
+        if v <= 0:
+            raise ValueError("el número de trazabilidad tiene que ser mayor que 0")
+        return v
     
 class PlanningOut(Schema):
     id: int
@@ -37,7 +54,6 @@ class PlanningOut(Schema):
 class StateOut(Schema):
     id: int
     label: str
-
 
 @planning_api.post("/")
 def create_planning(request, data: PlanningIn):

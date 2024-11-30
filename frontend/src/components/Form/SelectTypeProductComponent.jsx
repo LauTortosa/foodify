@@ -44,6 +44,7 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
           <select 
               name="type_value"
               onChange={handleTypeChange} 
+              required
               className="select select-bordered w-full">
             <option value="">Tipo de producto</option>
             {types.map(type => (
@@ -57,6 +58,7 @@ const SelectTypeProductComponent = ({ onTypeSelect, onProductSelect }) => {
           <select 
               name="product_value"
               onChange={handleProductChange} 
+              required
               className="select select-bordered w-full">
             <option value="">Producto</option>
             {filteredProducts.map(product => (

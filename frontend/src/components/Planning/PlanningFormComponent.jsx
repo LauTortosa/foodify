@@ -8,7 +8,6 @@ import AlertComponent from "../AlertComponent";
 
 const PlanningFormComponent = ({ refreshPlanningList }) => {
     const { register, handleSubmit, setValue, reset } = useForm();
-    const [error, setError] = useState();
     const [successMessage, setSuccessMessage] = useState('');
     const [warningMessage, setWarningMessage] = useState('');
 
@@ -23,41 +22,38 @@ const handleProductSelect = (productLabel) => {
 
 const handleSubmitForm = async (data) => {
     try {
-        const date = new Date(data.date);
-        if (isNaN(date.getTime())) {
-            throw new Error("Fecha no valida");
-        }
-
         const dataToSend = {
-            date: date.toISOString().split('T')[0],
+            date: data.date,
             load: parseInt(data.load), 
             tracebility: parseInt(data.tracebility),
             type: data.type_value, 
             product: data.product_value 
         };
 
-        console.log("data send", dataToSend);
-
         await axios.post('http://localhost:8000/planning/api/', dataToSend)
+
         reset();
         setWarningMessage("");
         setSuccessMessage("Planificación creada con éxito");
+
         if (refreshPlanningList) refreshPlanningList();
 
-    } catch (error) {
-        if (error.response?.status === 409) {
-            setWarningMessage("El número de trazabilidad ya existe");
+     } catch (error) {
+        let errorMessages = [];
+
+        if (error.response?.data?.detail && Array.isArray(error.response.data.detail)) {
+            errorMessages = error.response.data.detail.map(err => err.msg);
         } else {
-            const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.msg || error.message || "Error al añadir la planificación.";
-            setWarningMessage("Error al añadir la planificación: " + errorMessage);
-            setSuccessMessage("");
+            errorMessages.push(error.response?.data?.msg || error.message || "Error al añadir la planificación.");
         }
+        
+        setWarningMessage(errorMessages);
+        setSuccessMessage("");
     }
 };
 
 const clearSuccess = () => setSuccessMessage("");
 const clearWarning = () => setWarningMessage("");
-
 
 return (
     <form onSubmit={handleSubmit(handleSubmitForm)} className="p-4">
@@ -83,11 +79,17 @@ return (
         />
         <button type="submit" className="btn">Añadir Planificación</button>
         {warningMessage && (
-            <AlertComponent 
-                type="warning"
-                message={warningMessage}
-                onClose={clearWarning}
-            />
+            warningMessage.map((msg, index) => {
+                return (
+                   <AlertComponent 
+                      key={index}   
+                      type="warning"
+                      message={msg}
+                      onClose={clearWarning}
+                   />
+                );
+            })
+            
         )}
         {successMessage && (
             <AlertComponent 
