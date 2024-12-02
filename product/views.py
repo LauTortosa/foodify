@@ -1,6 +1,8 @@
-from ninja import NinjaAPI, Query, Schema
+from django.core.exceptions import ObjectDoesNotExist
+from ninja import NinjaAPI, Query, Schema, Field
 from ninja.errors import HttpError
 from typing import List
+from pydantic.functional_validators import field_validator
 from .models import Product, ProductComponent, Type, Component
 
 product_api = NinjaAPI(urls_namespace='product_api')
@@ -29,8 +31,22 @@ class ComponentOut(Schema):
 
 class ProductComponentIn(Schema):
     product_id: int
-    component_id: int
-    kilograms: float
+    component_id: int = Field(...)
+    kilograms: float = Field(...)
+
+    @field_validator("component_id")
+    def validate_component_id(cls, v):
+        try:
+            Component.objects.get(id=v)
+            raise ValueError("el componente ya existe")
+        except ObjectDoesNotExist:
+            pass
+        return v
+    
+    @field_validator("kilograms")
+    def validate_kilograms(cls, v):
+        if v <= 0:
+            raise ValueError("los kilos tienen que ser mayor que 0")
 
 @product_api.post("/component-product")
 def add_component_product(request, data: ProductComponentIn):

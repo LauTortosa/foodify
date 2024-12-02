@@ -25,12 +25,18 @@ const RecipeAddModalComponent = ({ productId, components }) => {
             setSelectedComponent("");
             setQuantity(0);
             setSuccessMessage("Componente añadido con éxito");
+        
         } catch (error) {
-            if (error.response?.status === 409) {
-                setWarningMessage("El componente ya existe para este producto");
+            let errorMessages = [];
+    
+            if (error.response?.data?.detail && Array.isArray(error.response.data.detail)) {
+                errorMessages = error.response.data.detail.map(err => err.msg);
             } else {
-                console.error("Error: ", error.response?.data || error.message);
+                errorMessages.push(error.response?.data?.msg || error.message || "Error al añadir la planificación.");
             }
+            
+            setWarningMessage(errorMessages);
+            setSuccessMessage("");
         }
     };
 
@@ -101,11 +107,17 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                     </div>
                     <div>
                         {warningMessage && (
-                            <AlertComponent 
-                                type="warning"
-                                message={warningMessage}
-                                onClose={clearMessages}
-                            />    
+                            warningMessage.map((msg, index) => {
+                                return (
+                                    <AlertComponent 
+                                        key={index}   
+                                        type="warning"
+                                        message={msg}
+                                        onClose={clearMessages}
+                                    />
+                                );
+                            })
+                
                         )}
                     </div>
                 </div>
