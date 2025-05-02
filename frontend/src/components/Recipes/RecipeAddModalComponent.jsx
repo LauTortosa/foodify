@@ -28,13 +28,24 @@ const RecipeAddModalComponent = ({ productId, components }) => {
         
         } catch (error) {
             let errorMessages = [];
-    
-            if (error.response?.data?.detail && Array.isArray(error.response.data.detail)) {
-                errorMessages = error.response.data.detail.map(err => err.msg);
-            } else {
-                errorMessages.push(error.response?.data?.msg || error.message || "Error al añadir la planificación.");
+            console.log(error.response?.data); 
+            //if (error.response?.data?.detail && Array.isArray(error.response.data.detail)) {
+            //    errorMessages = error.response.data.detail.map(err => err.msg);
+            //} else {
+            //    errorMessages.push(error.response?.data?.msg || error.message || "Error al añadir la planificación.");
+            //}
+
+            if (typeof error.response?.data?.detail === 'string') {
+                errorMessages.push(error.response.data.detail);
             }
-            
+            // Verificar si el detalle es un array de objetos
+            else if (Array.isArray(error.response?.data?.detail)) {
+                error.response.data.detail.forEach(item => {
+                    if (item.msg) {
+                        errorMessages.push(item.msg);
+                    }
+                });
+            }
             setWarningMessage(errorMessages);
             setSuccessMessage("");
         }

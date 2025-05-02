@@ -36,27 +36,26 @@ class ProductComponentIn(Schema):
 
     @field_validator("component_id")
     def validate_component_id(cls, v):
-        try:
-            Component.objects.get(id=v)
-            raise ValueError("el componente ya existe")
-        except ObjectDoesNotExist:
-            pass
+        if not isinstance(v, int) or v <= 0:
+            raise ValueError("selecciona un componente")
         return v
     
     @field_validator("kilograms")
     def validate_kilograms(cls, v):
         if v <= 0:
             raise ValueError("los kilos tienen que ser mayor que 0")
+        return v
 
 @product_api.post("/component-product")
 def add_component_product(request, data: ProductComponentIn):
+    print(f"data recibido: {data}")
     exists = ProductComponent.objects.filter(
         product_id=data.product_id,
         component_id=data.component_id
     ).exists()
 
     if exists:
-        raise HttpError(409, "Component already exists for this product")
+        raise HttpError(409, "Este componente ya existe")
     
     component = ProductComponent.objects.create(
         product_id=data.product_id, 
