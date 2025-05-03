@@ -18,7 +18,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
         <div className='md:col-span-5'>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'>
             <div className='ml-28'>
-              <h2 className='text-md font-bold underline mb-4'>Planificaciones pendientes</h2>
+              <h2 className='text-md font-bold underline mb-4'>Trabajo pendiente</h2>
               <StatePendingComponent statePending={statePending} />
               <StatePreparedComponent statePrepared={statePrepared} />
             </div>
