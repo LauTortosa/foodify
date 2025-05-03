@@ -1,18 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-
+import { useStatePlanning } from "../../hooks/useStatePlanning";
 
 const StatePreparedComponent = () => {
-    const [statePrepared, setStatePrepared] = useState(0);
-
-    useEffect(() => {
-        getStatePrepared();
-    });
-
-    const getStatePrepared = async () => {
-        const response = await axios.get('http://localhost:8000/planning/api/state/prepared');
-        setStatePrepared(response.data["planning prepared"]);
-    };
+    const { statePrepared } = useStatePlanning(0);
 
     return(
         <div className="text-lg">

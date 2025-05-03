@@ -1,17 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useStatePlanning } from "../../hooks/useStatePlanning";
 
 const StatePendingComponent = () => {
-  const [statePending, setStatePending] = useState(0);
-
-  useEffect(() => {
-    getStatePending();
-  }, []);
-
-  const getStatePending = async() => {
-    const response = await axios.get('http://localhost:8000/planning/api/state/pending');
-    setStatePending(response.data["planning pending"]);
-  };
+  const { statePending } = useStatePlanning(0);
 
   return(
     <div className="mb-8 text-lg">
