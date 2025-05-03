@@ -3,10 +3,12 @@ import axios from "axios";
 
 import ListTasksComponent from "../components/Home/ListTasksComponent";
 import useAuthenticatedUser from "../hooks/useAuthenticatedUser";
+import { useStatePlanning } from "../hooks/useStatePlanning";
 
 const HomeView = () => {
     const username = useAuthenticatedUser();
     const [listTasks, setListTask] = useState([]);
+    const { statePending, statePrepared } = useStatePlanning();
 
     useEffect(() => {
         getTask();
@@ -21,7 +23,7 @@ const HomeView = () => {
         <div className='container'>
             <div className='mt-8 ml-28 mb-12'>
                 <h2>¡Hola {username}!</h2>
-                <p>Hoy tienes </p>
+                <p>Hoy tienes {statePending} trabajos por preparar y {statePrepared} por registrar</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-5 gap-8'>
                 <div className='md:col-span-2 lg:col-span-1 mt-6 ml-8'>Calendario</div>
