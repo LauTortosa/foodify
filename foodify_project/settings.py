@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'task',
     'corsheaders',
     'users',
+    'event',
 ]
 
 MIDDLEWARE = [
