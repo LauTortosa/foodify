@@ -9,7 +9,7 @@ class EventIn(Schema):
     date: str = Field(..., description="Fecha del evento en formato dd/mm/yyyy")
     event: str = Field(..., min_length=5, max_length=80, description="Descripción del evento")
     time: str = Field(..., description="Hora del evento en formato HH:MM")
-    location: str
+    location: str = Field(..., min_length=5, max_length=30, description="Lugar del evento")
     endTime: str
     stateEvent: str
 
@@ -20,11 +20,6 @@ def validate_date(cls, v):
     except ValueError:
         raise ValueError("Introduce una fecha válida.")
     return v
-    
-@field_validator("event")
-def validate_event(cls, v):
-    if not (5 <= len(v) <= 80):
-        raise ValueError("El evento debe tener entre 5 y 60 caracteres.")
     
 @field_validator("time")
 def validate_time(cls, v):
