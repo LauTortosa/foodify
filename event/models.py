@@ -20,3 +20,11 @@ class Event(models.Model):
 
     def __str__(self):
         return f"({self.id}) {self.event} - {self.date}"
+    
+    @property
+    def date_value(self):
+        return self.date.strftime("%d/%m/%Y")
+    
+    @property
+    def stateEvent_value(self):
+        return self.stateEvent.label
