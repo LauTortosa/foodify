@@ -28,3 +28,7 @@ class Event(models.Model):
     @property
     def stateEvent_value(self):
         return self.stateEvent.label
+    
+    @property
+    def time_value(self):
+        return self.time.strftime("%H:%M")
