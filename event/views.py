@@ -10,8 +10,8 @@ class EventIn(Schema):
     event: str = Field(..., min_length=5, max_length=80, description="Descripción del evento")
     time: str = Field(..., description="Hora del evento en formato HH:MM")
     location: str = Field(..., min_length=5, max_length=30, description="Lugar del evento")
-    endTime: str
-    stateEvent: str
+    end_time: str = Field(alias="endTime")
+    state_event: str = Field(alias="stateEvent")
 
 @field_validator("date")
 def validate_date(cls, v):
@@ -36,8 +36,8 @@ class EventOut(Schema):
     event: str
     time: str
     location: str
-    endTime: str
-    stateEvent: str
+    end_time: str = Field(alias="endTime")
+    state_event: str = Field(alias="stateEvent")
 
 class StateEventOut(Schema):
     id: int 

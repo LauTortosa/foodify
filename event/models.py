@@ -15,8 +15,8 @@ class Event(models.Model):
     event = models.CharField(max_length=MAX_LENGTH)
     time = models.TimeField()
     location = models.CharField(max_length=MAX_LENGTH)
-    endTime = models.CharField(max_length=MAX_LENGTH)
-    stateEvent = models.ForeignKey(StateEvent, on_delete=models.RESTRICT, default=1)
+    end_time = models.IntegerField()
+    state_event = models.ForeignKey(StateEvent, on_delete=models.RESTRICT, default=1)
 
     def __str__(self):
         return f"({self.id}) {self.event} - {self.date}"
@@ -26,9 +26,20 @@ class Event(models.Model):
         return self.date.strftime("%d/%m/%Y")
     
     @property
-    def stateEvent_value(self):
-        return self.stateEvent.label
+    def state_event_value(self):
+        return self.state_event.label
     
     @property
     def time_value(self):
         return self.time.strftime("%H:%M")
+    
+    @property
+    def end_time_value(self):
+        h, m = divmod(self.end_time, 60)
+        if m == 0:
+            return f"{h} hora" + ("s" if h != 1 else "")
+        elif h == 0:
+            return f"{m} minutos" + ("s" if m != 1 else "")
+        else: 
+            return f"{h} horas" + ("s" if h != 1 else "") + f" y {m} minuto" + ("s" if m != 1 else "")
+        
