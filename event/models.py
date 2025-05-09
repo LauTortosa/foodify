@@ -15,7 +15,7 @@ class Event(models.Model):
     event = models.CharField(max_length=MAX_LENGTH)
     time = models.TimeField()
     location = models.CharField(max_length=MAX_LENGTH)
-    end_time = models.IntegerField()
+    end_time = models.IntegerField(null=True, blank=True)
     state_event = models.ForeignKey(StateEvent, on_delete=models.RESTRICT, default=1)
 
     def __str__(self):

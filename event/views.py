@@ -2,6 +2,7 @@ from ninja import NinjaAPI, Schema, Field
 from typing import Optional
 from pydantic.functional_validators import field_validator
 from datetime import datetime
+from .models import Event
 
 event_api = NinjaAPI(urls_namespace='event_api')
 
@@ -11,7 +12,7 @@ class EventIn(Schema):
     time: str = Field(..., description="Hora del evento en formato HH:MM")
     location: str = Field(..., min_length=5, max_length=30, description="Lugar del evento")
     end_time: int = Field(..., gt=0, description="Duración del evento en minutos", alias="endTime")
-    state_event: Optional[int] = Field(default="none", alias="stateEvent")
+    state_event: Optional[int] = Field(default=None, alias="stateEvent")
 
 @field_validator("date")
 def validate_date(cls, v):
@@ -42,3 +43,15 @@ class EventOut(Schema):
 class StateEventOut(Schema):
     id: int 
     label: str
+
+@event_api.post("/")
+def create_event(request, data: EventIn):
+    event = Event.objects.create(
+        date=data.date,
+        event=data.event,
+        time=data.time,
+        location=data.location,
+        end_time=data.end_time,
+    )
+
+    return {"ok": True}
