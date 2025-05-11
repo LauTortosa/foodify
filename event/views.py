@@ -74,3 +74,38 @@ def delete_event(request, event_id: int):
     event.delete()
 
     return {"ok": True}
+
+@event_api.put("/{event_id}")
+def update_event(request, event_id: int, data: EventIn):
+    event = Event.objects.get(id=event_id)
+
+    if data.date:
+        event.date = data.date
+    
+    if data.event:
+        event.event = data.event
+    
+    if data.time:
+        event.time = data.time
+
+    if data.location:
+        event.location = data.location
+
+    if data.end_time:
+        event.end_time = data.end_time
+    
+    if data.state_event:
+        new_state = StateEvent.objects.get(id=data.state_event)
+        event.state_event = new_state
+
+    event.save()
+
+    return {
+        "id": event.id,
+        "date": event.date,
+        "event": event.event,
+        "time": event.time,
+        "location": event.location,
+        "end_time": event.end_time,
+        "state_event": event.state_event.id
+    }
