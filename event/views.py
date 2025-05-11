@@ -2,7 +2,7 @@ from ninja import NinjaAPI, Schema, Field
 from typing import Optional, List
 from pydantic.functional_validators import field_validator
 from datetime import datetime
-from .models import Event
+from .models import Event, StateEvent
 
 event_api = NinjaAPI(urls_namespace='event_api')
 
@@ -61,3 +61,9 @@ def list_event(request):
     list = Event.objects.all()
 
     return list
+
+@event_api.get("/state", response=List[StateEventOut])
+def state_event(request):
+    states = StateEvent.objects.all()
+
+    return states
