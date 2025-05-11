@@ -27,7 +27,9 @@ class Event(models.Model):
     
     @property
     def state_event_value(self):
-        return self.state_event.label
+        if self.state_event:
+            return self.state_event.label
+        return None
     
     @property
     def time_value(self):
@@ -35,6 +37,8 @@ class Event(models.Model):
     
     @property
     def end_time_value(self):
+        if self.end_time is None:
+            return None
         h, m = divmod(self.end_time, 60)
         if m == 0:
             return f"{h} hora" + ("s" if h != 1 else "")
@@ -42,4 +46,3 @@ class Event(models.Model):
             return f"{m} minutos" + ("s" if m != 1 else "")
         else: 
             return f"{h} horas" + ("s" if h != 1 else "") + f" y {m} minuto" + ("s" if m != 1 else "")
-        

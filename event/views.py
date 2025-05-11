@@ -1,5 +1,5 @@
 from ninja import NinjaAPI, Schema, Field
-from typing import Optional
+from typing import Optional, List
 from pydantic.functional_validators import field_validator
 from datetime import datetime
 from .models import Event
@@ -12,12 +12,12 @@ class EventIn(Schema):
     time: str = Field(..., description="Hora del evento en formato HH:MM")
     location: str = Field(..., min_length=5, max_length=30, description="Lugar del evento")
     end_time: int = Field(..., gt=0, description="Duración del evento en minutos", alias="endTime")
-    state_event: Optional[int] = Field(default=None, alias="stateEvent")
+    state_event: Optional[int] = Field(default=1, alias="stateEvent")
 
 @field_validator("date")
 def validate_date(cls, v):
     try:
-        datetime.strtime(v, "%d/%m/%Y")
+        datetime.strptime(v, "%d/%m/%Y")
     except ValueError:
         raise ValueError("Introduce una fecha válida.")
     return v
@@ -25,7 +25,7 @@ def validate_date(cls, v):
 @field_validator("time")
 def validate_time(cls, v):
     try: 
-        datetime.strtime(v, "%H:%M")
+        datetime.strptime(v, "%H:%M")
     except ValueError:
         raise ValueError("Hora del evento no válida.")
     return v
@@ -33,12 +33,12 @@ def validate_time(cls, v):
 
 class EventOut(Schema): 
     id: int
-    date: str
+    date_value: str
     event: str
-    time: str
+    time_value: str
     location: str
-    end_time: str = Field(alias="endTime")
-    state_event: str = Field(alias="stateEvent")
+    end_time_value: Optional[str] = None
+    state_event_value: Optional[str] = None
 
 class StateEventOut(Schema):
     id: int 
@@ -55,3 +55,9 @@ def create_event(request, data: EventIn):
     )
 
     return {"ok": True}
+
+@event_api.get("/list", response=List[EventOut])
+def list_event(request):
+    list = Event.objects.all()
+
+    return list
