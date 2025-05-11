@@ -63,7 +63,14 @@ def list_event(request):
     return list
 
 @event_api.get("/state", response=List[StateEventOut])
-def state_event(request):
+def get_state_event(request):
     states = StateEvent.objects.all()
 
     return states
+
+@event_api.delete("/{event_id}")
+def delete_event(request, event_id: int):
+    event = Event.objects.get(id=event_id)
+    event.delete()
+
+    return {"ok": True}
