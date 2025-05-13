@@ -20,14 +20,30 @@ const EventsComponent = () => {
 
     return (
         <div className="p-4">
-            <div className="grid grid-cols-2">
-                <h2 className="text-xl font-bold underline mb-4 text-gray-800">Próximos Eventos</h2>
+            <div className="grid grid-cols-2 items-center mb-4">
+                <h2 className="text-xl font-bold underline text-gray-800">Próximos Eventos</h2>
                 <div>
-                <p className=""><span className="text-sm ml-2 mr-2">✚</span>Añadir evento</p>
-
+                    <button 
+                        onClick={() => document.getElementById('my_modal_3').showModal()} 
+                        className="btn btn-sm btn-ghost text-gray-700 hover:bg-gray-100"
+                    >
+                        ✚ Añadir evento
+                    </button>
+                    
+                    <dialog id="my_modal_3" className="modal">
+                        <div className="modal-box">
+                            <form method="dialog">
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                            </button>
+                            </form>
+                            <h2 className="text-xl text-center font-bold underline mb-4">Añadir evento</h2>
+                            evento
+                        </div>
+                    </dialog>
                 </div>
-
             </div>
+
             <ul className="space-y-3">
                 {events.map((event) => (
                 <li
