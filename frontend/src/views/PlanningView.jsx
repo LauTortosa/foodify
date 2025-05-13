@@ -21,7 +21,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
   
           {username === 'responsable' && (
             <>
-              <h2 className="text-lg font-bold underline mb-4 mt-6">Acciones</h2>
+              <h2 className="text-lg font-bold underline mb-4 mt-8">Acciones</h2>
               <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
                 Añadir planificación
               </button>
