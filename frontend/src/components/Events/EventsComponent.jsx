@@ -8,10 +8,18 @@ const EventsComponent = () => {
     const getEvents = async () => {
         try {
             const response = await axios.get('http://localhost:8000/event/api/list');
-            console.log("response", response.data);
             setEvents(response.data);
         } catch (error) {
             console.error("Error al mostrar los eventos", error);
+        }
+    };
+
+    const deleteEvent = async (eventId) => {
+        try {
+            await axios.delete(`http://localhost:8000/event/api/${eventId}`);
+            getEvents();
+        } catch (error) {
+            console.error("Error al eliminar el evento", error);
         }
     };
 
@@ -53,21 +61,23 @@ const EventsComponent = () => {
                 >
                     <h3 className="text-gray-800 font-medium text-base mb-2 flex justify-between items-center">
                         <span>{event.event}</span>
-                        <button className="btn btn-square btn-xs">
-                            <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                            </svg>
+                        <button 
+                            onClick={() => deleteEvent(event.id)} 
+                            className="btn btn-square btn-xs">
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                                </svg>
                         </button>
                     </h3>
 
