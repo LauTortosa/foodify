@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import EventFormComponent from "./EventFormComponent";
 
 const EventsComponent = () => {
     const [events, setEvents] = useState([]);
@@ -38,7 +39,7 @@ const EventsComponent = () => {
                             </button>
                             </form>
                             <h2 className="text-xl text-center font-bold underline mb-4">Añadir evento</h2>
-                            evento
+                            <EventFormComponent refreshEvents={getEvents} />
                         </div>
                     </dialog>
                 </div>
