@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
@@ -17,11 +16,6 @@ const Navbar = () => {
         <div className="mb-4">
           <Link to="/recipes" className="block py-2 px-4 text-xl">Recetas</Link>
         </div>
-        {username === 'responsable' && (
-          <div className="mb-4">
-            <Link to="/planning-registered" className="block py-2 px-4 text-xl">Diario de trabajos</Link>
-          </div>
-        )}
         {username && (
           <div className="mb-4">
             <Link to="/calculate-kilograms" className="block py-2 px-4 text-xl">Calcular kilos</Link>

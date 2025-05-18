@@ -5,10 +5,13 @@ import StatePreparedComponent from "../components/Home/StatePreparedComponent";
 
 import usePlanningList from './../hooks/usePlanningList';
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
+import { useState } from 'react';
+import PlanningRegisteredView from './PlanningRegisteredView.jsx';
 
 const PlanningView = ({ statePending, statePrepared }) => {
   const { plannings, listPlanning } = usePlanningList();
   const username = useAuthenticatedUser();
+  const [view, setView] = useState('list');
 
   return (
     <div className="container">
@@ -22,33 +25,54 @@ const PlanningView = ({ statePending, statePrepared }) => {
           {username === 'responsable' && (
             <>
               <h2 className="text-lg font-bold underline mb-4 mt-8">Acciones</h2>
-              <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
-                Añadir trabajo
-              </button>
-              <dialog id="my_modal_3" className="modal">
-                <div className="modal-box">
-                  <form method="dialog">
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                      ✕
-                    </button>
-                  </form>
-                  <h2 className="text-xl text-center font-bold underline mb-4">Añadir trabajo</h2>
-                  <PlanningFormComponent refreshPlanningList={listPlanning} />
-                </div>
-              </dialog>
+              <div className="flex flex-col gap-2">
+                <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
+                  Añadir trabajo
+                </button>
+                <dialog id="my_modal_3" className="modal">
+                  <div className="modal-box">
+                    <form method="dialog">
+                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                        ✕
+                      </button>
+                    </form>
+                    <h2 className="text-xl text-center font-bold underline mb-4">Añadir trabajo</h2>
+                    <PlanningFormComponent refreshPlanningList={listPlanning} />
+                  </div>
+                </dialog>
+
+                <button className="btn" onClick={() => setView("diary")}>
+                  Diario de trabajos
+                </button>
+                <button className="btn" onClick={() => setView("list")}>
+                  Listado de trabajos
+                </button>
+              </div>
+              
             </>
           )}
         </div>
   
         <div className="md:col-span-1 lg:col-span-6 mt-10 mr-20">
-          <h2 className="text-center text-xl font-bold underline mb-4">Listado de Trabajo</h2>
+          <h2 className="text-center text-xl font-bold underline mb-4">
+            {view === "list" ? "Listado de Trabajo" : "Diario de trabajo"}
+          </h2>
           <div className="overflow-x-auto">
-            <PlanningList
-              plannings={plannings}
-              showLink={true}
-              showState={true}
-              refreshPlanningList={listPlanning}
-            />
+            {view === "list" ? (
+              <PlanningList
+                plannings={plannings}
+                showLink={true}
+                showState={true}
+                refreshPlanningList={listPlanning}
+              />
+            ): (
+              <PlanningRegisteredView 
+                showLink={false}
+                showState={true}
+                showDelete={false}
+              />
+            )}
+            
           </div>
         </div>
       </div>
