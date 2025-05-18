@@ -12,14 +12,14 @@ const Navbar = () => {
           <Link to="/" className="block py-2 px-4 text-xl">Inicio</Link>
         </div>
         <div className="mb-4">
-          <Link to="/planning" className="block py-2 px-4 text-xl">Planificaciones</Link>
+          <Link to="/planning" className="block py-2 px-4 text-xl">Gestión de trabajo</Link>
         </div>
         <div className="mb-4">
           <Link to="/recipes" className="block py-2 px-4 text-xl">Recetas</Link>
         </div>
         {username === 'responsable' && (
           <div className="mb-4">
-            <Link to="/planning-registered" className="block py-2 px-4 text-xl">Diario de registros</Link>
+            <Link to="/planning-registered" className="block py-2 px-4 text-xl">Diario de trabajos</Link>
           </div>
         )}
         {username && (

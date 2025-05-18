@@ -23,7 +23,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
             <>
               <h2 className="text-lg font-bold underline mb-4 mt-8">Acciones</h2>
               <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
-                Añadir planificación
+                Añadir trabajo
               </button>
               <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
@@ -32,7 +32,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
                       ✕
                     </button>
                   </form>
-                  <h2 className="text-xl text-center font-bold underline mb-4">Añadir planificación</h2>
+                  <h2 className="text-xl text-center font-bold underline mb-4">Añadir trabajo</h2>
                   <PlanningFormComponent refreshPlanningList={listPlanning} />
                 </div>
               </dialog>
@@ -41,7 +41,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
         </div>
   
         <div className="md:col-span-1 lg:col-span-6 mt-10 mr-20">
-          <h2 className="text-center text-xl font-bold underline mb-4">Listado de Planificaciones</h2>
+          <h2 className="text-center text-xl font-bold underline mb-4">Listado de Trabajo</h2>
           <div className="overflow-x-auto">
             <PlanningList
               plannings={plannings}
