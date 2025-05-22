@@ -14,19 +14,19 @@ const PlanningView = ({ statePending, statePrepared }) => {
   const [view, setView] = useState('list');
 
   return (
-    <div className="container">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-8 gap-8">
+    <div className="container mx-auto px-4 py-6 min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-8 gap-8">
         
-        <div className="md:col-span-2 lg:col-span-2 mt-10 ml-8">
-          <h2 className="text-xl font-bold underline mb-4">Trabajo pendiente</h2>
+        <div className="lg:col-span-2">
+          <h2 className="text-md font-bold underline mb-4">Trabajo pendiente</h2>
           <StatePendingComponent statePending={statePending} />
           <StatePreparedComponent statePrepared={statePrepared} />
   
           {username === 'responsable' && (
             <>
-              <h2 className="text-lg font-bold underline mb-4 mt-8">Acciones</h2>
+              <h2 className="text-md font-bold underline mb-4 mt-8">Acciones</h2>
               <div className="flex flex-col gap-2">
-                <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>
+                <button className="btn btn-sm w-40" onClick={() => document.getElementById('my_modal_3').showModal()}>
                   Añadir trabajo
                 </button>
                 <dialog id="my_modal_3" className="modal">
@@ -41,10 +41,10 @@ const PlanningView = ({ statePending, statePrepared }) => {
                   </div>
                 </dialog>
 
-                <button className="btn" onClick={() => setView("diary")}>
+                <button className="btn btn-sm w-40" onClick={() => setView("diary")}>
                   Diario de trabajos
                 </button>
-                <button className="btn" onClick={() => setView("list")}>
+                <button className="btn btn-sm w-40" onClick={() => setView("list")}>
                   Listado de trabajos
                 </button>
               </div>
@@ -53,7 +53,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
           )}
         </div>
   
-        <div className="md:col-span-1 lg:col-span-6 mt-10 mr-20">
+        <div className="lg:col-span-6 mr-20">
           <h2 className="text-center text-xl font-bold underline mb-4">
             {view === "list" ? "Listado de Trabajo" : "Diario de trabajo"}
           </h2>

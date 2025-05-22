@@ -11,7 +11,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
     const username = useAuthenticatedUser();
 
     return (
-        <div className=''>
+        <div>
             <table className="table">
                 <thead>
                     <tr>

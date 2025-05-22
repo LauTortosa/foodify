@@ -8,16 +8,22 @@ const HeaderComponent = () => {
   const userType = isGuest ? 'guest' : (username === 'responsable' ? 'responsable' : 'operator');
 
   return (
-    <div className="navbar border-b-4 border-gray-300 mt-6">
-      <h1 className="text-center text-5xl font-bold mt-10 ml-8 mb-6">FOODIFY PLANNER</h1>
-      <div className="ml-auto font-bold">
-        <div className="form-control mr-8">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+    <div className="navbar border-b-4 border-gray-300 px-8 py-4 items-center justify-between">
+      <h1 className="text-3xl font-bold">FOODIFY PLANNER</h1>
+
+      <div className="flex items-center gap-4">
+        <div className="form-control">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered w-24 md:w-auto"
+          />
         </div>
         <UserDropdownComponent username={username} userType={userType} />
       </div>
     </div>
   );
 };
+
 
 export default HeaderComponent;

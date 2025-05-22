@@ -21,17 +21,17 @@ const HomeView = () => {
     };
 
     return (
-        <div className='container'>
-            <div className='mt-8 ml-12'>
+        <div className='container mx-auto px-4 py-6 min-h-screen'>
+            <div className=''>
                 <h2>¡Hola {username}!</h2>
                 <p>Hoy tienes {statePending} trabajos por preparar y {statePrepared} por registrar</p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-6 gap-8'>
-                <div className='md:col-span-2 lg:col-span-2 mt-6 ml-8'>
+            <div className='grid grid-cols-1 lg:grid-cols-6 gap-8'>
+                <div className='lg:col-span-2 mt-6'>
                     <EventsComponent/>
                 </div>
-                <div className='md:col-span-1 lg:col-span-4 mt-10 mr-20'>
-                    <h2 className="text-xl font-bold underline mb-4 ml-2">Tareas pendientes</h2>
+                <div className='lg:col-span-4 mt-10'>
+                    <h2 className="text-xl font-bold underline mb-4">Tareas pendientes</h2>
                     <div className='overflow-x-auto'>
                         <ListTasksComponent
                             listTasks={listTasks}

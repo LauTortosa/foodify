@@ -4,8 +4,8 @@ const StatePendingComponent = () => {
   const { statePending } = useStatePlanning(0);
 
   return(
-    <div className="mb-8 text-lg">
-      Por preparar <span className="text-2xl ml-20">{statePending}</span>
+    <div className="mb-4 text-md">
+      Por preparar <span className="text-xl ml-8">{statePending}</span>
     </div>
   );
 };

@@ -12,8 +12,9 @@ const CalculateView = () => {
     const [load, setLoad] = useState(0);
 
     return (
-        <div className='grid grid-cols-4 divide-x-2 mt-12'>
-            <div className='ml-8 mr-4'>
+        <div className='container mx-auto px-4 py-6 min-h-screen'>
+            <div className='grid grid-cols-1 lg:grid-cols-4 gap-8'>
+            <div>
                 <ChecksProductsComponent
                     selectedProducts={selectedProducts} 
                     setSelectedProducts={setSelectedProducts} 
@@ -34,12 +35,14 @@ const CalculateView = () => {
                     setCalculatedKilosTotal={setCalculatedKilosTotal}
                 />
             </div>
-            <div className="col-span-3 overflow-x-auto mb-12 mr-8">
+            <div className="lg:col-span-3 overflow-x-auto">
                 <TableCalculateKilosComponent 
                     calculatedKilosTotal={calculatedKilosTotal}
                 />
             </div>
         </div>
+        </div>
+        
     );
 };
 

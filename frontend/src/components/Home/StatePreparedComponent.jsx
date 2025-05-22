@@ -4,8 +4,8 @@ const StatePreparedComponent = () => {
     const { statePrepared } = useStatePlanning(0);
 
     return(
-        <div className="text-lg">
-            Por registrar <span className="text-2xl ml-20">{statePrepared}</span>
+        <div className="text-md">
+            Por registrar <span className="text-xl ml-8">{statePrepared}</span>
         </div>
     );
 };
