@@ -15,7 +15,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-8 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-8">
         
         <div className="lg:col-span-2">
           <h2 className="text-md font-bold underline mb-4">Trabajo pendiente</h2>
@@ -53,7 +53,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
           )}
         </div>
   
-        <div className="lg:col-span-6 mr-20">
+        <div className="lg:col-span-6">
           <h2 className="text-center text-xl font-bold underline mb-4">
             {view === "list" ? "Listado de Trabajo" : "Diario de trabajo"}
           </h2>

@@ -2,7 +2,7 @@ import DeleteTaskComponent from "./DeleteTaskComponent";
 
 const TableTasksComponent = ({ listTasks, onCheckboxChange, getTask }) => {
     return (
-        <table className="table">
+        <table className="table table-xs">
             <thead>
                 <tr>
                     <th>#</th>

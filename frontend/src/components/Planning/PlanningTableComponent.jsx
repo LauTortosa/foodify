@@ -12,7 +12,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
 
     return (
         <div>
-            <table className="table">
+            <table className="table table-sm">
                 <thead>
                     <tr>
                         <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'index')}>#</th>

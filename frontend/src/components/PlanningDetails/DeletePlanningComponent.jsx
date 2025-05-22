@@ -8,7 +8,7 @@ const DeletePlanningComponent = ({ planningId, refreshPlanningList }) => {
 
     return ( 
         <div>
-            <button className="btn w-24" onClick={deletePlanning}>Eliminar</button>
+            <button onClick={deletePlanning}>🗑️</button>
         </div>
     );
 };
