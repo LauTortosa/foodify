@@ -30,23 +30,16 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <td>{index + 1}</td>
                         <td>{planning.date_value}</td>
                         <td>{planning.tracebility}</td>
-                        {(username === 'responsable' || username === 'operario') && showLink ? (
-                        <td className="text-blue-500 hover:underline">
-                            <Link to={`/planning/${planning.id}`}>
-                                {planning.product_value}
-                            </Link>
-                            </td>
-                        ) : (
                         <td>{planning.product_value}</td>
-                        )}
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
-                            {username === 'responsable' && showDelete && <td>
+                            {username === 'responsable' && showDelete && <td className='flex items-center gap-2'>
+                                <Link to={`/planning/${planning.id}`}>📒</Link>
                                 <DeletePlanningComponent 
                                     planningId={planning.id} 
                                     refreshPlanningList={refreshPlanningList}
                                 />
-                            </td>}
+                        </td>}
                     </tr>
                 ))}
                 </tbody>
