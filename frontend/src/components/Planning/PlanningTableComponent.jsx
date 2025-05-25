@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { sortData, handleSort } from '../../utils';
-
 import DeletePlanningComponent from '../PlanningDetails/DeletePlanningComponent';
 import UpdatePlanningComponent from '../PlanningDetails/UpdatePlanningComponent';
 import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
 
-const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlanningList, showDelete }) => {
+const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlanningList, showDelete, onShowDetails }) => {
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'asc'});
     const sortedPlannings = sortData(plannings, sortConfig);
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -47,7 +45,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
                             {username === 'responsable' && showDelete && <td className='flex items-center gap-2'>
-                                <Link to={`/planning/${planning.id}`}>📒</Link>
+                                <button onClick={() => onShowDetails(planning.id)}>📒</button>
                                 <button onClick={() => onEditClick(planning)}>✏️</button>
                                 <DeletePlanningComponent 
                                     planningId={planning.id} 
@@ -75,7 +73,6 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                 </div>
             )}
         </div>
-        
     )
 };
 

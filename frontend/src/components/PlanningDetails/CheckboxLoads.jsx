@@ -67,40 +67,54 @@ const CheckboxLoads = ({ components, load, planningId }) => {
     };
 
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Componentes</th>
-            <th>Cantidad</th>
-            {Array.from({ length: load }).map((_, loadIndex) => (
-            <th key={loadIndex} onClick={() => toggleAllChecks(loadIndex)} className="cursor-pointer">Carga {loadIndex + 1}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {components.map((component, componentIndex) => {
-            const [ingredient, quantity] = component.split(' - ');
-            return (
-              <tr key={componentIndex}>
-                <td onClick={() => toggleRowChecks(componentIndex)} className="cursor-pointer">{ingredient}</td>
-                <td>{quantity}</td>
-                  {Array.from({ length: load }).map((_, loadIndex) => (
-                <td key={loadIndex}>
+  <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+    <table className="min-w-full text-sm text-left">
+      <thead className="bg-gray-50 text-gray-700">
+        <tr>
+          <th className="p-3">🧪 Componentes</th>
+          <th className="p-3">🔢 Cantidad</th>
+          {Array.from({ length: load }).map((_, loadIndex) => (
+            <th
+              key={loadIndex}
+              className="p-3 cursor-pointer hover:underline"
+              onClick={() => toggleAllChecks(loadIndex)}
+            >
+              Carga {loadIndex + 1}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {components.map((component, componentIndex) => {
+          const [ingredient, quantity] = component.split(' - ');
+          return (
+            <tr key={componentIndex} className="hover:bg-gray-50">
+              <td
+                onClick={() => toggleRowChecks(componentIndex)}
+                className="p-3 cursor-pointer hover:underline"
+              >
+                {ingredient}
+              </td>
+              <td className="p-3">{quantity}</td>
+              {Array.from({ length: load }).map((_, loadIndex) => (
+                <td key={loadIndex} className="p-3">
                   <input
-                    className="ml-4"
                     type="checkbox"
-                    id={`load_${componentIndex}_${loadIndex}`}
+                    className="accent-blue-600"
                     checked={isChecked(componentIndex, loadIndex)}
                     onChange={() => toggleCheck(componentIndex, loadIndex)}
                   />
                 </td>
-                  ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+);
+
+
 }
 
 export default CheckboxLoads; 

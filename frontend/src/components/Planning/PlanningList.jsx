@@ -1,13 +1,14 @@
 import PlanningTableComponent from './PlanningTableComponent';
 
-const PlanningList = ({ plannings, showLink = true, showState = true, showDelete = true, refreshPlanningList }) => {
+const PlanningList = ({ plannings, showLink = true, showState = true, showDelete = true, refreshPlanningList, onShowDetails }) => {
     return (
         <PlanningTableComponent 
             plannings={plannings} 
             showLink={showLink} 
             showState={showState} 
             showDelete={showDelete} 
-            refreshPlanningList={refreshPlanningList} 
+            refreshPlanningList={refreshPlanningList}
+            onShowDetails={onShowDetails}
         />
     );
 };

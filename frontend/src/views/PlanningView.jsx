@@ -1,17 +1,23 @@
+import { useState } from 'react';
 import PlanningList from '../components/Planning/PlanningList.jsx'
+import PlanningRegisteredView from './PlanningRegisteredView.jsx';
+import usePlanningList from './../hooks/usePlanningList';
+import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
 import PlanningFormComponent from '../components/Planning/PlanningFormComponent.jsx';
 import StatePendingComponent from "../components/Home/StatePendingComponent";
 import StatePreparedComponent from "../components/Home/StatePreparedComponent";
-
-import usePlanningList from './../hooks/usePlanningList';
-import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
-import { useState } from 'react';
-import PlanningRegisteredView from './PlanningRegisteredView.jsx';
+import PlanningDetailsComponent from "../components/PlanningDetails/PlanningDetailsComponent.jsx"
 
 const PlanningView = ({ statePending, statePrepared }) => {
   const { plannings, listPlanning } = usePlanningList();
   const username = useAuthenticatedUser();
-  const [view, setView] = useState('list');
+  const [view, setView] = useState("list");
+  const [selectedPlanningId, setSelectedPlanningId] = useState(null);
+
+  const showPlanningDetails = (id) => {
+    setSelectedPlanningId(id);
+    setView("details");
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen">
@@ -58,21 +64,39 @@ const PlanningView = ({ statePending, statePrepared }) => {
             {view === "list" ? "Listado de Trabajo" : "Diario de trabajo"}
           </h2>
           <div className="overflow-x-auto">
-            {view === "list" ? (
-              <PlanningList
-                plannings={plannings}
-                showLink={true}
-                showState={true}
-                refreshPlanningList={listPlanning}
-              />
-            ): (
-              <PlanningRegisteredView 
-                showLink={false}
-                showState={true}
-                showDelete={false}
-              />
-            )}
-            
+            {(() => {
+              switch (view) {
+                case "list":
+                  return (
+                    <PlanningList
+                      plannings={plannings}
+                      showLink={true}
+                      showState={true}
+                      refreshPlanningList={listPlanning}
+                      onShowDetails={showPlanningDetails}
+                    />
+                  ); 
+                case "diary":     
+                  return (
+                    <PlanningRegisteredView 
+                      showLink={false}
+                      showState={true}
+                      showDelete={false}
+                    />
+                  );
+                case "details":
+                  return (
+                    <div className="w-full px-4 py-4 max-w-4xl">
+      <button className="btn btn-sm btn-ghost mb-4" onClick={() => setView("list")}>
+        ← Volver
+      </button>
+      <PlanningDetailsComponent planningId={selectedPlanningId} />
+    </div>
+                );
+                default:  
+                  return <p>Cargando vista...</p>
+              }
+            })()}
           </div>
         </div>
       </div>
