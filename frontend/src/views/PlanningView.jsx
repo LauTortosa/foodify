@@ -64,6 +64,9 @@ const PlanningView = ({ statePending, statePrepared }) => {
             {view === "list" ? "Listado de Trabajo" : "Diario de trabajo"}
           </h2>
           <div className="overflow-x-auto">
+            <button className="btn btn-sm btn-ghost mb-4" onClick={() => setView("list")}>
+              ← Volver
+            </button>
             {(() => {
               switch (view) {
                 case "list":
@@ -87,11 +90,9 @@ const PlanningView = ({ statePending, statePrepared }) => {
                 case "details":
                   return (
                     <div className="w-full px-4 py-4 max-w-4xl">
-      <button className="btn btn-sm btn-ghost mb-4" onClick={() => setView("list")}>
-        ← Volver
-      </button>
-      <PlanningDetailsComponent planningId={selectedPlanningId} />
-    </div>
+                      
+                      <PlanningDetailsComponent planningId={selectedPlanningId} />
+                    </div>
                 );
                 default:  
                   return <p>Cargando vista...</p>
