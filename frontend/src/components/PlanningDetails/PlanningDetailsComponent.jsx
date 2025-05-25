@@ -29,7 +29,6 @@ const PlanningDetailsComponent = ({ planningId, onEditClick }) => {
             product_value: data.product_value,
             component_value: data.component_value || []
         });
-
     }
 
     return(
@@ -39,11 +38,6 @@ const PlanningDetailsComponent = ({ planningId, onEditClick }) => {
                 <span>{planning.product_value}</span>
                 <div className="badge badge-sm badge-outline ml-2">{planning.state_value}</div>
             </h2>
-            
-            <div className="ml-16 mt-10">
-                <h2 className='text-md font-bold underline'>Acciones</h2>
-                <button className="btn btn-sm mt-4" onClick={() => onEditClick(planning)}>Editar</button>
-            </div>
         </div>
         <div className="flex items-center mb-8">
             <div className="flex flex-col">

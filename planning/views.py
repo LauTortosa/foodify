@@ -14,6 +14,7 @@ class PlanningIn(Schema):
     load: int = Field(...)
     tracebility: int = Field(...)
     product: str = Field(..., min_length=1)
+    state_value: str = Field(default="Pendiente")
 
     @field_validator("date")
     def validate_date(cls, v):

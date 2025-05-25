@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputRadioComponent from "../Form/InputRadioComponent";
-import InputNumberComponent from "../Form/InputNumberComponent";
 
 const UpdatePlanningComponent = ({ 
     planningId, 
@@ -16,7 +15,6 @@ const UpdatePlanningComponent = ({
 
     const [editState, setEditState] = useState(initialState);
     const [editLoad, setEditLoad] = useState(initialLoad);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -45,26 +43,49 @@ const UpdatePlanningComponent = ({
     ];
 
     return (
-        <div>
-            <h3 className="font-bold text-lg text-center">Editar planificación</h3>
-            <h4 className="underline mb-2">Cargas</h4>
-            <p className="mb-6">Número actual: {initialLoad}</p>
-            <InputNumberComponent 
-                label="Número de cargas nuevo"
-                value={editLoad}
-                onChange={setEditLoad}
-                id={editLoad}
-                className=""
-            />
-            <div className="divider"></div>
-            <h4 className="underline mb-2">Estado</h4>
+        <div className="space-y-4 px-4 py-2">
+            <h2 className="text-2xl font-semibold text-center text-gray-800">Editar trabajo</h2>
+
+            <div className="bg-base-200 rounded-xl p-4 shadow">
+                <h3 className="text-md font-medium text-gray-700 mb-1">Producto</h3>
+                <p className="text-lg font-semibold">{initialProduct}</p>
+
+                <h3 className="text-md font-medium text-gray-700 mt-4 mb-1">Nº Trazabilidad</h3>
+                <p className="text-lg font-semibold">{initialTracebility}</p>
+
+                <h3 className="text-md font-medium text-gray-700 mt-4 mb-1">Cargas actuales</h3>
+                <p className="text-lg font-semibold">{initialLoad}</p>
+
+                <div className="mt-4">
+                <label htmlFor="newLoad" className="block mb-1 text-gray-700 font-medium">
+                    Número de cargas nuevo
+                </label>
+                <input
+                    type="number"
+                    id="newLoad"
+                    value={editLoad}
+                    onChange={e => setEditLoad(Number(e.target.value))}
+                    className="w-24 rounded-md border border-gray-300 px-3 py-2"
+                />
+            </div>
+        </div>
+
+        <div className="divider">Estado</div>
             <InputRadioComponent
                 name="state"
                 options={radioOptions}
                 selectedValue={editState}
                 onChange={setEditState}
             />
-            <button className="btn mt-6 mx-auto block" onClick={updatePlanning}>Aceptar</button>
+
+            <div className="text-center">
+                <button
+                    className="btn mt-4 bg-gray-600 text-white hover:bg-gray-700 border-none"
+                    onClick={updatePlanning}
+                >
+                    Aceptar
+                </button>
+            </div>
         </div>
     );
 };
