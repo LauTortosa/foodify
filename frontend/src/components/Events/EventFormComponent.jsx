@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import api from "../../api/api.jsx";
 
 const EventFormComponent = ({ refreshEvents }) => {
     const { register, handleSubmit, reset } = useForm();
@@ -14,7 +14,7 @@ const EventFormComponent = ({ refreshEvents }) => {
                 endTime: parseInt(data.end_time_value)
             };
 
-            await axios.post("http://localhost:8000/event/api/", dataToSend);
+            await api.post("/event/api/", dataToSend);
 
             reset();
             refreshEvents();

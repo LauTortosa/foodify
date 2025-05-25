@@ -1,36 +1,5 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
-
 import EventFormComponent from "./EventFormComponent";
-
-const EventsComponent = () => {
-    const [events, setEvents] = useState([]);
-    const username = useAuthenticatedUser();
-
-    const getEvents = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/event/api/list');
-            setEvents(response.data);
-        } catch (error) {
-            console.error("Error al mostrar los eventos", error);
-        }
-    };
-
-    const deleteEvent = async (eventId) => {
-        try {
-            await axios.delete(`http://localhost:8000/event/api/${eventId}`);
-            getEvents();
-        } catch (error) {
-            console.error("Error al eliminar el evento", error);
-        }
-    };
-
-    useEffect(() => {
-        getEvents();
-    }, []);
-
+const EventComponent = ({ events, username, deleteEvent, refreshEvents }) => {
     return (
         <div className="p-4">
             <div className="grid grid-cols-2 items-center mb-4">
@@ -52,7 +21,7 @@ const EventsComponent = () => {
                                 </button>
                                 </form>
                                 <h2 className="text-xl text-center font-bold underline mb-4">Añadir evento</h2>
-                                <EventFormComponent refreshEvents={getEvents} />
+                                <EventFormComponent refreshEvents={refreshEvents} />
                             </div>
                         </dialog>
                     </div>
@@ -99,8 +68,7 @@ const EventsComponent = () => {
                 ))}
             </ul>
 </div>
-
     );
 };
 
-export default EventsComponent;
+export default EventComponent;

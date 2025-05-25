@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import ListTasksComponent from "../components/Home/ListTasksComponent";
-import EventsComponent from "../components/Events/EventsComponent";
+//import EventsComponent from "../components/Events/EventsComponent";
 import useAuthenticatedUser from "../hooks/useAuthenticatedUser";
 import { useStatePlanning } from "../hooks/useStatePlanning";
+import EventsView from "./EventsView";
 
 const HomeView = () => {
     const username = useAuthenticatedUser();
@@ -28,7 +29,7 @@ const HomeView = () => {
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-6 gap-8'>
                 <div className='lg:col-span-2 mt-6'>
-                    <EventsComponent/>
+                    <EventsView/>
                 </div>
                 <div className='lg:col-span-4 mt-10'>
                     <h2 className="text-xl font-bold underline mb-4">Tareas pendientes</h2>
