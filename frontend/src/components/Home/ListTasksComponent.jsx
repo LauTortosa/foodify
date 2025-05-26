@@ -1,25 +1,12 @@
 import TableTasksComponent from "./TableTasksComponent";
-import CreateTaskComponent from "./CreateTaskComponent";
 
-const ListTasksComponent = ({ listTasks, setListTask, getTask }) => {
-
-    const handleCheckboxChange = (id) => {
-        setListTask(prevTasks => 
-            prevTasks.map(task => 
-                task.id === id ? { ...task, completed: !task.completed } : task
-            )
-        );
-    };
-
+const ListTasksComponent = ({ listTasks, onCheckboxChange, deleteTask }) => {
     return (
-        <>
         <TableTasksComponent 
             listTasks={listTasks}
-            onCheckboxChange={handleCheckboxChange}
-            getTask={getTask}
+            onCheckboxChange={onCheckboxChange}
+            deleteTask={deleteTask}
         />
-        <CreateTaskComponent getTask={getTask} />
-    </>
     );
 };
 

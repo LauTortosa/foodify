@@ -1,15 +1,7 @@
-import axios from "axios";
-
-const DeleteTaskComponent = ({ taskId, getTask }) => {
-    const deleteTask = async () => {
-        await axios.delete(`http://localhost:8000/task/api/${taskId}`);
-        getTask();
-    };
-    
+const DeleteTaskComponent = ({ taskId, deleteTask }) => {
     return (
-        <button onClick={deleteTask}>🗑️</button>
+        <button onClick={() => deleteTask(taskId)}>🗑️</button>
     );
-
 };
 
 export default DeleteTaskComponent;
