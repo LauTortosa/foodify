@@ -1,41 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useProductsByType } from "../../hooks/useProductsByType";
 
 const ChecksProductsComponent = ({ setSelectedProducts }) => {
-    const [types, setTypes] = useState([]);
-    const [productsByType, setProductsByType] = useState({});
-
-    useEffect(() => {
-        getTypes();
-    }, []);
-
-    const getTypes = async () => {
-        const response = await axios.get('http://localhost:8000/product/api/types');
-        const typesData = response.data;
-        setTypes(typesData);
-
-        const productsData = await Promise.all(
-            typesData.map(async (type) => {
-                const productsResponse = await axios.get(`http://localhost:8000/product/api/products?type_id=${type.id}`);
-                return {
-                    typeId: type.id,
-                    products: productsResponse.data
-                };
-            })
-        );
-
-        // organice products by type
-        if (Array.isArray(productsData)) {
-            const updatedProductsByType = {};
-            productsData.forEach(({ typeId, products }) => {
-                updatedProductsByType[typeId] = products.map(product => ({
-                    ...product,
-                    checked: false
-                }));
-            });
-            setProductsByType(updatedProductsByType);
-        }
-    };
+    const { types, productsByType, setProductsByType } = useProductsByType();
 
     const handleCheckboxChange = (typeId, productId) => {
         setProductsByType(prevProductsByType => {
