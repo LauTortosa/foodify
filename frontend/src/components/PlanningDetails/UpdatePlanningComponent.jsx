@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../api/api.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputRadioComponent from "../Form/InputRadioComponent";
@@ -31,7 +31,7 @@ const UpdatePlanningComponent = ({
             product: initialProduct
         };
     
-        await axios.put(`http://localhost:8000/planning/api/${planningId}`, newData);
+        await api.put(`/planning/api/${planningId}`, newData);
         navigate(0);
         onClose();
     };

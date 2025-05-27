@@ -54,7 +54,6 @@ const PlanningView = ({ statePending, statePrepared }) => {
                   Listado de trabajos
                 </button>
               </div>
-              
             </>
           )}
         </div>
@@ -90,7 +89,6 @@ const PlanningView = ({ statePending, statePrepared }) => {
                 case "details":
                   return (
                     <div className="w-full px-4 py-4 max-w-4xl">
-                      
                       <PlanningDetailsComponent planningId={selectedPlanningId} />
                     </div>
                 );
