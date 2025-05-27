@@ -1,17 +1,26 @@
-import axios from "axios";
+import api from '../../api/api.jsx';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
 import AlertComponent from "../AlertComponent";
 
-const RecipeAddModalComponent = ({ productId, components }) => {
+const RecipeAddModalComponent = ({ productId, components, onComponentAdded }) => {
     const [selectedComponent, setSelectedComponent] = useState('');
     const [quantity, setQuantity] = useState(0);
     const [successMessage, setSuccessMessage] = useState('');
     const [warningMessage, setWarningMessage] = useState('');
-    const navigate = useNavigate();
     const username = useAuthenticatedUser();
+
+    const extractErrorMessages = (error) => {
+        const data = error.response?.data;
+        if (typeof data?.detail === 'string') {
+            return [data.detail];
+        } else if (Array.isArray(data?.detail)) {
+            return data.detail.map(item => item.msg || 'Error desconocido');
+        } else {
+            return [data?.msg || error.message || 'Error desconocido'];
+        }
+    };
     
     const createComponent = async (data) => {
         try {
@@ -21,32 +30,20 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                 kilograms: quantity,
             };
 
-            await axios.post('http://localhost:8000/product/api/component-product', dataToSend);
+            await api.post('/product/api/component-product', dataToSend);
             setSelectedComponent("");
             setQuantity(0);
             setSuccessMessage("Componente añadido con éxito");
+            setWarningMessage("");
+
+            if (onComponentAdded) {
+                onComponentAdded();
+            }
         
         } catch (error) {
-            let errorMessages = [];
             console.log(error.response?.data); 
-            //if (error.response?.data?.detail && Array.isArray(error.response.data.detail)) {
-            //    errorMessages = error.response.data.detail.map(err => err.msg);
-            //} else {
-            //    errorMessages.push(error.response?.data?.msg || error.message || "Error al añadir la planificación.");
-            //}
-
-            if (typeof error.response?.data?.detail === 'string') {
-                errorMessages.push(error.response.data.detail);
-            }
-            // Verificar si el detalle es un array de objetos
-            else if (Array.isArray(error.response?.data?.detail)) {
-                error.response.data.detail.forEach(item => {
-                    if (item.msg) {
-                        errorMessages.push(item.msg);
-                    }
-                });
-            }
-            setWarningMessage(errorMessages);
+            const messages = extractErrorMessages(error);
+            setWarningMessage(messages);
             setSuccessMessage("");
         }
     };
@@ -76,9 +73,7 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                         <label 
                             htmlFor={`modal-add-component-${productId}`} 
                             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                            onClick={() => {
-                                navigate(0);
-                            }}
+                            onClick={clearMessages}
                         >
                             ✕
                         </label>
@@ -104,7 +99,11 @@ const RecipeAddModalComponent = ({ productId, components }) => {
                         className="input input-bordered w-full mt-2"
                         placeholder="Cantidad"
                     />
-                    <button className="btn mt-4" onClick={createComponent}>
+                    <button 
+                        type='button'
+                        className="btn mt-4" 
+                        onClick={createComponent}
+                    >
                         Añadir
                     </button>
                     <div>
