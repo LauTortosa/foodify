@@ -61,12 +61,12 @@ const RecipeAddModalComponent = ({ productId, components, onComponentAdded }) =>
         <>
             {username === 'responsable' && (
                 <label 
-  htmlFor={`modal-add-component-${productId}`} 
-  className="btn btn-sm btn-ghost mb-4"
->
-  <span>➕</span>
-  Añadir Componente
-</label>
+                    htmlFor={`modal-add-component-${productId}`} 
+                    className="btn btn-sm btn-ghost mb-4"
+                >
+                <span>➕</span>
+                    Añadir Componente
+                </label>
 
             )}
             <input type="checkbox" id={`modal-add-component-${productId}`} className="modal-toggle" />
@@ -136,7 +136,7 @@ const RecipeAddModalComponent = ({ productId, components, onComponentAdded }) =>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default RecipeAddModalComponent;
