@@ -5,7 +5,7 @@ const RecipeComponent = ({ productId, recipe, components, user, deleteComponet, 
 
     return (
         <>
-            <h2 className="font-bold uppercase text-3xl text-center w-full mb-8">{recipe.product}</h2>
+            <h2 className="text-center text-xl font-bold underline mb-4">{recipe.product}</h2>
             
             <RecipeAddModalComponent
                 productId={productId}

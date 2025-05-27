@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
-import { sortData } from '../utils';
 import api from '../api/api.jsx';
-import RecipeComponent from '../components/Recipes/RecipeComponent';
+import { sortData } from '../utils';
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser.jsx';
+
+import RecipeComponent from '../components/Recipes/RecipeComponent';
 import RecipeTable from '../components/Recipes/RecipeTable.jsx';
 
 const RecipeView = () => {
     const [productList, setProductList] = useState([]);
+    const [components, setComponents] = useState([]);
+    const [recipe, setRecipe] = useState(null);
+    
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const [productId, setProductId] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [recipe, setRecipe] = useState(null);
-    const [components, setComponents] = useState([]);
+    
     const user = useAuthenticatedUser();
 
     useEffect(() => {
@@ -53,7 +55,7 @@ const RecipeView = () => {
         }
     };
 
-    const deleteComponet = async (componentLabel) => {
+    const deleteComponent = async (componentLabel) => {
         await api.delete(`/product/api/${productId}/${componentLabel}`);
         await getRecipe(productId);
         await getComponents(); 
@@ -62,44 +64,33 @@ const RecipeView = () => {
     const sortedProducts = sortData(productList, sortConfig);
 
     return (
-      <div className='container mx-auto px-4 py-6 min-h-screen'>
-        <h2 className='text-center text-xl font-bold underline mt-4 mb-4'>Lista de recetas</h2>
+      <div className="container mx-auto px-4 py-6 min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-8 gap-4">
         
-        <RecipeTable
+        <aside className="lg:col-span-2">
+          <RecipeTable
             products={sortedProducts}
             sortConfig={sortConfig}
             setSortConfig={setSortConfig}
-            onViewClick={(productId) => {
-                setProductId(productId);
-                setIsModalOpen(true);
+            onViewClick={(id) => {
+              setProductId(id);
             }}
-        />
+          />
+        </aside>
 
-        {isModalOpen && (
-            <div>
-                <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-                <div className="modal modal-open">
-                  <div className="modal-box relative">
-                    <label 
-                      htmlFor="my-modal-3" 
-                      className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
-                      onClick={() => setIsModalOpen(false)}
-                    >
-                      ✕
-                    </label>
-                      <RecipeComponent 
-                        productId={productId}
-                        recipe={recipe}
-                        components={components}
-                        user={user}
-                        deleteComponet={deleteComponet} 
-                        onComponentAdded={() => getRecipe(productId)}   
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-        </div>
+        <main className="lg:col-span-6">
+          <RecipeComponent
+            productId={productId}
+            recipe={recipe}
+            components={components}
+            user={user}
+            deleteComponent={deleteComponent}
+            onComponentAdded={() => getRecipe(productId)}
+          />
+        </main>
+
+      </div>
+    </div>
     );
 };
 
