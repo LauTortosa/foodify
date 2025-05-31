@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import api from "../api/api.jsx"
 
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
@@ -10,6 +11,11 @@ const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [calculatedKilosTotal, setCalculatedKilosTotal] = useState({});
     const [load, setLoad] = useState(0);
+
+    const getProductComponents = async (productId) => {
+        const response = await api.get(`/product/api/${productId}`);
+        return response.data.component_value;
+    };
 
     return (
         <div className='container mx-auto px-4 py-6 min-h-screen'>
@@ -29,6 +35,7 @@ const CalculateView = () => {
                     setCalculatedKilosTotal={setCalculatedKilosTotal}
                     calculatedKilosTotal={calculatedKilosTotal}
                     setSelectedProducts={setSelectedProducts}
+                    getProductComponents={getProductComponents}
                 />
                 <DeleteCalculateComponent 
                     setSelectedProducts={setSelectedProducts}
@@ -42,7 +49,6 @@ const CalculateView = () => {
             </div>
         </div>
         </div>
-        
     );
 };
 
