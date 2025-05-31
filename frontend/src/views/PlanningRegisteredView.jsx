@@ -44,7 +44,7 @@ const PlanningRegisteredView = ({showLink = false, showState = false, showDelete
                 showState={showState} 
                 showDelete={showDelete} 
             />
-            <button className="btn" onClick={handleClick}>pdf</button>
+            <button className="btn btn-sm btn-ghost mt-4 mb-4" onClick={handleClick}>📄 Generar pdf</button>
         </div>
     );
 };
