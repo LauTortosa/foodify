@@ -7,7 +7,7 @@ const DeletePlanningComponent = ({ setCalculatedKilosTotal }) => {
         <div>
             <button 
                 onClick={deleteCalculate}
-                className="btn w-40 mt-6 mb-8">
+                className="btn btn-sm mb-4 w-40">
                     Eliminar
                 </button>
         </div>

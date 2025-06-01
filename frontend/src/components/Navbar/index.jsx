@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         {username && (
           <div className="mb-4">
-            <Link to="/calculate-kilograms" className="block py-2 px-4 text-xl">Calcular kilos</Link>
+            <Link to="/calculate-kilograms" className="block py-2 px-4 text-xl">Cálculo de kilos</Link>
           </div>
         )}
       </div>

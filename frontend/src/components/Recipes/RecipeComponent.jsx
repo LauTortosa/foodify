@@ -5,13 +5,14 @@ const RecipeComponent = ({ productId, recipe, components, user, deleteComponet, 
 
     return (
         <>
-            <h2 className="text-center text-xl font-bold underline mb-4">{recipe.product}</h2>
-            
-            <RecipeAddModalComponent
+        <RecipeAddModalComponent
                 productId={productId}
                 components={components}
                 onComponentAdded={onComponentAdded}
             />
+            <h2 className="text-xl font-bold underline mb-4 ml-2">{recipe.product}</h2>
+            
+            
             <table className="table table-zebra">
                 <thead>
                     <tr>

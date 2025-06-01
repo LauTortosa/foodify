@@ -9,7 +9,7 @@ const InputNumberComponent = ({
     
     const inputElement = (
         <input
-            type="number"
+            type="text"
             id={id}
             value={value}
             onChange={(e) => onChange(parseInt(e.target.value))}

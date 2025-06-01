@@ -8,7 +8,7 @@ const LoadInputCalculateKilosComponent = ({ load, setLoad }) => {
                 value={load} 
                 onChange={setLoad} 
                 id="loadInput"
-                className=""
+                className="w-40"
             />
         </div>
     )

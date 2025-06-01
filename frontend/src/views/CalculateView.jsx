@@ -46,6 +46,7 @@ const CalculateView = () => {
                     value={load}
                     setLoad={setLoad}
                 />
+                <h2 className='text-md font-bold underline mb-4 mt-8'>Acciones</h2>
                 <CalculateKilosComponent
                     selectedProducts={selectedProducts}
                     load={load}
@@ -58,10 +59,11 @@ const CalculateView = () => {
                     setSelectedProducts={setSelectedProducts}
                     setCalculatedKilosTotal={setCalculatedKilosTotal}
                 />
-                <button className='btn' onClick={handleClick}>Decargar pdf</button>
+                <button className='btn btn-sm mb-4 w-40' onClick={handleClick}>Decargar pdf</button>
 
             </div>
             <div className="lg:col-span-3 overflow-x-auto">
+                <h2 className="text-center text-xl font-bold underline mb-4">Cálculo de Kilos</h2>
                 <TableCalculateKilosComponent 
                     calculatedKilosTotal={calculatedKilosTotal}
                 />

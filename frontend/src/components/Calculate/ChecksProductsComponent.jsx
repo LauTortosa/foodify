@@ -33,7 +33,7 @@ const ChecksProductsComponent = ({ setSelectedProducts }) => {
         <div>
             {types.map(type => (
                 <div key={type.id}>
-                    <h3 className="font-bold">{type.label}</h3>
+                    <h3 className="font-bold mt-4">{type.label}</h3>
                     <ul>
                         {productsByType[type.id]?.map(product => (
                             <li key={product.id}>

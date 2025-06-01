@@ -66,7 +66,6 @@ const RecipeView = () => {
     return (
       <div className="container mx-auto px-4 py-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-8 gap-4">
-        
         <aside className="lg:col-span-2">
           <RecipeTable
             products={sortedProducts}
@@ -79,6 +78,7 @@ const RecipeView = () => {
         </aside>
 
         <main className="lg:col-span-6">
+          <h2 className="text-center text-xl font-bold underline mb-4">Recetas</h2>
           <RecipeComponent
             productId={productId}
             recipe={recipe}

@@ -41,7 +41,7 @@ const CalculateKilosComponent = ({
 
   return (
     <div>
-      <button onClick={calculateTotal} className="btn w-40 mt-6">
+      <button onClick={calculateTotal} className="btn btn-sm mb-4 w-40">
         Calcular
       </button>
       {warningMessage && (
