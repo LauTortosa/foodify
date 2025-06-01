@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import api from "../api/api.jsx"
+import usePdfGenerator from '../hooks/usePdfGenerator.jsx';
 
 import ChecksProductsComponent from '../components/Calculate/ChecksProductsComponent';
 import CalculateKilosComponent from '../components/Calculate/CalculateKilosComponent';
@@ -11,10 +12,26 @@ const CalculateView = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [calculatedKilosTotal, setCalculatedKilosTotal] = useState({});
     const [load, setLoad] = useState(0);
+    const { generatePdf } = usePdfGenerator();
 
     const getProductComponents = async (productId) => {
         const response = await api.get(`/product/api/${productId}`);
         return response.data.component_value;
+    };
+
+    const handleClick = () => {
+        const rows = Object.entries(calculatedKilosTotal).map(([component, kilos], index) => ([
+            index + 1,
+            component,
+            kilos
+        ]));
+
+        generatePdf({
+            title: "Kilos",
+            columns: ["#", "Componente", "Kilos"],
+            data: rows,
+            filename: "kilos.pdf"
+        });
     };
 
     return (
@@ -41,6 +58,8 @@ const CalculateView = () => {
                     setSelectedProducts={setSelectedProducts}
                     setCalculatedKilosTotal={setCalculatedKilosTotal}
                 />
+                <button className='btn' onClick={handleClick}>Decargar pdf</button>
+
             </div>
             <div className="lg:col-span-3 overflow-x-auto">
                 <TableCalculateKilosComponent 

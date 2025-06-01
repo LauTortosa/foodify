@@ -6,7 +6,6 @@ const CalculateKilosComponent = ({
   load,
   setCalculatedKilosTotal,
   calculatedKilosTotal,
-  setSelectedProducts,
   getProductComponents
 }) => {
   const [warningMessage, setWarningMessage] = useState("");
