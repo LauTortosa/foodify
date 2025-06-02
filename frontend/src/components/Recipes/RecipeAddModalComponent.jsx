@@ -59,7 +59,7 @@ const RecipeAddModalComponent = ({ productId, components, onComponentAdded }) =>
 
     return (
         <>
-            {username === 'responsable' && (
+            {username === 'gestion' && (
                 <label 
                     htmlFor={`modal-add-component-${productId}`} 
                     className="btn btn-sm btn-ghost mb-4"

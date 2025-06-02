@@ -6,7 +6,7 @@ import useAuthenticatedUser from '../hooks/useAuthenticatedUser';
 const HeaderComponent = () => {
   const username = useAuthenticatedUser();
   const isGuest = !username;
-  const userType = isGuest ? 'guest' : (username === 'responsable' ? 'responsable' : 'operator');
+  const userType = isGuest ? 'guest' : (username === 'gestion' ? 'gestion' : 'operario');
   
   const now = new Date();
   const date = format(new Date(), "dd/MM/yyy", {locale: es});

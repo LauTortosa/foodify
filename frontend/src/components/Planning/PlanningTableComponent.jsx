@@ -32,7 +32,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'product_value')}>Producto</th>
                         <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'load')}>Cargas</th>
                         {showState && <th className='cursor-pointer' onClick={() => handleSort(sortConfig, setSortConfig, 'state_value')}>Estado</th>}
-                        {username === 'responsable' && showDelete && <th>Acciones</th>}
+                        {username === 'gestion' && showDelete && <th>Acciones</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@ const PlanningTableComponent = ({ plannings, showLink, showState, refreshPlannin
                         <td>{planning.product_value}</td>
                         <td>{planning.load}</td>
                         {showState && <td>{planning.state_value}</td>}
-                            {username === 'responsable' && showDelete && <td className='flex items-center gap-2'>
+                            {username === 'gestion' && showDelete && <td className='flex items-center gap-2'>
                                 <button onClick={() => onShowDetails(planning.id)}>📒</button>
                                 <button onClick={() => onEditClick(planning)}>✏️</button>
                                 <DeletePlanningComponent 

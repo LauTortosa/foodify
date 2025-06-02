@@ -7,9 +7,9 @@ const UserDropdownComponent = ({ username, userType }) => {
         switch (userType) {
             case 'guest':
                 return 'INV';
-            case 'responsable':
-                return 'AD';
-            case 'operator':
+            case 'gestion':
+                return 'GEST';
+            case 'operario':
                 return 'OP';
             default:
                 return '';

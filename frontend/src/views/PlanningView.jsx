@@ -28,7 +28,7 @@ const PlanningView = ({ statePending, statePrepared }) => {
           <StatePendingComponent statePending={statePending} />
           <StatePreparedComponent statePrepared={statePrepared} />
   
-          {username === 'responsable' && (
+          {username === 'gestion' && (
             <>
               <h2 className="text-md font-bold underline mb-4 mt-8">Acciones</h2>
               <div className="flex flex-col gap-2">

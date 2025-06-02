@@ -18,7 +18,7 @@ const RecipeComponent = ({ productId, recipe, components, user, deleteComponet, 
                     <tr>
                         <th>Componentes</th>
                         <th>Cantidad</th> 
-                        {user === 'responsable' && (
+                        {user === 'gestion' && (
                         <th>Acciones</th>                            
                         )}                           
                     </tr>
@@ -30,7 +30,7 @@ const RecipeComponent = ({ productId, recipe, components, user, deleteComponet, 
                             <tr className="hover" key={index}>
                                 <td>{ingredient}</td>
                                 <td>{quantity}</td>
-                                {user === 'responsable' && (
+                                {user === 'gestion' && (
                                     <td>
                                         <button 
                                             className="btn btn-sm btn-ghost"

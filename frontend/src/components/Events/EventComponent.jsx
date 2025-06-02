@@ -4,7 +4,7 @@ const EventComponent = ({ events, username, deleteEvent, refreshEvents }) => {
         <div className="p-4">
             <div className="grid grid-cols-2 items-center mb-4">
                 <h2 className="text-xl font-bold underline text-gray-800">Próximos Eventos</h2>
-                {username === 'responsable' && (
+                {username === 'gestion' && (
                     <div>
                         <button 
                             onClick={() => document.getElementById('my_modal_3').showModal()} 
@@ -37,7 +37,7 @@ const EventComponent = ({ events, username, deleteEvent, refreshEvents }) => {
                 >
                     <h3 className="text-gray-800 font-medium text-base mb-2 flex justify-between items-center">
                         <span>{event.event}</span>
-                        {username === 'responsable' && ( 
+                        {username === 'gestion' && ( 
                             <button 
                                 onClick={() => deleteEvent(event.id)} 
                                 className="btn btn-square btn-xs"
