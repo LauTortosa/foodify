@@ -1,14 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../api/api.jsx"
 
 const LoginComponent = () => {
     const [error, setError] = useState('');
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/users/api/logout', {}, { withCredentials: true });
+            const response = await api.post('/users/api/logout', {}, { withCredentials: true });
             if (response.data.success) {
-                window.location.reload();
+                window.location.href = "/";
             } else {
                 setError('Logout failed');
             }
