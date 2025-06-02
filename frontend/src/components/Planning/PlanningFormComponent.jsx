@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
+import api from "../../api/api.jsx"
 
 import SelectTypeProductComponent from "../Form/SelectTypeProductComponent";
 import InputNumberComponent from "../Form/InputNumberComponent";
@@ -30,7 +30,7 @@ const handleSubmitForm = async (data) => {
             product: data.product_value 
         };
 
-        await axios.post('http://localhost:8000/planning/api/', dataToSend)
+        await api.post('/planning/api/', dataToSend)
 
         reset();
         setWarningMessage("");

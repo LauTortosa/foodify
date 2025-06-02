@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import api from "../../api/api.jsx";
+import AlertComponent from "../AlertComponent.jsx";
 
 const EventFormComponent = ({ refreshEvents }) => {
     const { register, handleSubmit, reset } = useForm();
+    const [successMessage, setSuccessMessage] = useState("");
 
     const onSubmitForm = async (data) => {
         try {
@@ -16,6 +19,7 @@ const EventFormComponent = ({ refreshEvents }) => {
 
             await api.post("/event/api/", dataToSend);
 
+            setSuccessMessage("Evento creado con éxito");
             reset();
             refreshEvents();
 
@@ -24,7 +28,10 @@ const EventFormComponent = ({ refreshEvents }) => {
         }
     };
 
+    const clearSuccess = () => { setSuccessMessage("")};
+
     return (
+        <>
         <form onSubmit={handleSubmit(onSubmitForm)} className="p-4">
             <label className="input input-bordered flex items-center gap-2 mb-4">
                 Nombre del evento
@@ -49,6 +56,14 @@ const EventFormComponent = ({ refreshEvents }) => {
 
             <button type="submit" className="btn">Añadir evento</button>
         </form>
+        {successMessage && (
+            <AlertComponent 
+                type="success"
+                message={successMessage}
+                onClose={clearSuccess}
+            />
+        )}
+        </>
     );
 };
 
