@@ -35,7 +35,7 @@ const RecipeComponent = ({ productId, recipe, components, user, deleteComponet, 
                                         <button 
                                             className="btn btn-sm btn-ghost"
                                             onClick={() => deleteComponet(ingredient)}>
-                                                Eliminar
+                                                🗑️
                                         </button>
                                     </td>
                                 )}
