@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
+import api from "../api/api.jsx";
 
 const useAuthenticatedUser = () => {
     const [username, setUsername] = useState('');
@@ -7,7 +7,7 @@ const useAuthenticatedUser = () => {
     useEffect(()=> {
         const loadUser = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/users/api/me', { withCredentials: true });
+                const response = await api.get('/users/api/me', { withCredentials: true });
                 if (response.data.authenticated) {
                     setUsername(response.data.username);
                 }
