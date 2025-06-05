@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api/api.jsx";
 import { useEffect, useState } from "react";
 
 export const useStatePlanning = () => {
@@ -11,12 +11,12 @@ export const useStatePlanning = () => {
     }, []);
 
     const getStatePending = async() => {
-        const response = await axios.get('http://localhost:8000/planning/api/state/pending');
+        const response = await api.get('/planning/api/state/pending');
         setStatePending(response.data["planning pending"]);
     };
 
     const getStatePrepared = async() => {
-        const response = await axios.get('http://localhost:8000/planning/api/state/prepared');
+        const response = await api.get('/planning/api/state/prepared');
         setStatePrepared(response.data["planning prepared"]);
     };
 
