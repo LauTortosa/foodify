@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api/api.jsx";
 import { useEffect, useState } from "react";
 import usePdfGenerator from "../hooks/usePdfGenerator";
 
@@ -13,8 +13,7 @@ const PlanningRegisteredView = ({showLink = false, showState = false, showDelete
     }, []);
 
     const listRegistereds = async () => {
-        const response = await axios.get('http://localhost:8000/planning/api/registered');
-        console.log("response", response.data);
+        const response = await api.get('/planning/api/registered');
 
         setPlannings(response.data);
     };
