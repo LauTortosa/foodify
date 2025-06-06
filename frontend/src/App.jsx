@@ -1,4 +1,3 @@
-import React from 'react';
 import MyRoutes from './routes';
 import Navbar from './components/Navbar'; 
 import HeaderComponent from './components/HeaderComponent';

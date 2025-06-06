@@ -31,7 +31,7 @@ const TaskView = () => {
 
     const getTask = async () => {
         const response = await api.get("/task/api/list");
-        setListTask(response.data);
+        setListTask(Array.isArray(response.data) ? response.data : []);
     };
 
     const deleteTask = async (taskId) => {

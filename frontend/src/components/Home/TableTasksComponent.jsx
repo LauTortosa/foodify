@@ -12,26 +12,32 @@ const TableTasksComponent = ({ listTasks, onCheckboxChange, deleteTask }) => {
                 </tr>
             </thead>
             <tbody>
-                {listTasks.map((task, index) => (
-                <tr key={task.id} className="hover">
-                    <td>{index + 1}</td>
-                    <td>{task.task}</td>
-                    <td>
-                        <input
-                            type="checkbox"
-                            checked={task.completed}
-                            onChange={() => onCheckboxChange(task.id)}
-                            className="checkbox"
-                        />
-                    </td>
-                    <td>
-                        <DeleteTaskComponent
-                            taskId={task.id}
-                            deleteTask={deleteTask}
-                        />
-                    </td>
-                </tr>
-                ))}
+                {Array.isArray(listTasks) ? (
+                    listTasks.map((task, index) => (
+                        <tr key={task.id} className="hover">
+                            <td>{index + 1}</td>
+                            <td>{task.task}</td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    checked={task.completed}
+                                    onChange={() => onCheckboxChange(task.id)}
+                                    className="checkbox"
+                                />
+                            </td>
+                            <td>
+                                <DeleteTaskComponent
+                                    taskId={task.id}
+                                    deleteTask={deleteTask}
+                                />
+                            </td>
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                        <td>No hay tareas</td>
+                    </tr>
+                )}
             </tbody>
         </table>
     );
