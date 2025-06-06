@@ -34,6 +34,7 @@ const RecipeView = () => {
             setComponents(response.data);
         } catch (error) {
             console.error('Error fetching components:', error);
+            setComponents([]);
         }
     };
 
