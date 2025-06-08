@@ -101,7 +101,7 @@ python manage.py runserver
 
 ## 🌐 Prototipo en línea
 - Prueba de la app en:  
-🔗 [www.foodifyplanning.es](www.foodifyplanning.es)
+🔗 [http://foodifyplanning.es](http://foodifyplanning.es)
 
 ### 👤 Usuarios disponibles
 | Rol      | Usuario     | Contraseña |
