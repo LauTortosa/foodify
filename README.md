@@ -1,118 +1,124 @@
 # FOODIFY PLANNING 
 Aplicación web para la organización y planificación del trabajo de una empresa de alimentación.
 
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
 **Backend:**
-- Django: Framework 
+- Django.
 - Django Ninja: Biblioteca para la creación de APIs.
 - Pydantic: Validación de datos. 
 
 **Frontend:**
-- React: Framework.
+- React + Vite.
 - React Router: Biblioteca para manejar el enrutamiento.
 - Axios: Cliente HTTP para hacer peticiones a las APIs.
-- Tailwind CSS: Framework de CSS para los estilos.  
+- Tailwind CSS: Estilo ágil y responsive.   
 
 **Testing:**
 - Unittest
 
 **Despliegue**:
-- Servidor: Prototipo desplegado en [https://foodifyplanning.es](https://foodifyplanning.es)  utilizando OVH.
+- Dominio: Prototipo desplegado en [https://foodifyplanning.es](https://foodifyplanning.es)
+- Hosting: VPS OVH con Ubuntu.
 - Base de datos: PostgreSQL.
-- Servidor web: Guinicorn y Nginx.
-- Variables de entorno: A través de un archivo `.env`.
+- Servidor web: Guinicorn + Nginx.
+- Variables de entorno: Archivo `.env`.
 
-## Funcionalidades
-**Gestión de planificaciones:**
-- Crear, editar y eliminar planificaciones de producción. 
-- Listar todas las planificaciones creadas.
-- Consultar detalles de cada producto planificado.
-- Cálcular los kilos totales necesarios para la producción.
+## ✅ Funcionalidades
+**🧾 Gestión de trabajo:**
+- Crear, editar y eliminar trabajos. 
+- Listado todos los trabajos creados.
+- Consulta de detalles de cada trabajo.
+- Cálculo de los kilos automático necesarios por receta y planificación.
+- Creación y listado de eventos programados con fecha, hora, duración y ubicación.
 
-**Consulta y seguimiento:**
-- Visualizar planificaciones en estado 'registrado'.
-- Ver tareas pendientes.
-- Identificar planificaciones que faltan por preparar y registrar.
+**🗓️ Consulta y seguimiento de trabajo:**
+- Visualización en una tabla de los trabajos en estado 'registrado'.
+- Listado de tareas pendientes.
+- Identificación de los trabajos que faltan por preparar y registrar mediante una tabla.
+- Generación de pdf en forma de informe sobre el cálculo de kilos y el diario de trabajo. 
 
-**Autenticación de usuarios:**
-- Sistema de login y logout.
+**👥 Autenticación de usuarios:**
+- Login y logout con validación.
 - Roles:
-  - Operario: Consultar datos, añadir tareas y registrar trabajo realizado.
-  - Responsable: Crear, editar y supervisar planificaciones.
+  - Operario: Consulta de datos y trabajos, registro de tareas y trabajo realizado.
+  - Gestión: Controla la gestión del trabajo.
 
-## Funcionalidades futuras
-**Funcionalidad**
-- Registro de horas trabajadas en cada planificación, para mejorar el seguimiento.
-- Generación de pdf con el resumen de los kilos totales de los productos seleccionados.
-- Implementación de un calendario.
-- Nuevo apartado para gestionar documentos.
+## 📌 Novedades de la versión 2
+- Nuevo modelo `Event`.
+- Creación y eliminación de eventos desde el frontend.
+- Visualización mejorada en la vista de inicio.
+- Refactorización de vistas.
+- Mejoras de estilo en botones, cards, modales y añadido de emojis.
+- Implementación del hook `generatePdf`.
   
-**Interfaz**
-- Rediseño de la página principal y la vista planning.
-- Añadir colores e iconos representativos en las recetas.
 
-## Estructura del Proyecto
-- `foodify_project/`: Contiene la configuración principal del proyecto Django.
-- `planning/`: Aplicación para gestionar las planificaciones.
-- `product/`: Aplicación para gestionar los productos.
-- `calculated_kilograms/`: Aplicación para calcular los kilogramos de los productos que se van a preparar.
-- `task/`: Aplicación para gestionar las tareas pendientes.
-
-## Instalación
-1. Clonar repositorio
+## 📁 Estructura del Proyecto
+```bash
+foodify/
+├── backend/
+│   ├── planning/
+│   ├── product/
+│   ├── task/
+│   ├── event/
+│   ├── users/
+│   ├── calculated_kilograms/
+├── frontend/
+|   ├── api/
+│   ├── assets/    
+│   ├── components/
+│   ├── hooks/
+│   ├── routes/
+│   ├── views/
 ```
+
+## ⚙️ Instalación
+```bash
+# 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/foodify-planner.git
 cd foodify-planner
-```
-2. Crear entorno virtual
-```
+
+# 2. Crear entorno virtual
 python -m venv venv
-```
-3. Activar entorno virtual:
-   - En Windows
-    ```
-    source venv/bin/activate
-    ```
-   - En Linux/macOS
-    ```
-    source venv/bin/activate
-    ```
-4. Instalar dependencias
-```
+
+# 3. Activarlo
+source venv/bin/activate
+
+# 4. Instalar dependencias
 pip install -r requirements.txt
-```
-5. Configurar base de datos
-```
+
+# 5. Migrar la base de datos
 python manage.py migrate
-```
-6. Crear usuario admin
-```
+
+# 6. Crear un superusuario
 python manage.py createsuperuser
-```
-7. Ejecutar servidor
-```
+
+# 7. Ejecutar el servidor
 python manage.py runserver
 ```
-8. Añadir datos iniciales: Desde el panel de administración (http://localhost:8000/admin/), completa los datos necesarios en el modelo `productComponent
 
-## Prototipo en línea
-Puedes probar la aplicación accediendo al prototipo en el siguiente enlace: 
-[Foodify Planning - Prototipo](www.foodifyplanning.es)
+## 📊 Datos iniciales
+- Acceder a `http://localhost:8000/admin/` para crear productos y componentes necesarios. 
 
-### Usuarios disponibles
-**Responsable**
-- Usuario: responsable
-- Contraseña: resp1234
+## 🌐 Prototipo en línea
+- Prueba de la app en:  
+🔗 [www.foodifyplanning.es](www.foodifyplanning.es)
 
-**Operario**
-- Usuario: operario
-- Contraseña: oper1234
+### 👤 Usuarios disponibles
+| Rol      | Usuario     | Contraseña |
+| -------- | ----------- | ---------- |
+| Gestión  | gestion     | gest1234   |
+| Operario | operario    | oper1234   |
 
 **Nota:** Los datos ingresados son para pruebas y se eliminan periódicamente.
 
-## Licencia
-Este proyecto está bajo la Licencia MIT.
+## 📅 Próximas funcionalidades
+- Registro de horas trabajadas por usuario.
+- Gestión de documentos internos.
+- Iconografía para recetas.
+  
+## 📝 Licencia
+- MIT License.
 
-## Contacto
+## 📬 Contacto
 Si tines preguntas o sugerencias, puedes contactarme en:
-[lau.tortosa@gmail.com](lau.tortosa@gmail.com)
+📧 [lau.tortosa@gmail.com](lau.tortosa@gmail.com)
